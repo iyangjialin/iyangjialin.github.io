@@ -13,6 +13,7 @@ async function generate() {
   await hexo.loadPlugin(require.resolve('hexo-renderer-ejs'));
   await hexo.loadPlugin(require.resolve('hexo-renderer-stylus'));
   await hexo.loadPlugin(require.resolve('hexo-generator-archive'));
+  await hexo.loadPlugin(require.resolve('hexo-generator-category'));
   await hexo.loadPlugin(require.resolve('hexo-generator-tag'));
   await hexo.loadPlugin(require.resolve('hexo-generator-sitemap'));
   await hexo.loadPlugin(require.resolve('hexo-generator-feed'));
