@@ -1,0 +1,40 @@
+{
+  "name": "iyangjialin-blog",
+  "version": "1.0.0",
+  "description": "iyangjialin 的个人博客",
+  "main": "index.js",
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyangjialin/iyangjialin.github.io.git"
+  },
+  "keywords": [
+    "blog",
+    "hexo"
+  ],
+  "author": "iyangjialin",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/iyangjialin/iyangjialin.github.io/issues"
+  },
+  "homepage": "https://github.com/iyangjialin/iyangjialin.github.io#readme",
+  "dependencies": {
+    "hexo": "^6.3.0",
+    "hexo-cli": "^4.1.0",
+    "hexo-deployer-git": "^4.0.0",
+    "hexo-generator-feed": "^4.0.0",
+    "hexo-generator-searchdb": "^1.5.0",
+    "hexo-generator-sitemap": "^3.0.1",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^6.3.0",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-landscape": "^1.1.0"
+  }
+}
