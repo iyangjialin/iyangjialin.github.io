@@ -75,3 +75,11 @@ deploy:
   type: git
   repo: https://github.com/iyangjialin/iyangjialin.github.io.git
   branch: gh-pages
+
+# Archive
+archive:
+  enable: true
+  per_page: 20
+  yearly: false
+  monthly: true
+  daily: false
