@@ -1,0 +1,24 @@
+<div id="content" class="content-wrapper">
+  <section id="main">
+    <article class="article">
+      <div class="article-inner">
+        <header class="article-header">
+          <h1 class="article-title">标签</h1>
+        </header>
+        <div class="article-content">
+          <div class="tag-cloud">
+            <% 
+              var colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'];
+              site.tags.each(function(tag, i) { 
+            %>
+              <a href="<%- url_for('/tags/' + tag.name + '/') %>" class="tag-badge" style="background-color: <%= colors[i % colors.length] %>">
+                <%= tag.name %>
+                <span class="tag-count"><%= tag.length %></span>
+              </a>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>

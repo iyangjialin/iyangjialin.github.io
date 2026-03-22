@@ -1,1 +1,23 @@
-<%- partial('_partial/archive', {expand: false, index: true}) %>
+<div id="content" class="content-wrapper">
+  <section id="main">
+    <h1 class="tag-title">
+      <span class="tag-icon">#</span> <%= page.tag %>
+    </h1>
+    <div class="tag-posts">
+      <% page.posts.each(function(post) { %>
+        <article class="archive-article">
+          <div class="archive-article-inner">
+            <header class="archive-article-header">
+              <a href="<%- url_for(post.path) %>" class="archive-article-title">
+                <%= post.title %>
+              </a>
+              <time class="archive-article-date" datetime="<%= post.date.toISOString() %>">
+                <%= date(post.date, 'YYYY-MM-DD') %>
+              </time>
+            </header>
+          </div>
+        </article>
+      <% }); %>
+    </div>
+  </section>
+</div>

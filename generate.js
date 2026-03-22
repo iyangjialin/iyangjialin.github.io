@@ -6,13 +6,17 @@ async function generate() {
   const hexo = new Hexo(__dirname, {});
 
   await hexo.init();
-
-  // 手动加载渲染器
-  console.log('加载渲染器...');
+  
+  // 加载所有插件
+  console.log('加载插件...');
   await hexo.loadPlugin(require.resolve('hexo-renderer-marked'));
   await hexo.loadPlugin(require.resolve('hexo-renderer-ejs'));
   await hexo.loadPlugin(require.resolve('hexo-renderer-stylus'));
-
+  await hexo.loadPlugin(require.resolve('hexo-generator-tag'));
+  await hexo.loadPlugin(require.resolve('hexo-generator-sitemap'));
+  await hexo.loadPlugin(require.resolve('hexo-generator-feed'));
+  await hexo.loadPlugin(require.resolve('hexo-generator-searchdb'));
+  
   await hexo.load();
 
   console.log('生成静态文件...');

@@ -7,8 +7,14 @@ async function server() {
 
   await hexo.init();
   await hexo.load();
+  
+  // 手动加载 hexo-server 插件
+  await hexo.loadPlugin(require.resolve('hexo-server'));
 
-  await hexo.call('server', {});
+  await hexo.call('server', {
+    port: 4000,
+    logger: false
+  });
 
   console.log('服务器已启动，访问 http://localhost:4000');
   console.log('按 Ctrl+C 停止服务器');
