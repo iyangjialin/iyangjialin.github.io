@@ -10,7 +10,7 @@ layout: page
 
 ## 最新文章
 
+- [GitHub 顶级 AI 开发者与研究员名录（2026）](2026/03/23/2026-03-23-github-ai-developers/)
 - [GitHub上前28家顶级商业公司](2026/03/23/2026-03-23-github-top-28-companies/)
 - [TERAFAB：算力成为新石油的起点](2026/03/23/2026-03-23-terafab-computing-power/)
 - [AI Token：新智能经济的"原子"](2026/03/23/2026-03-23-ai-token/)
-- [我的数字分身：在现实之外，构建另一个"我"](2026/03/22/2026-03-22-my-digital-self/)
