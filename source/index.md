@@ -10,7 +10,7 @@ layout: page
 
 ## 最新文章
 
+- [Elon Musk 2026：从硅谷创业者到人类文明设计师](2026/03/23/2026-03-23-elon-musk-profile-2026/)
 - [Andrej Karpathy 完整档案](2026/03/23/2026-03-23-andrej-karpathy-profile/)
 - [GitHub 顶级 AI 开发者与研究员名录（2026）](2026/03/23/2026-03-23-github-ai-developers/)
 - [GitHub上前28家顶级商业公司](2026/03/23/2026-03-23-github-top-28-companies/)
-- [TERAFAB：算力成为新石油的起点](2026/03/23/2026-03-23-terafab-computing-power/)
