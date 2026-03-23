@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="罗伯特·迪尔茨（Robert Dilts） 是神经语言程序学（NLP, Neuro-Linguistic Programming）领域最重要的代表人物之一，被认为是将 NLP 从技术工具提升为系统方法论的关键人物。  本文先介绍 Dilts 本人及其核心理论——逻辑层次模型，再将其映射到 AI Agent 设计方法论，形成一套完整的「人 → AI」跨领域框架。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论">
+<meta property="og:url" content="https://iyangjialin.github.io/2026/04/05/2026-04-05-dilts-nlp-agent-design/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="罗伯特·迪尔茨（Robert Dilts） 是神经语言程序学（NLP, Neuro-Linguistic Programming）领域最重要的代表人物之一，被认为是将 NLP 从技术工具提升为系统方法论的关键人物。  本文先介绍 Dilts 本人及其核心理论——逻辑层次模型，再将其映射到 AI Agent 设计方法论，形成一套完整的「人 → AI」跨领域框架。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-04T22:40:00.000Z">
+<meta property="article:modified_time" content="2026-04-04T22:39:34.722Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="NLP">
+<meta property="article:tag" content="系统思维">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="Robert Dilts">
+<meta property="article:tag" content="AI设计">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.svg">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/iyangjialin"><span class="fa fa-github"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://iyangjialin.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-04-05-dilts-nlp-agent-design" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/05/2026-04-05-dilts-nlp-agent-design/" class="article-date">
+  <time class="dt-published" datetime="2026-04-04T22:40:00.000Z" itemprop="datePublished">2026-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>罗伯特·迪尔茨（Robert Dilts）</strong> 是神经语言程序学（NLP, Neuro-Linguistic Programming）领域最重要的代表人物之一，被认为是将 NLP 从技术工具提升为系统方法论的关键人物。</p>
+</blockquote>
+<p>本文先介绍 Dilts 本人及其核心理论——<strong>逻辑层次模型</strong>，再将其映射到 <strong>AI Agent 设计方法论</strong>，形成一套完整的「人 → AI」跨领域框架。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、Robert-Dilts-是谁？"><a href="#一、Robert-Dilts-是谁？" class="headerlink" title="一、Robert Dilts 是谁？"></a>一、Robert Dilts 是谁？</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>国籍</td>
+<td>美国人</td>
+</tr>
+<tr>
+<td>身份</td>
+<td>NLP 第二代核心人物</td>
+</tr>
+<tr>
+<td>师从</td>
+<td>理查德·班德勒、约翰·格林德</td>
+</tr>
+<tr>
+<td>应用方向</td>
+<td>商业、教育、领导力、创新思维</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、最著名的理论：逻辑层次模型（Logical-Levels）"><a href="#二、最著名的理论：逻辑层次模型（Logical-Levels）" class="headerlink" title="二、最著名的理论：逻辑层次模型（Logical Levels）"></a>二、最著名的理论：逻辑层次模型（Logical Levels）</h2><p>这是他影响力最大的贡献。</p>
+<h3 id="六大层次（从低到高）"><a href="#六大层次（从低到高）" class="headerlink" title="六大层次（从低到高）"></a>六大层次（从低到高）</h3><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>核心问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>环境</strong>（Environment）</td>
+<td>我在哪里？我和谁在一起？</td>
+<td>外部条件与资源</td>
+</tr>
+<tr>
+<td><strong>行为</strong>（Behavior）</td>
+<td>我做了什么？</td>
+<td>具体动作与表现</td>
+</tr>
+<tr>
+<td><strong>能力</strong>（Capabilities）</td>
+<td>我会什么？我如何做？</td>
+<td>技能与策略</td>
+</tr>
+<tr>
+<td><strong>信念与价值</strong>（Beliefs &amp; Values）</td>
+<td>我为什么这样做？</td>
+<td>驱动力与判断标准</td>
+</tr>
+<tr>
+<td><strong>身份</strong>（Identity）</td>
+<td>我是谁？</td>
+<td>自我认知与角色定位</td>
+</tr>
+<tr>
+<td><strong>使命&#x2F;精神</strong>（Purpose &#x2F; Spirit）</td>
+<td>我为何存在？</td>
+<td>终极目标与意义</td>
+</tr>
+</tbody></table>
+<h3 id="核心洞察"><a href="#核心洞察" class="headerlink" title="核心洞察"></a>核心洞察</h3><blockquote>
+<p><strong>问题通常出现在某一层，但解决往往要在更高层完成</strong></p>
+</blockquote>
+<p>举个例子：</p>
+<ul>
+<li>想提升收入（行为层）</li>
+<li>→ 如果你觉得「我不配赚更多钱」（信念层）</li>
+<li>→ 那你再努力也很难突破</li>
+</ul>
+<p>所以：<strong>改变 &#x3D; 上升维度打击问题</strong></p>
+<hr>
+<h2 id="三、对现代-AI-Agent-的启发"><a href="#三、对现代-AI-Agent-的启发" class="headerlink" title="三、对现代 AI&#x2F;Agent 的启发"></a>三、对现代 AI&#x2F;Agent 的启发</h2><p>你最近在研究「智能体（Agent）」，Dilts 的模型其实可以直接套用：</p>
+<h3 id="AI-Agent-的六层结构"><a href="#AI-Agent-的六层结构" class="headerlink" title="AI Agent 的六层结构"></a>AI Agent 的六层结构</h3><table>
+<thead>
+<tr>
+<th>Dilts 层次</th>
+<th>Agent 对应</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>环境</td>
+<td>数据 &#x2F; API &#x2F; 外部工具</td>
+<td>数据库、搜索工具</td>
+</tr>
+<tr>
+<td>行为</td>
+<td>执行动作（调用、输出）</td>
+<td>调 API、生成内容</td>
+</tr>
+<tr>
+<td>能力</td>
+<td>模型能力（推理、代码、规划）</td>
+<td>LLM 推理、Task Planning</td>
+</tr>
+<tr>
+<td>信念</td>
+<td>Prompt &#x2F; 系统设定 &#x2F; 策略</td>
+<td>System Prompt、决策策略</td>
+</tr>
+<tr>
+<td>身份</td>
+<td>Agent 角色定义</td>
+<td>律师 Agent &#x2F; 投资 Agent</td>
+</tr>
+<tr>
+<td>使命</td>
+<td>目标（赚钱 &#x2F; 服务 &#x2F; 自动化）</td>
+<td>商业目标、KPI</td>
+</tr>
+</tbody></table>
+<p>这就是：<strong>Agent 设计的「隐形架构」</strong></p>
+<hr>
+<h2 id="四、六层架构系统蓝图"><a href="#四、六层架构系统蓝图" class="headerlink" title="四、六层架构系统蓝图"></a>四、六层架构系统蓝图</h2><p>基于 Robert Dilts 的六层模型，我们把一个 AI Agent 拆成 <strong>6 层架构系统</strong>：</p>
+<blockquote>
+<p><strong>本质：把「人」的改变模型 → 映射成「AI 能力设计模型」</strong></p>
+</blockquote>
+<h3 id="第一层：环境层（Environment）"><a href="#第一层：环境层（Environment）" class="headerlink" title="第一层：环境层（Environment）"></a>第一层：环境层（Environment）</h3><p><strong>&#x3D; Agent 所处的世界</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>数据源（数据库 &#x2F; API &#x2F; 文档）</li>
+<li>外部工具（搜索、支付、CRM）</li>
+<li>平台（飞书 &#x2F; Slack &#x2F; Web &#x2F; App）</li>
+</ul>
+<p><strong>设计问题：</strong></p>
+<ul>
+<li>Agent 能接触到什么信息？</li>
+<li>能调用哪些工具？</li>
+</ul>
+<p><strong>示例：</strong> 旅游 Agent → 接入航班 API &#x2F; 酒店 API &#x2F; 地图</p>
+<hr>
+<h3 id="第二层：行为层（Behavior）"><a href="#第二层：行为层（Behavior）" class="headerlink" title="第二层：行为层（Behavior）"></a>第二层：行为层（Behavior）</h3><p><strong>&#x3D; Agent 具体做什么动作</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>调用 API</li>
+<li>生成内容</li>
+<li>执行任务（订票 &#x2F; 写报告）</li>
+</ul>
+<p><strong>设计问题：</strong> Agent 每天「在干嘛」？</p>
+<p><strong>示例：</strong> 自动生成行程、比价、发送推荐</p>
+<hr>
+<h3 id="第三层：能力层（Capabilities）"><a href="#第三层：能力层（Capabilities）" class="headerlink" title="第三层：能力层（Capabilities）"></a>第三层：能力层（Capabilities）</h3><p><strong>&#x3D; Agent 会什么能力</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>推理（LLM）</li>
+<li>规划（Task Planning）</li>
+<li>代码执行</li>
+<li>多模态能力</li>
+</ul>
+<p><strong>核心：能力 &#x3D; 模型 + 工具组合</strong></p>
+<p><strong>示例：</strong> 多步骤规划行程、预算优化、用户画像分析</p>
+<hr>
+<h3 id="第四层：信念层（Beliefs-Strategy）"><a href="#第四层：信念层（Beliefs-Strategy）" class="headerlink" title="第四层：信念层（Beliefs &amp; Strategy）"></a>第四层：信念层（Beliefs &amp; Strategy）</h3><p><strong>&#x3D; Agent 如何「思考」</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>Prompt 设计</li>
+<li>系统指令（System Prompt）</li>
+<li>决策策略</li>
+</ul>
+<blockquote>
+<p><strong>这是最容易被忽略，但最关键的一层</strong></p>
+</blockquote>
+<p><strong>示例：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">你是一个极致理性的旅行规划师：</span><br><span class="line">- 优先推荐性价比最高方案</span><br><span class="line">- 避免游客陷阱</span><br><span class="line">- 用户体验优先</span><br></pre></td></tr></table></figure>
+
+<p><strong>本质：Prompt &#x3D; Agent 的「世界观」</strong></p>
+<hr>
+<h3 id="第五层：身份层（Identity）"><a href="#第五层：身份层（Identity）" class="headerlink" title="第五层：身份层（Identity）"></a>第五层：身份层（Identity）</h3><p><strong>&#x3D; Agent 是谁</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>角色定义</li>
+<li>品牌人格</li>
+<li>专业身份</li>
+</ul>
+<p><strong>示例：</strong> 「资深投行顾问」、「极致省钱旅行专家」、「AI 产品经理助手」</p>
+<p><strong>核心：身份决定信任</strong></p>
+<hr>
+<h3 id="第六层：使命层（Purpose）"><a href="#第六层：使命层（Purpose）" class="headerlink" title="第六层：使命层（Purpose）"></a>第六层：使命层（Purpose）</h3><p><strong>&#x3D; Agent 为什么存在</strong></p>
+<p><strong>对应：</strong></p>
+<ul>
+<li>商业目标</li>
+<li>KPI</li>
+<li>用户价值</li>
+</ul>
+<p><strong>示例：</strong> 帮用户省钱、提高转化率、自动化运营</p>
+<p><strong>核心：没有使命 &#x3D; Agent 没有方向</strong></p>
+<hr>
+<h2 id="五、关键洞察"><a href="#五、关键洞察" class="headerlink" title="五、关键洞察"></a>五、关键洞察</h2><h3 id="洞察一：上层决定下层（绝对原则）"><a href="#洞察一：上层决定下层（绝对原则）" class="headerlink" title="洞察一：上层决定下层（绝对原则）"></a>洞察一：上层决定下层（绝对原则）</h3><table>
+<thead>
+<tr>
+<th>层级</th>
+<th>决定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使命</td>
+<td>产品方向</td>
+</tr>
+<tr>
+<td>身份</td>
+<td>用户信任</td>
+</tr>
+<tr>
+<td>信念</td>
+<td>行为策略</td>
+</tr>
+<tr>
+<td>能力</td>
+<td>执行上限</td>
+</tr>
+<tr>
+<td>行为</td>
+<td>结果</td>
+</tr>
+<tr>
+<td>环境</td>
+<td>边界</td>
+</tr>
+</tbody></table>
+<p><strong>结论：不要一开始就调模型，而是先定义使命和身份。</strong></p>
+<h3 id="洞察二：90-的人做错在哪里？"><a href="#洞察二：90-的人做错在哪里？" class="headerlink" title="洞察二：90% 的人做错在哪里？"></a>洞察二：90% 的人做错在哪里？</h3><p>❌ 直接做：</p>
+<ul>
+<li>调模型</li>
+<li>接 API</li>
+<li>写 Prompt</li>
+</ul>
+<p>✅ 正确顺序：<strong>使命 → 身份 → 信念 → 能力 → 行为 → 环境</strong></p>
+<hr>
+<h2 id="六、Agent-设计模板（可直接用）"><a href="#六、Agent-设计模板（可直接用）" class="headerlink" title="六、Agent 设计模板（可直接用）"></a>六、Agent 设计模板（可直接用）</h2><p>你可以用这个模板做任何 Agent：</p>
+<h3 id="Step-1：定义使命（Purpose）"><a href="#Step-1：定义使命（Purpose）" class="headerlink" title="Step 1：定义使命（Purpose）"></a>Step 1：定义使命（Purpose）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这个Agent存在的唯一目标是：</span><br><span class="line">👉 （一句话商业目标）</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2：定义身份（Identity）"><a href="#Step-2：定义身份（Identity）" class="headerlink" title="Step 2：定义身份（Identity）"></a>Step 2：定义身份（Identity）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">你是一个：</span><br><span class="line">👉 （角色 + 专业 + 风格）</span><br><span class="line"></span><br><span class="line">你的核心特点：</span><br><span class="line">- 特点1</span><br><span class="line">- 特点2</span><br><span class="line">- 特点3</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3：定义信念（Prompt-核心）"><a href="#Step-3：定义信念（Prompt-核心）" class="headerlink" title="Step 3：定义信念（Prompt 核心）"></a>Step 3：定义信念（Prompt 核心）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">你的决策原则：</span><br><span class="line">1. 原则1</span><br><span class="line">2. 原则2</span><br><span class="line">3. 原则3</span><br><span class="line"></span><br><span class="line">你绝不会：</span><br><span class="line">- 绝不1</span><br><span class="line">- 绝不2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4：定义能力（Capabilities）"><a href="#Step-4：定义能力（Capabilities）" class="headerlink" title="Step 4：定义能力（Capabilities）"></a>Step 4：定义能力（Capabilities）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">你具备以下能力：</span><br><span class="line">- 能力1</span><br><span class="line">- 能力2</span><br><span class="line">- 能力3</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-5：定义行为（Behavior）"><a href="#Step-5：定义行为（Behavior）" class="headerlink" title="Step 5：定义行为（Behavior）"></a>Step 5：定义行为（Behavior）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">你的工作流程：</span><br><span class="line">1. 步骤一</span><br><span class="line">2. 步骤二</span><br><span class="line">3. 步骤三</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-6：定义环境（Environment）"><a href="#Step-6：定义环境（Environment）" class="headerlink" title="Step 6：定义环境（Environment）"></a>Step 6：定义环境（Environment）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">你可以使用：</span><br><span class="line">- 数据源：</span><br><span class="line">- 工具：</span><br><span class="line">- API：</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、完整案例：旅游-Agent"><a href="#七、完整案例：旅游-Agent" class="headerlink" title="七、完整案例：旅游 Agent"></a>七、完整案例：旅游 Agent</h2><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>使命</strong></td>
+<td>帮用户用最低成本获得最优旅行体验</td>
+</tr>
+<tr>
+<td><strong>身份</strong></td>
+<td>极致理性旅行规划专家</td>
+</tr>
+<tr>
+<td><strong>信念</strong></td>
+<td>不推荐网红坑、优先本地人体验、性价比优先</td>
+</tr>
+<tr>
+<td><strong>能力</strong></td>
+<td>路线规划、比价、用户画像分析</td>
+</tr>
+<tr>
+<td><strong>行为</strong></td>
+<td>① 收集需求 → ② 生成3套方案 → ③ 对比推荐</td>
+</tr>
+<tr>
+<td><strong>环境</strong></td>
+<td>航班 API、酒店 API、地图</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、进阶：Agent-进化公式"><a href="#八、进阶：Agent-进化公式" class="headerlink" title="八、进阶：Agent 进化公式"></a>八、进阶：Agent 进化公式</h2><p><strong>Agent 成长路径：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">升级信念 &gt; 升级能力 &gt; 扩展环境</span><br></pre></td></tr></table></figure>
+
+<p>改变 Prompt（信念层）的收益最大，因为它决定了所有下层的行为方式。扩展工具（环境层）是最后才做的事。</p>
+<hr>
+<h2 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h2><blockquote>
+<p><strong>Dilts 模型本质上是在回答：一个 AI，不只是「会做事」，而是「为什么这么做 + 以什么身份做」。</strong></p>
+</blockquote>
+<p><strong>Robert Dilts &#x3D; 把「改变人」这件事，变成一套可设计的系统工程的人。</strong> 而 AI Agent 设计，正是把这套系统工程从「人」迁移到了「机器」上。</p>
+<hr>
+<h2 id="附录：Robert-Dilts-代表作"><a href="#附录：Robert-Dilts-代表作" class="headerlink" title="附录：Robert Dilts 代表作"></a>附录：Robert Dilts 代表作</h2><table>
+<thead>
+<tr>
+<th>书名</th>
+<th>中文译名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>From Coach to Awakener</em></td>
+<td>《从教练到觉醒者》</td>
+</tr>
+<tr>
+<td><em>Tools of the Spirit</em></td>
+<td>《心灵的工具》</td>
+</tr>
+<tr>
+<td><em>Sleight of Mouth</em></td>
+<td>《语言的魔力》</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iyangjialin.github.io/2026/04/05/2026-04-05-dilts-nlp-agent-design/" data-id="cmntrs7az001mx0d3dxcva03x" data-title="Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/05/2026-04-05-affaan-mustafa-ecc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Affaan Mustafa：把 AI 编程从「工具时代」推进到「操作系统时代」的人
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/04/01/2026-04-01-ai-coding-chronicle/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AI编码编年史：编程正在消失，还是正在重生？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18px;">Agent</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">Agent时代</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 10px;">Claude Code</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/GitHub/" style="font-size: 12px;">GitHub</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 10px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 12px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Skill-Creator/" style="font-size: 12px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 14px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 12px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 12px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 14px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 14px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 14px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 12px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 12px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 16px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 14px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 12px;">系统思维</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 12px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 12px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/04/11/2026-04-11-satya-nadella-cognitive-model/">纳德拉认知模型：一个让微软重生的架构师如何理解 AI 时代</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/10/2026-04-10-self-deconstruction/">一次完整的自我拆解：从对话反推你的能力模型</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/09/2026-04-09-ai-era-education/">AI 时代，教育何往：当「知道答案」不再重要</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/05/2026-04-05-affaan-mustafa-ecc/">Affaan Mustafa：把 AI 编程从「工具时代」推进到「操作系统时代」的人</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/05/2026-04-05-dilts-nlp-agent-design/">Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <p>&copy; 2026 <strong>TokenMind Studio</strong></p>
+<p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/iyangjialin" target="_blank">iyangjialin</a></p>
+      
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

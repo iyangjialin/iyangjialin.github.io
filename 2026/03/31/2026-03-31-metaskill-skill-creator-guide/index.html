@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MetaSkill：Skill-Creator 完整技能设计手册 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="来源：skill-creator-0.1.0&#x2F;SKILL.md · 完整中文翻译 + 结构化整理  技能（Skill）是模块化、自包含的包，通过提供专业知识、工作流程和工具来扩展 AI 的能力。可以把它们理解为特定领域的「入职指南」——将通用智能代理转变为配备程序性知识的领域专家。 本文是 Skill-Creator 的完整设计手册，涵盖技能结构、核心原则、创建流程与最佳实践。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MetaSkill：Skill-Creator 完整技能设计手册">
+<meta property="og:url" content="https://iyangjialin.github.io/2026/03/31/2026-03-31-metaskill-skill-creator-guide/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="来源：skill-creator-0.1.0&#x2F;SKILL.md · 完整中文翻译 + 结构化整理  技能（Skill）是模块化、自包含的包，通过提供专业知识、工作流程和工具来扩展 AI 的能力。可以把它们理解为特定领域的「入职指南」——将通用智能代理转变为配备程序性知识的领域专家。 本文是 Skill-Creator 的完整设计手册，涵盖技能结构、核心原则、创建流程与最佳实践。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-31T05:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-31T01:51:11.990Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Skill-Creator">
+<meta property="article:tag" content="SkillHub">
+<meta property="article:tag" content="方法论">
+<meta property="article:tag" content="技能设计">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.svg">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          
+            <a class="nav-icon" target="_blank" rel="noopener" href="https://github.com/iyangjialin"><span class="fa fa-github"></span></a>
+          
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://iyangjialin.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-03-31-metaskill-skill-creator-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/31/2026-03-31-metaskill-skill-creator-guide/" class="article-date">
+  <time class="dt-published" datetime="2026-03-31T05:00:00.000Z" itemprop="datePublished">2026-03-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MetaSkill：Skill-Creator 完整技能设计手册
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>来源：<a target="_blank" rel="noopener" href="https://clawhub.ai/chindden/skill-creator">skill-creator-0.1.0&#x2F;SKILL.md</a> · 完整中文翻译 + 结构化整理</p>
+</blockquote>
+<p>技能（Skill）是模块化、自包含的包，通过提供专业知识、工作流程和工具来扩展 AI 的能力。可以把它们理解为特定领域的「入职指南」——将通用智能代理转变为配备程序性知识的领域专家。</p>
+<p>本文是 Skill-Creator 的完整设计手册，涵盖技能结构、核心原则、创建流程与最佳实践。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、技能能提供什么"><a href="#一、技能能提供什么" class="headerlink" title="一、技能能提供什么"></a>一、技能能提供什么</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>专业工作流程</td>
+<td>特定领域的多步骤程序</td>
+</tr>
+<tr>
+<td>工具集成</td>
+<td>使用特定文件格式或 API 的说明</td>
+</tr>
+<tr>
+<td>领域专业知识</td>
+<td>行业知识、业务逻辑、公司规范</td>
+</tr>
+<tr>
+<td>捆绑资源</td>
+<td>用于复杂和重复任务的脚本、参考资料和资产</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、核心原则"><a href="#二、核心原则" class="headerlink" title="二、核心原则"></a>二、核心原则</h2><h3 id="原则一：简洁是关键"><a href="#原则一：简洁是关键" class="headerlink" title="原则一：简洁是关键"></a>原则一：简洁是关键</h3><p>上下文窗口是公共资源。技能与 AI 需要的其他所有内容共享上下文窗口：系统提示、对话历史、其他技能的元数据以及实际的用户请求。</p>
+<p><strong>默认假设：AI 已经非常聪明。</strong> 只添加 AI 还没有的上下文。挑战每条信息：</p>
+<ul>
+<li>「AI 真的需要这个解释吗？」</li>
+<li>「这段文字值得它的 token 成本吗？」</li>
+</ul>
+<p>优先使用简洁的示例，而不是冗长的解释。</p>
+<h3 id="原则二：设置适当的自由度"><a href="#原则二：设置适当的自由度" class="headerlink" title="原则二：设置适当的自由度"></a>原则二：设置适当的自由度</h3><p>将具体程度与任务的脆弱性和可变性相匹配：</p>
+<table>
+<thead>
+<tr>
+<th>自由度</th>
+<th>实现方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高自由度</td>
+<td>基于文本的说明</td>
+<td>多种方法都有效、决策取决于上下文</td>
+</tr>
+<tr>
+<td>中等自由度</td>
+<td>带参数的伪代码或脚本</td>
+<td>有首选模式、可接受一些变化</td>
+</tr>
+<tr>
+<td>低自由度</td>
+<td>特定脚本，少量参数</td>
+<td>操作脆弱易出错、一致性至关重要</td>
+</tr>
+</tbody></table>
+<p>类比：AI 像探索者走在路上——有悬崖的狭窄桥梁需要护栏（低自由度），开阔的田野允许多条路线（高自由度）。</p>
+<hr>
+<h2 id="三、技能的目录结构"><a href="#三、技能的目录结构" class="headerlink" title="三、技能的目录结构"></a>三、技能的目录结构</h2><p>每个技能由必需的 <code>SKILL.md</code> 文件和可选的捆绑资源组成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">skill-name/</span><br><span class="line">├── SKILL.md            （必需）</span><br><span class="line">│   ├── YAML frontmatter 元数据（必需）</span><br><span class="line">│   │   ├── name:       （必需）</span><br><span class="line">│   │   └── description:（必需）</span><br><span class="line">│   └── Markdown 说明  （必需）</span><br><span class="line">└── 捆绑资源            （可选）</span><br><span class="line">    ├── scripts/        - 可执行代码（Python/Bash/等）</span><br><span class="line">    ├── references/     - 需要时加载到上下文中的文档</span><br><span class="line">    └── assets/         - 输出中使用的文件（模板、图标、字体等）</span><br></pre></td></tr></table></figure>
+
+<h3 id="SKILL-md（必需）"><a href="#SKILL-md（必需）" class="headerlink" title="SKILL.md（必需）"></a>SKILL.md（必需）</h3><p>每个 <code>SKILL.md</code> 包含两部分：</p>
+<ul>
+<li><strong>Frontmatter（YAML）</strong>：包含 <code>name</code> 和 <code>description</code> 字段。这是 AI 读取以确定何时使用技能的唯一字段，因此清晰全面非常重要。</li>
+<li><strong>正文（Markdown）</strong>：使用技能的说明和指导。仅在技能触发后加载。</li>
+</ul>
+<h3 id="捆绑资源（可选）"><a href="#捆绑资源（可选）" class="headerlink" title="捆绑资源（可选）"></a>捆绑资源（可选）</h3><h4 id="scripts-（脚本）"><a href="#scripts-（脚本）" class="headerlink" title="scripts&#x2F;（脚本）"></a>scripts&#x2F;（脚本）</h4><p>用于需要确定性可靠性或重复重写的任务的可执行代码。</p>
+<ul>
+<li><strong>何时包含</strong>：当相同的代码被重复重写，或需要确定性可靠性时</li>
+<li><strong>示例</strong>：<code>scripts/rotate_pdf.py</code>（PDF 旋转任务）</li>
+<li><strong>优点</strong>：token 高效、确定性强，可在不加载上下文的情况下执行</li>
+<li><strong>注意</strong>：脚本仍可能需要被 AI 读取以进行环境特定调整</li>
+</ul>
+<h4 id="references-（参考资料）"><a href="#references-（参考资料）" class="headerlink" title="references&#x2F;（参考资料）"></a>references&#x2F;（参考资料）</h4><p>旨在根据需要加载到上下文中以告知 AI 思考过程的文档。</p>
+<ul>
+<li><strong>何时包含</strong>：AI 在工作时应参考的文档</li>
+<li><strong>示例</strong>：<code>references/finance.md</code>、<code>references/mnda.md</code>、<code>references/api_docs.md</code></li>
+<li><strong>用例</strong>：数据库模式、API 文档、领域知识、公司政策</li>
+<li><strong>优点</strong>：保持 SKILL.md 精简，仅在需要时加载</li>
+<li><strong>最佳实践</strong>：文件超过 10k 字时，在 SKILL.md 中包含 grep 搜索模式</li>
+<li><strong>避免重复</strong>：信息只存在于 SKILL.md 或参考文件中，不要两者都有</li>
+</ul>
+<h4 id="assets-（资产）"><a href="#assets-（资产）" class="headerlink" title="assets&#x2F;（资产）"></a>assets&#x2F;（资产）</h4><p>不加载到上下文中，而是在 AI 生成的输出中直接使用的文件。</p>
+<ul>
+<li><strong>何时包含</strong>：技能需要在最终输出中使用的文件时</li>
+<li><strong>示例</strong>：<code>assets/logo.png</code>、<code>assets/slides.pptx</code>、<code>assets/frontend-template/</code></li>
+<li><strong>用例</strong>：模板、图像、图标、样板代码、字体</li>
+</ul>
+<h4 id="不应包含的内容"><a href="#不应包含的内容" class="headerlink" title="不应包含的内容"></a>不应包含的内容</h4><p>技能应只包含直接支持其功能的基本文件，不要创建多余的文档：</p>
+<ul>
+<li>README.md</li>
+<li>INSTALLATION_GUIDE.md</li>
+<li>QUICK_REFERENCE.md</li>
+<li>CHANGELOG.md</li>
+</ul>
+<hr>
+<h2 id="四、渐进式披露设计原则"><a href="#四、渐进式披露设计原则" class="headerlink" title="四、渐进式披露设计原则"></a>四、渐进式披露设计原则</h2><p>技能使用三级加载系统来有效管理上下文：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>内容</th>
+<th>加载时机</th>
+<th>大小建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一级</td>
+<td>元数据（名称 + 描述）</td>
+<td>始终在上下文中</td>
+<td>~100 字</td>
+</tr>
+<tr>
+<td>第二级</td>
+<td>SKILL.md 正文</td>
+<td>技能触发时</td>
+<td>&lt;5k 字</td>
+</tr>
+<tr>
+<td>第三级</td>
+<td>捆绑资源</td>
+<td>AI 按需加载</td>
+<td>无限制</td>
+</tr>
+</tbody></table>
+<p><strong>核心原则：</strong> 当技能支持多个变体时，在 SKILL.md 中只保留核心工作流程和选择指导，将特定变体的详细信息移至单独的参考文件。</p>
+<h3 id="渐进式披露模式"><a href="#渐进式披露模式" class="headerlink" title="渐进式披露模式"></a>渐进式披露模式</h3><p><strong>模式一：带参考的高级指南</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># PDF 处理</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 快速入门</span></span><br><span class="line"></span><br><span class="line">使用 pdfplumber 提取文本：[代码示例]</span><br><span class="line"></span><br><span class="line"><span class="section">## 高级功能</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**表单填充**</span>：完整指南见 [<span class="string">FORMS.md</span>](<span class="link">FORMS.md</span>)</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**API 参考**</span>：所有方法见 [<span class="string">REFERENCE.md</span>](<span class="link">REFERENCE.md</span>)</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**示例**</span>：常见模式见 [<span class="string">EXAMPLES.md</span>](<span class="link">EXAMPLES.md</span>)</span><br></pre></td></tr></table></figure>
+
+<p>AI 仅在需要时加载 FORMS.md、REFERENCE.md 或 EXAMPLES.md。</p>
+<hr>
+<p><strong>模式二：特定领域组织</strong></p>
+<p>对于具有多个领域的技能，按领域组织内容以避免加载不相关的上下文：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bigquery-skill/</span><br><span class="line">├── SKILL.md           （概述和导航）</span><br><span class="line">└── reference/</span><br><span class="line">    ├── finance.md     （收入、计费指标）</span><br><span class="line">    ├── sales.md       （机会、管道）</span><br><span class="line">    ├── product.md     （API 使用、功能）</span><br><span class="line">    └── marketing.md   （活动、归因）</span><br></pre></td></tr></table></figure>
+
+<p>当用户询问销售指标时，AI 只读取 <code>sales.md</code>。同理，支持多框架的技能也按变体组织：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cloud-deploy/</span><br><span class="line">├── SKILL.md           （工作流程 + 提供商选择）</span><br><span class="line">└── references/</span><br><span class="line">    ├── aws.md         （AWS 部署模式）</span><br><span class="line">    ├── gcp.md         （GCP 部署模式）</span><br><span class="line">    └── azure.md       （Azure 部署模式）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>模式三：条件详情</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># DOCX 处理</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 创建文档</span></span><br><span class="line"></span><br><span class="line">使用 docx-js 创建新文档。见 [<span class="string">DOCX-JS.md</span>](<span class="link">DOCX-JS.md</span>)。</span><br><span class="line"></span><br><span class="line"><span class="section">## 编辑文档</span></span><br><span class="line"></span><br><span class="line">对于简单的编辑，直接修改 XML。</span><br><span class="line"></span><br><span class="line"><span class="strong">**对于跟踪更改**</span>：见 [<span class="string">REDLINING.md</span>](<span class="link">REDLINING.md</span>)</span><br><span class="line"><span class="strong">**对于 OOXML 详情**</span>：见 [<span class="string">OOXML.md</span>](<span class="link">OOXML.md</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>重要指南：</strong></p>
+<ul>
+<li><strong>避免深度嵌套的引用</strong> —— 保持引用从 SKILL.md 一级深度，所有参考文件都应直接从 SKILL.md 链接</li>
+<li><strong>构建较长的参考文件</strong> —— 超过 100 行的文件，在顶部包含目录，以便 AI 预览时可以看到完整范围</li>
+</ul>
+<hr>
+<h2 id="五、技能创建六步流程"><a href="#五、技能创建六步流程" class="headerlink" title="五、技能创建六步流程"></a>五、技能创建六步流程</h2><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤一</td>
+<td>理解技能</td>
+<td>通过具体示例理解技能的使用模式</td>
+</tr>
+<tr>
+<td>步骤二</td>
+<td>规划内容</td>
+<td>分析可重用的脚本、参考资料和资产</td>
+</tr>
+<tr>
+<td>步骤三</td>
+<td>初始化</td>
+<td>运行 <code>init_skill.py</code> 生成技能目录</td>
+</tr>
+<tr>
+<td>步骤四</td>
+<td>编辑技能</td>
+<td>实现资源，编写 SKILL.md</td>
+</tr>
+<tr>
+<td>步骤五</td>
+<td>打包</td>
+<td>运行 <code>package_skill.py</code> 生成 .skill 文件</td>
+</tr>
+<tr>
+<td>步骤六</td>
+<td>迭代</td>
+<td>根据实际使用反馈持续改进</td>
+</tr>
+</tbody></table>
+<h3 id="步骤一：通过具体示例理解技能"><a href="#步骤一：通过具体示例理解技能" class="headerlink" title="步骤一：通过具体示例理解技能"></a>步骤一：通过具体示例理解技能</h3><p>仅当技能的使用模式已经清楚理解时才跳过此步骤。即使在使用现有技能时，它仍然有价值。</p>
+<p>要创建有效的技能，需要清楚理解如何使用该技能的具体示例。例如，构建图像编辑器技能时，需要问：</p>
+<ul>
+<li>「图像编辑器技能应该支持什么功能？编辑、旋转，还有其他吗？」</li>
+<li>「你能给出一些如何使用此技能的示例吗？」</li>
+<li>「用户会说什么来触发此技能？」</li>
+</ul>
+<blockquote>
+<p>避免在单条消息中提出太多问题。从最重要的问题开始，根据需要跟进。</p>
+</blockquote>
+<p>当对技能应支持的功能有清晰认识时，结束此步骤。</p>
+<h3 id="步骤二：规划可重用的技能内容"><a href="#步骤二：规划可重用的技能内容" class="headerlink" title="步骤二：规划可重用的技能内容"></a>步骤二：规划可重用的技能内容</h3><p>将具体示例转化为有效技能，通过以下方式分析每个示例：</p>
+<ol>
+<li>考虑如何从头开始执行示例</li>
+<li>确定在重复执行这些工作流程时，哪些脚本、参考资料和资产会有帮助</li>
+</ol>
+<p><strong>示例一</strong>：构建 <code>pdf-editor</code> 技能</p>
+<ul>
+<li>旋转 PDF 需要每次重写相同的代码</li>
+<li>→ <code>scripts/rotate_pdf.py</code> 脚本应存储在技能中</li>
+</ul>
+<p><strong>示例二</strong>：构建 <code>frontend-webapp-builder</code> 技能</p>
+<ul>
+<li>编写前端 Web 应用每次都需要相同的样板 HTML&#x2F;React</li>
+<li>→ 包含样板文件的 <code>assets/hello-world/</code> 模板应存储在技能中</li>
+</ul>
+<p><strong>示例三</strong>：构建 <code>big-query</code> 技能</p>
+<ul>
+<li>查询 BigQuery 需要每次重新发现表模式和关系</li>
+<li>→ 记录表模式的 <code>references/schema.md</code> 文件应存储在技能中</li>
+</ul>
+<h3 id="步骤三：初始化技能"><a href="#步骤三：初始化技能" class="headerlink" title="步骤三：初始化技能"></a>步骤三：初始化技能</h3><p>从头开始创建新技能时，始终运行 <code>init_skill.py</code> 脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scripts/init_skill.py &lt;skill-name&gt; --path &lt;output-directory&gt;</span><br></pre></td></tr></table></figure>
+
+<p>该脚本将：</p>
+<ul>
+<li>在指定路径创建技能目录</li>
+<li>生成带有适当 frontmatter 和 TODO 占位符的 SKILL.md 模板</li>
+<li>创建示例资源目录：<code>scripts/</code>、<code>references/</code> 和 <code>assets/</code></li>
+<li>在每个目录中添加可以自定义或删除的示例文件</li>
+</ul>
+<h3 id="步骤四：编辑技能"><a href="#步骤四：编辑技能" class="headerlink" title="步骤四：编辑技能"></a>步骤四：编辑技能</h3><p>编辑技能时，记住该技能是为另一个 AI 实例使用而创建的。包含对 AI 有益且不明显的信息。</p>
+<h4 id="学习经过验证的设计模式"><a href="#学习经过验证的设计模式" class="headerlink" title="学习经过验证的设计模式"></a>学习经过验证的设计模式</h4><p>根据技能需求查阅这些有用的指南：</p>
+<ul>
+<li><strong>多步骤流程</strong>：有关顺序工作流程和条件逻辑，见 <code>references/workflows.md</code></li>
+<li><strong>特定输出格式或质量标准</strong>：有关模板和示例模式，见 <code>references/output-patterns.md</code></li>
+</ul>
+<h4 id="从可重用内容开始"><a href="#从可重用内容开始" class="headerlink" title="从可重用内容开始"></a>从可重用内容开始</h4><p>从确定的可重用资源开始实现：<code>scripts/</code>、<code>references/</code> 和 <code>assets/</code> 文件。</p>
+<blockquote>
+<p>注意：此步骤可能需要用户输入。例如，实现 <code>brand-guidelines</code> 技能时，用户可能需要提供品牌资产或模板。</p>
+</blockquote>
+<p>添加的脚本必须通过实际运行来测试，确保没有错误且输出符合预期。不需要的示例文件应删除。</p>
+<h4 id="更新-SKILL-md"><a href="#更新-SKILL-md" class="headerlink" title="更新 SKILL.md"></a>更新 SKILL.md</h4><p><strong>写作指南：</strong> 始终使用祈使句&#x2F;不定式形式。</p>
+<p><strong>Frontmatter 字段：</strong></p>
+<ul>
+<li><code>name</code>：技能名称</li>
+<li><code>description</code>：主要触发机制，帮助 AI 理解何时使用该技能。应包括技能的功能以及具体触发器&#x2F;上下文</li>
+</ul>
+<blockquote>
+<p>示例描述（docx 技能）：「全面的文档创建、编辑和分析，支持跟踪更改、注释、格式保留和文本提取。当 AI 需要处理专业文档（.docx 文件）时使用，用于：(1) 创建新文档，(2) 修改或编辑内容，(3) 处理跟踪更改，(4) 添加注释，或任何其他文档任务」</p>
+</blockquote>
+<p><strong>注意</strong>：不要在 YAML frontmatter 中包含任何其他字段。</p>
+<h3 id="步骤五：打包技能"><a href="#步骤五：打包技能" class="headerlink" title="步骤五：打包技能"></a>步骤五：打包技能</h3><p>技能开发完成后，打包成可分发的 <code>.skill</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本用法</span></span><br><span class="line">scripts/package_skill.py &lt;path/to/skill-folder&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定输出目录</span></span><br><span class="line">scripts/package_skill.py &lt;path/to/skill-folder&gt; ./dist</span><br></pre></td></tr></table></figure>
+
+<p>打包脚本将自动：</p>
+<ol>
+<li><strong>验证</strong>技能，检查：<ul>
+<li>YAML frontmatter 格式和必需字段</li>
+<li>技能命名约定和目录结构</li>
+<li>描述的完整性和质量</li>
+<li>文件组织和资源引用</li>
+</ul>
+</li>
+<li><strong>打包</strong>技能（验证通过后），创建以技能命名的 <code>.skill</code> 文件（本质是带 .skill 扩展名的 zip 文件）</li>
+</ol>
+<p>如果验证失败，脚本将报告错误并退出。修复验证错误后再次运行。</p>
+<h3 id="步骤六：迭代"><a href="#步骤六：迭代" class="headerlink" title="步骤六：迭代"></a>步骤六：迭代</h3><p>测试技能后，根据实际使用反馈进行改进。</p>
+<p><strong>迭代工作流程：</strong></p>
+<ol>
+<li>在实际任务中使用技能</li>
+<li>注意困难或低效之处</li>
+<li>确定应如何更新 SKILL.md 或捆绑资源</li>
+<li>实施更改并再次测试</li>
+</ol>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>核心建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容精简</td>
+<td>只添加 AI 还没有的上下文，不解释显而易见的事情</td>
+</tr>
+<tr>
+<td>结构清晰</td>
+<td>三级加载系统，按需披露</td>
+</tr>
+<tr>
+<td>资源分类</td>
+<td>scripts&#x2F;references&#x2F;assets 三类，各司其职</td>
+</tr>
+<tr>
+<td>描述精准</td>
+<td>description 是触发机制，必须清晰全面</td>
+</tr>
+<tr>
+<td>持续迭代</td>
+<td>在实际使用中发现问题，持续改进</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Skill-Creator 的本质，是把「人类的专业知识」压缩成「AI 可复用的工程模块」。每一个好的 Skill，都是一次知识的结构化沉淀。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iyangjialin.github.io/2026/03/31/2026-03-31-metaskill-skill-creator-guide/" data-id="cmntrs7as001cx0d3busj4wod" data-title="MetaSkill：Skill-Creator 完整技能设计手册" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/01/2026-04-01-ai-coding-chronicle/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AI编码编年史：编程正在消失，还是正在重生？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/03/31/2026-03-31-skill-creator-methodology/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Skill-Creator 方法论：把 AI 能力产品化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18px;">Agent</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">Agent时代</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 10px;">Claude Code</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/GitHub/" style="font-size: 12px;">GitHub</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 10px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 12px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Skill-Creator/" style="font-size: 12px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 14px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 12px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 12px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 14px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 14px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 14px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 12px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 12px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 16px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 14px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 12px;">系统思维</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 12px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 12px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/04/11/2026-04-11-satya-nadella-cognitive-model/">纳德拉认知模型：一个让微软重生的架构师如何理解 AI 时代</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/10/2026-04-10-self-deconstruction/">一次完整的自我拆解：从对话反推你的能力模型</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/09/2026-04-09-ai-era-education/">AI 时代，教育何往：当「知道答案」不再重要</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/05/2026-04-05-affaan-mustafa-ecc/">Affaan Mustafa：把 AI 编程从「工具时代」推进到「操作系统时代」的人</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/05/2026-04-05-dilts-nlp-agent-design/">Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <p>&copy; 2026 <strong>TokenMind Studio</strong></p>
+<p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/iyangjialin" target="_blank">iyangjialin</a></p>
+      
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
