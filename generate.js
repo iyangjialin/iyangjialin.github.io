@@ -6,6 +6,10 @@ async function generate() {
   const hexo = new Hexo(__dirname, {});
 
   await hexo.init();
+
+  // 确保 url 正确（覆盖可能的默认值）
+  hexo.config.url = 'https://iyangjialin.github.io';
+  hexo.config.root = '/';
   
   // 加载所有插件
   console.log('加载插件...');
