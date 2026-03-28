@@ -9,7 +9,31 @@
   <link href="https://iyangjialin.github.io/atom.xml" rel="self"/>
   <rights>All rights reserved 2026, John Doe</rights>
   <title>Hexo</title>
-  <updated>2026-03-27T22:49:28.312Z</updated>
+  <updated>2026-03-28T16:18:53.395Z</updated>
+  <entry>
+    <author>
+      <name>John Doe</name>
+    </author>
+    <category term="AI洞察" scheme="https://iyangjialin.github.io/categories/AI%E6%B4%9E%E5%AF%9F/"/>
+    <category term="AI" scheme="https://iyangjialin.github.io/tags/AI/"/>
+    <category term="Agent" scheme="https://iyangjialin.github.io/tags/Agent/"/>
+    <category term="OpenClaw" scheme="https://iyangjialin.github.io/tags/OpenClaw/"/>
+    <category term="AI工具" scheme="https://iyangjialin.github.io/tags/AI%E5%B7%A5%E5%85%B7/"/>
+    <content>
+      <![CDATA[<p>在 AI Agent 爆发的今天，OpenClaw 被很多人视为”下一代操作系统雏形”。<br>但如果你真正上手用过，就会发现——它离”稳定生产力工具”，还有一段距离。</p><p>这篇文章，我们不吹不黑，讲清楚 OpenClaw 的核心缺点。</p><hr><h2 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h2><p><strong>OpenClaw 很强，但更像实验品，而不是工业级工具。</strong></p><hr><h2 id="1-稳定性问题：成功是概率，不是必然"><a href="#1-稳定性问题：成功是概率，不是必然" class="headerlink" title="1. 稳定性问题：成功是概率，不是必然"></a>1. 稳定性问题：成功是概率，不是必然</h2><p>OpenClaw 最大的问题是”不稳定”。</p><p>在实际使用中你会发现：</p><ul><li>多步骤任务容易中断</li><li>长链路执行经常跑偏</li><li>不同环境下表现差异明显</li></ul><p>换句话说：</p><blockquote><p>同一个任务，执行 3 次，结果可能 3 种</p></blockquote><p>这在实验阶段可以接受，但在企业环境中是致命问题。</p><hr><h2 id="2-可控性弱：它不像程序，更像”人”"><a href="#2-可控性弱：它不像程序，更像”人”" class="headerlink" title="2. 可控性弱：它不像程序，更像”人”"></a>2. 可控性弱：它不像程序，更像”人”</h2><p>传统软件的特点是：</p><blockquote><p>输入确定 → 输出确定</p></blockquote><p>但 OpenClaw 不一样：</p><ul><li>会”自作主张”改变执行路径</li><li>不完全遵循 prompt</li><li>有时会优化任务，有时反而跑偏</li></ul><p>你可以把它理解为：</p><blockquote><p>一个聪明但不完全听话的实习生</p></blockquote><p>这让系统很灵活，但也很难严格控制。</p><hr><h2 id="3-成本问题：Token-消耗极高"><a href="#3-成本问题：Token-消耗极高" class="headerlink" title="3. 成本问题：Token 消耗极高"></a>3. 成本问题：Token 消耗极高</h2><p>OpenClaw 的运行方式决定了它的成本结构：</p><ul><li>每一步决策都调用模型</li><li>多 Agent 协作会放大消耗</li><li>长任务成本指数增长</li></ul><p>结果就是：</p><blockquote><p>复杂任务 ≈ 高成本任务</p></blockquote><p>这对商业化是一个非常现实的阻碍。</p><hr><h2 id="4-调试困难：从工程问题变成”认知问题”"><a href="#4-调试困难：从工程问题变成”认知问题”" class="headerlink" title="4. 调试困难：从工程问题变成”认知问题”"></a>4. 调试困难：从工程问题变成”认知问题”</h2><p>在传统开发中：</p><ul><li>bug 可以复现</li><li>日志可以分析</li><li>问题可以定位</li></ul><p>但在 OpenClaw 中：</p><ul><li>错误可能来自模型”判断失误”</li><li>同样输入不一定复现同样问题</li><li>debug 依赖 prompt 调整和经验</li></ul><p>本质上你在做的已经不是 Debug，而是：</p><blockquote><p>“训练一个系统如何思考”</p></blockquote><hr><h2 id="5-生态不成熟：还在拼积木阶段"><a href="#5-生态不成熟：还在拼积木阶段" class="headerlink" title="5. 生态不成熟：还在拼积木阶段"></a>5. 生态不成熟：还在拼积木阶段</h2><p>目前 OpenClaw 的生态还比较早期：</p><ul><li>工具链不统一</li><li>插件标准不稳定</li><li>缺乏成熟案例</li></ul><p>开发者往往需要：</p><blockquote><p>自己搭系统、自己踩坑、自己总结方法论</p></blockquote><p>这对效率是一个不小的挑战。</p><hr><h2 id="6-安全与权限问题：能力越大，风险越大"><a href="#6-安全与权限问题：能力越大，风险越大" class="headerlink" title="6. 安全与权限问题：能力越大，风险越大"></a>6. 安全与权限问题：能力越大，风险越大</h2><p>OpenClaw 能做的事情很多：</p><ul><li>操作浏览器</li><li>调用 API</li><li>执行系统命令</li></ul><p>但这也带来了风险：</p><ul><li>误操作（删除、错误请求）</li><li>Prompt 注入攻击</li><li>权限边界不清晰</li></ul><p>在企业环境中，这一块必须非常谨慎。</p><hr><h2 id="7-学习成本：并不是真正的”零门槛”"><a href="#7-学习成本：并不是真正的”零门槛”" class="headerlink" title="7. 学习成本：并不是真正的”零门槛”"></a>7. 学习成本：并不是真正的”零门槛”</h2><p>虽然很多人宣传它是低代码工具，但现实是：</p><p>你仍然需要：</p><ul><li>理解 Prompt 设计</li><li>理解 Agent 工作机制</li><li>掌握一定的工程能力（API、工具集成）</li></ul><p>所以它更适合：</p><blockquote><p>“懂一点技术 + 懂一点业务”的新型开发者</p></blockquote><hr><h2 id="总结：OpenClaw-的真正问题是什么？"><a href="#总结：OpenClaw-的真正问题是什么？" class="headerlink" title="总结：OpenClaw 的真正问题是什么？"></a>总结：OpenClaw 的真正问题是什么？</h2><p>OpenClaw 的问题，不是能力不足，而是：</p><blockquote><p><strong>它太像人，而不像机器</strong></p></blockquote><ul><li>会犯错</li><li>会不稳定</li><li>会做出不可预测的决策</li></ul><p>但也正因为如此，它具备巨大的潜力：</p><blockquote><p>一旦稳定性、成本、可控性被解决，它可能成为真正的”AI操作系统”。</p></blockquote><hr><h2 id="最后一句话"><a href="#最后一句话" class="headerlink" title="最后一句话"></a>最后一句话</h2><p><strong>今天的 OpenClaw，是未来操作系统的”原型机”。</strong></p><p>能用，但还不能完全依赖。<br>值得研究，但需要理性预期。</p>]]>
+    </content>
+    <id>https://iyangjialin.github.io/2026/03/29/2026-03-29-openclaw-not-productivity-tool/</id>
+    <link href="https://iyangjialin.github.io/2026/03/29/2026-03-29-openclaw-not-productivity-tool/"/>
+    <published>2026-03-28T16:15:00.000Z</published>
+    <summary>
+      <![CDATA[<p>在 AI Agent 爆发的今天，OpenClaw 被很多人视为”下一代操作系统雏形”。<br>但如果你真正上手用过，就会发现——它离”稳定生产力工具”，还有一段距离。</p>
+<p>这篇文章，我们不吹不黑，讲清楚 OpenClaw 的核心缺点。</p>
+<hr>
+<h2]]>
+    </summary>
+    <title>OpenClaw 的缺点：为什么它还不是&quot;生产力工具&quot;？</title>
+    <updated>2026-03-28T16:18:53.395Z</updated>
+  </entry>
   <entry>
     <author>
       <name>John Doe</name>
