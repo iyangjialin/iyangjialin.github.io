@@ -91,6 +91,656 @@
 
 
   
+    <article id="post-2026-04-22-hermes-vs-openclaw-comparison" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/22/2026-04-22-hermes-vs-openclaw-comparison/" class="article-date">
+  <time class="dt-published" datetime="2026-04-22T10:00:00.000Z" itemprop="datePublished">2026-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hermes Agent vs OpenClaw：一次彻底的架构进化
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>OpenClaw（也叫 Clawdbot、Molbot）是许多人接触 AI Agent 的起点，而 Hermes Agent 正是它的官方继任者。本文从架构、记忆、技能、自动化、配置五个维度深入对比两者差异，并附完整迁移指南。</p>
+<blockquote>
+<p>版本说明：Hermes v0.10.0 | OpenClaw (legacy) — 更新于 2026-04-22</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="1-背景关系"><a href="#1-背景关系" class="headerlink" title="1. 背景关系"></a>1. 背景关系</h2><h3 id="血缘关系"><a href="#血缘关系" class="headerlink" title="血缘关系"></a>血缘关系</h3><p>Hermes Agent 与 OpenClaw 有着直接的继承关系。OpenClaw 是早期项目，Hermes 是其继任者，官方提供了一键迁移工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hermes claw migrate</span><br></pre></td></tr></table></figure>
+
+<h3 id="命名对应"><a href="#命名对应" class="headerlink" title="命名对应"></a>命名对应</h3><table>
+<thead>
+<tr>
+<th>OpenClaw</th>
+<th>Hermes</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>~/.openclaw/</code></td>
+<td><code>~/.hermes/</code></td>
+<td>主配置目录</td>
+</tr>
+<tr>
+<td><code>clawdbot.json</code></td>
+<td><code>config.yaml</code></td>
+<td>主配置文件</td>
+</tr>
+<tr>
+<td><code>workspace/SOUL.md</code></td>
+<td><code>~/.hermes/SOUL.md</code></td>
+<td>人格定义</td>
+</tr>
+<tr>
+<td><code>workspace/MEMORY.md</code></td>
+<td><code>~/.hermes/memories/MEMORY.md</code></td>
+<td>长期记忆</td>
+</tr>
+<tr>
+<td><code>workspace/AGENTS.md</code></td>
+<td><code>AGENTS.md</code> (项目内)</td>
+<td>Agent 指令</td>
+</tr>
+<tr>
+<td><code>~/.agents/skills/</code></td>
+<td><code>~/.hermes/skills/</code></td>
+<td>技能目录</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-核心架构对比"><a href="#2-核心架构对比" class="headerlink" title="2. 核心架构对比"></a>2. 核心架构对比</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>OpenClaw</th>
+<th>Hermes Agent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>编程语言</strong></td>
+<td>Python</td>
+<td>Python</td>
+</tr>
+<tr>
+<td><strong>核心设计</strong></td>
+<td>单体架构</td>
+<td>模块化架构</td>
+</tr>
+<tr>
+<td><strong>工具调用</strong></td>
+<td>基础工具集</td>
+<td>50+ 内置工具，可扩展</td>
+</tr>
+<tr>
+<td><strong>子代理</strong></td>
+<td>有限支持</td>
+<td><code>delegate_task</code> 多子代理并行</td>
+</tr>
+<tr>
+<td><strong>上下文压缩</strong></td>
+<td>简单</td>
+<td>自动上下文压缩 + 缓存</td>
+</tr>
+<tr>
+<td><strong>前缀缓存</strong></td>
+<td>无</td>
+<td>Anthropic Prompt Caching 支持</td>
+</tr>
+<tr>
+<td><strong>检查点&#x2F;回滚</strong></td>
+<td>无</td>
+<td>内置 <code>/rollback</code></td>
+</tr>
+<tr>
+<td><strong>批量处理</strong></td>
+<td>无</td>
+<td><code>batch_runner.py</code> 并行处理</td>
+</tr>
+</tbody></table>
+<h3 id="Hermes-独有特性"><a href="#Hermes-独有特性" class="headerlink" title="Hermes 独有特性"></a>Hermes 独有特性</h3><ul>
+<li><strong>自动检查点</strong> — 文件修改前自动快照</li>
+<li><strong>前缀缓存</strong> — 减少 token 消耗</li>
+<li><strong>多子代理并行</strong> — 最多 3 个并发</li>
+<li><strong>事件钩子系统</strong> — 生命周期自定义</li>
+<li><strong>插件系统</strong> — Tool interception、Guardrails</li>
+<li><strong>API Server</strong> — OpenAI 兼容接口</li>
+<li><strong>IDE 集成 (ACP)</strong> — VS Code &#x2F; Zed &#x2F; JetBrains</li>
+<li><strong>RL Training</strong> — 轨迹数据生成</li>
+</ul>
+<hr>
+<h2 id="3-功能特性对比"><a href="#3-功能特性对比" class="headerlink" title="3. 功能特性对比"></a>3. 功能特性对比</h2><h3 id="3-1-记忆系统"><a href="#3-1-记忆系统" class="headerlink" title="3.1 记忆系统"></a>3.1 记忆系统</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MEMORY.md</td>
+<td>✅</td>
+<td>✅（增强）</td>
+</tr>
+<tr>
+<td>USER.md</td>
+<td>✅</td>
+<td>✅（增强）</td>
+</tr>
+<tr>
+<td>会话搜索</td>
+<td>基础</td>
+<td><strong>FTS5 全文搜索</strong> + LLM 摘要</td>
+</tr>
+<tr>
+<td>外部记忆 Provider</td>
+<td>无</td>
+<td><strong>8 种</strong>（Honcho &#x2F; Mem0 &#x2F; Holographic…）</td>
+</tr>
+<tr>
+<td>记忆容量管理</td>
+<td>基础</td>
+<td><strong>严格字符限制</strong> + 自动整合</td>
+</tr>
+<tr>
+<td>安全扫描</td>
+<td>无</td>
+<td><strong>Prompt Injection 扫描</strong></td>
+</tr>
+</tbody></table>
+<h3 id="3-2-技能系统"><a href="#3-2-技能系统" class="headerlink" title="3.2 技能系统"></a>3.2 技能系统</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>技能格式</td>
+<td>简单</td>
+<td><strong>SKILL.md 标准格式</strong></td>
+</tr>
+<tr>
+<td>技能市场</td>
+<td>无</td>
+<td><strong>agentskills.io 兼容</strong></td>
+</tr>
+<tr>
+<td>技能自动加载</td>
+<td>基础</td>
+<td><strong>智能匹配 + 自动加载</strong></td>
+</tr>
+<tr>
+<td>官方技能数量</td>
+<td>少量</td>
+<td><strong>50+ 内置技能</strong></td>
+</tr>
+<tr>
+<td>技能分类</td>
+<td>扁平</td>
+<td><strong>15+ 分类</strong></td>
+</tr>
+</tbody></table>
+<h3 id="3-3-自动化"><a href="#3-3-自动化" class="headerlink" title="3.3 自动化"></a>3.3 自动化</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定时任务（Cron）</td>
+<td>外部</td>
+<td><strong>内置完整 Cron 系统</strong></td>
+</tr>
+<tr>
+<td>任务调度</td>
+<td>无</td>
+<td><strong>自然语言描述</strong></td>
+</tr>
+<tr>
+<td>定时任务交付</td>
+<td>有限</td>
+<td><strong>多平台推送</strong>（飞书&#x2F;微信&#x2F;Telegram…）</td>
+</tr>
+<tr>
+<td>代码执行</td>
+<td>基础</td>
+<td><strong>沙箱 Python RPC</strong></td>
+</tr>
+<tr>
+<td>工作流编排</td>
+<td>无</td>
+<td><strong>子代理 + 事件钩子</strong></td>
+</tr>
+</tbody></table>
+<h3 id="3-4-媒体与-Web"><a href="#3-4-媒体与-Web" class="headerlink" title="3.4 媒体与 Web"></a>3.4 媒体与 Web</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>浏览器自动化</td>
+<td>基础</td>
+<td><strong>多后端</strong>（Browserbase &#x2F; Browser Use &#x2F; CDP &#x2F; Chromium）</td>
+</tr>
+<tr>
+<td>语音模式</td>
+<td>TTS 基础</td>
+<td><strong>完整语音对话</strong></td>
+</tr>
+<tr>
+<td>语音通话（Discord）</td>
+<td>无</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>图片生成</td>
+<td>无</td>
+<td><strong>8 种模型</strong>（FLUX &#x2F; GPT-Image &#x2F; Ideogram…）</td>
+</tr>
+<tr>
+<td>Vision 多模态</td>
+<td>基础</td>
+<td><strong>增强 + clipboard paste</strong></td>
+</tr>
+<tr>
+<td>YouTube 处理</td>
+<td>无</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GIF 搜索</td>
+<td>无</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h3 id="3-5-开发工具"><a href="#3-5-开发工具" class="headerlink" title="3.5 开发工具"></a>3.5 开发工具</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub 集成</td>
+<td>基础</td>
+<td><strong>完整 PR&#x2F;Issue 工作流</strong></td>
+</tr>
+<tr>
+<td>代码审查</td>
+<td>基础</td>
+<td><strong>独立审查子代理 + 自动修复</strong></td>
+</tr>
+<tr>
+<td>TDD 支持</td>
+<td>无</td>
+<td><strong>RED-GREEN-REFACTOR 流程</strong></td>
+</tr>
+<tr>
+<td>系统调试</td>
+<td>无</td>
+<td><strong>4 阶段根因调查</strong></td>
+</tr>
+<tr>
+<td>计划模式</td>
+<td>无</td>
+<td><strong>plan + writing-plans</strong></td>
+</tr>
+<tr>
+<td>MCP 协议</td>
+<td>无</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-记忆系统对比"><a href="#4-记忆系统对比" class="headerlink" title="4. 记忆系统对比"></a>4. 记忆系统对比</h2><h3 id="OpenClaw-记忆"><a href="#OpenClaw-记忆" class="headerlink" title="OpenClaw 记忆"></a>OpenClaw 记忆</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">workspace/MEMORY.md          # 每日记忆文件</span><br><span class="line">workspace/USER.md            # 用户画像</span><br><span class="line">workspace/memory/*.md        # 日记式记忆</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hermes-记忆（三层架构）"><a href="#Hermes-记忆（三层架构）" class="headerlink" title="Hermes 记忆（三层架构）"></a>Hermes 记忆（三层架构）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────┐</span><br><span class="line">│            SYSTEM PROMPT                 │</span><br><span class="line">│  SOUL.md (人格) │ MEMORY.md │ USER.md   │</span><br><span class="line">└─────────────────────────────────────────┘</span><br><span class="line">                    ↓</span><br><span class="line">         session_search (FTS5)</span><br><span class="line">                    ↓</span><br><span class="line">      外部 Provider (Honcho/Mem0/...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="关键改进"><a href="#关键改进" class="headerlink" title="关键改进"></a>关键改进</h3><table>
+<thead>
+<tr>
+<th>改进点</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>容量限制</td>
+<td>无硬性限制</td>
+<td><strong>严格字符限制防膨胀</strong></td>
+</tr>
+<tr>
+<td>去重机制</td>
+<td>无</td>
+<td><strong>自动去重</strong></td>
+</tr>
+<tr>
+<td>安全扫描</td>
+<td>无</td>
+<td><strong>Injection 扫描</strong></td>
+</tr>
+<tr>
+<td>记忆融合</td>
+<td>简单追加</td>
+<td><strong>智能合并 + 整合</strong></td>
+</tr>
+<tr>
+<td>搜索能力</td>
+<td>无</td>
+<td><strong>全文搜索 + LLM 摘要</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-技能系统对比"><a href="#5-技能系统对比" class="headerlink" title="5. 技能系统对比"></a>5. 技能系统对比</h2><h3 id="OpenClaw-技能"><a href="#OpenClaw-技能" class="headerlink" title="OpenClaw 技能"></a>OpenClaw 技能</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">workspace/skills/           # 工作区技能</span><br><span class="line">~/.agents/skills/           # 跨项目技能</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hermes-技能结构"><a href="#Hermes-技能结构" class="headerlink" title="Hermes 技能结构"></a>Hermes 技能结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~/.hermes/skills/</span><br><span class="line">├── SKILL.md                # 技能定义（YAML frontmatter + Markdown）</span><br><span class="line">├── references/             # 参考文档</span><br><span class="line">├── templates/              # 模板文件</span><br><span class="line">└── scripts/                # 脚本</span><br></pre></td></tr></table></figure>
+
+<h3 id="技能文件格式（SKILL-md）"><a href="#技能文件格式（SKILL-md）" class="headerlink" title="技能文件格式（SKILL.md）"></a>技能文件格式（SKILL.md）</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">my-skill</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">技能描述</span></span><br><span class="line"><span class="attr">version:</span> <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line"><span class="attr">tags:</span> [<span class="string">tag1</span>, <span class="string">tag2</span>]</span><br><span class="line"><span class="attr">related_skills:</span> [<span class="string">other-skill</span>]</span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="comment"># 技能名称</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 触发条件</span></span><br><span class="line"><span class="string">何时使用此技能</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用步骤</span></span><br><span class="line"><span class="number">1</span><span class="string">.</span> <span class="string">步骤一</span></span><br><span class="line"><span class="number">2</span><span class="string">.</span> <span class="string">步骤二</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Hermes-技能分类（50-）"><a href="#Hermes-技能分类（50-）" class="headerlink" title="Hermes 技能分类（50+）"></a>Hermes 技能分类（50+）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├── software-development/     # TDD、调试、计划、审查</span><br><span class="line">├── github/                   # GitHub 全套</span><br><span class="line">├── devops/                   # Webhook</span><br><span class="line">├── mlops/                    # 训练、推理、评测</span><br><span class="line">│   ├── models/               # CLIP / Whisper / Stable Diffusion</span><br><span class="line">│   ├── training/             # Axolotl / TRL / Unsloth</span><br><span class="line">│   ├── inference/            # vLLM / llama.cpp / GGUF</span><br><span class="line">│   └── evaluation/           # lm-evaluation-harness / W&amp;B</span><br><span class="line">├── productivity/             # Notion / Google Workspace / PowerPoint</span><br><span class="line">├── media/                    # YouTube / 音乐 / GIF</span><br><span class="line">├── creative/                 # ASCII 艺术 / 文生图</span><br><span class="line">├── gaming/                   # Minecraft / Pokemon</span><br><span class="line">├── autonomous-ai-agents/     # Claude Code / Codex / OpenCode</span><br><span class="line">├── note-taking/              # Obsidian</span><br><span class="line">├── research/                 # arXiv / 博客监控</span><br><span class="line">└── social-media/             # X/Twitter</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-配置体系对比"><a href="#6-配置体系对比" class="headerlink" title="6. 配置体系对比"></a>6. 配置体系对比</h2><h3 id="OpenClaw-配置"><a href="#OpenClaw-配置" class="headerlink" title="OpenClaw 配置"></a>OpenClaw 配置</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// clawdbot.json</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;agents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span> <span class="string">&quot;claude-3-5-sonnet&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;timeoutSeconds&quot;</span><span class="punctuation">:</span> <span class="number">300</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;channels&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Hermes-配置"><a href="#Hermes-配置" class="headerlink" title="Hermes 配置"></a>Hermes 配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config.yaml</span></span><br><span class="line"><span class="attr">agent:</span></span><br><span class="line">  <span class="attr">max_turns:</span> <span class="number">60</span></span><br><span class="line">  <span class="attr">verbose:</span> <span class="string">off</span></span><br><span class="line">  <span class="attr">reasoning_effort:</span> <span class="string">medium</span></span><br><span class="line"></span><br><span class="line"><span class="attr">memory:</span></span><br><span class="line">  <span class="attr">memory_enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">user_profile_enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">memory_char_limit:</span> <span class="number">2200</span></span><br><span class="line">  <span class="attr">user_char_limit:</span> <span class="number">1375</span></span><br><span class="line"></span><br><span class="line"><span class="attr">providers:</span></span><br><span class="line">  <span class="attr">primary:</span> <span class="string">anthropic</span></span><br><span class="line">  <span class="attr">fallbacks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">openrouter</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">google</span></span><br><span class="line"></span><br><span class="line"><span class="attr">platforms:</span></span><br><span class="line">  <span class="attr">feishu:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">weixin:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置迁移映射"><a href="#配置迁移映射" class="headerlink" title="配置迁移映射"></a>配置迁移映射</h3><table>
+<thead>
+<tr>
+<th>OpenClaw</th>
+<th>Hermes</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>agents.defaults.model</code></td>
+<td><code>model</code></td>
+<td>直接映射</td>
+</tr>
+<tr>
+<td><code>agents.defaults.timeoutSeconds</code></td>
+<td><code>agent.max_turns</code></td>
+<td>值除以 10</td>
+</tr>
+<tr>
+<td><code>agents.defaults.sandbox.backend</code></td>
+<td><code>terminal.backend</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>session.reset.mode</code></td>
+<td><code>session_reset.mode</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mcp.servers.*</code></td>
+<td><code>mcp_servers.*</code></td>
+<td>直接映射</td>
+</tr>
+<tr>
+<td><code>browser.cdpUrl</code></td>
+<td><code>browser.cdp_url</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>approvals.exec.mode</code></td>
+<td><code>approvals.mode</code></td>
+<td>值映射</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="7-消息平台支持"><a href="#7-消息平台支持" class="headerlink" title="7. 消息平台支持"></a>7. 消息平台支持</h2><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>飞书</strong></td>
+<td>有限</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td><strong>微信</strong></td>
+<td>有限</td>
+<td>✅ 完整支持</td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Discord</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Slack</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Signal</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Matrix</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Mattermost</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Home Assistant</td>
+<td>有限</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>自建 Web</td>
+<td>无</td>
+<td>✅ API Server</td>
+</tr>
+</tbody></table>
+<h3 id="Hermes-独有接入"><a href="#Hermes-独有接入" class="headerlink" title="Hermes 独有接入"></a>Hermes 独有接入</h3><ul>
+<li><strong>飞书 &#x2F; 微信</strong> 完整集成</li>
+<li><strong>Open WebUI &#x2F; LobeChat &#x2F; LibreChat</strong> 支持</li>
+<li><strong>VS Code &#x2F; Zed &#x2F; JetBrains</strong> 集成（ACP 协议）</li>
+</ul>
+<hr>
+<h2 id="8-迁移指南"><a href="#8-迁移指南" class="headerlink" title="8. 迁移指南"></a>8. 迁移指南</h2><h3 id="一键迁移"><a href="#一键迁移" class="headerlink" title="一键迁移"></a>一键迁移</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预览迁移内容</span></span><br><span class="line">hermes claw migrate --dry-run</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完整迁移（包含密钥）</span></span><br><span class="line">hermes claw migrate --preset full --<span class="built_in">yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 仅迁移用户数据（不含密钥）</span></span><br><span class="line">hermes claw migrate --preset user-data</span><br></pre></td></tr></table></figure>
+
+<h3 id="迁移内容清单"><a href="#迁移内容清单" class="headerlink" title="迁移内容清单"></a>迁移内容清单</h3><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SOUL.md</td>
+<td>✅ 自动迁移</td>
+</tr>
+<tr>
+<td>MEMORY.md &#x2F; USER.md</td>
+<td>✅ 自动迁移 + 合并去重</td>
+</tr>
+<tr>
+<td>技能</td>
+<td>✅ 迁移到 <code>skills/openclaw-imports/</code></td>
+</tr>
+<tr>
+<td>模型配置</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>MCP 服务器</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>TTS 设置</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>消息平台 Token</td>
+<td>✅（需要 <code>--preset full</code>）</td>
+</tr>
+<tr>
+<td>Cron 任务</td>
+<td>⚠️ 需手动重建</td>
+</tr>
+<tr>
+<td>插件</td>
+<td>⚠️ 需手动配置</td>
+</tr>
+<tr>
+<td>HEARTBEAT &#x2F; BOOTSTRAP</td>
+<td>⚠️ 存档后手动处理</td>
+</tr>
+</tbody></table>
+<h3 id="迁移后检查"><a href="#迁移后检查" class="headerlink" title="迁移后检查"></a>迁移后检查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hermes status              <span class="comment"># 检查 API 认证</span></span><br><span class="line">hermes memory status       <span class="comment"># 查看记忆状态</span></span><br><span class="line">hermes skills list         <span class="comment"># 确认技能加载</span></span><br><span class="line">systemctl --user restart hermes-gateway   <span class="comment"># 重启网关</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-总结"><a href="#9-总结" class="headerlink" title="9. 总结"></a>9. 总结</h2><h3 id="何时选-Hermes"><a href="#何时选-Hermes" class="headerlink" title="何时选 Hermes"></a>何时选 Hermes</h3><p>如果你有以下任意一项需求，Hermes 都是更好的选择：</p>
+<ul>
+<li>需要<strong>飞书&#x2F;微信</strong>原生集成</li>
+<li>需要<strong>多子代理</strong>并行处理复杂任务</li>
+<li>需要 <strong>TDD &#x2F; 系统调试 &#x2F; 代码审查</strong>等工程实践</li>
+<li>需要<strong>定时任务 + 多平台推送</strong></li>
+<li>需要<strong>图片生成 &#x2F; 语音对话</strong></li>
+<li>需要 <strong>MCP 协议</strong>支持</li>
+<li>需要 <strong>RL 训练数据</strong>生成</li>
+<li>想要持续更新和新功能</li>
+</ul>
+<h3 id="核心差异总结"><a href="#核心差异总结" class="headerlink" title="核心差异总结"></a>核心差异总结</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>OpenClaw</th>
+<th>Hermes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>定位</strong></td>
+<td>基础 Agent</td>
+<td><strong>全能助手平台</strong></td>
+</tr>
+<tr>
+<td><strong>技能生态</strong></td>
+<td>简单</td>
+<td><strong>50+ 官方技能</strong></td>
+</tr>
+<tr>
+<td><strong>自动化</strong></td>
+<td>基础</td>
+<td><strong>完整 Cron + Hooks</strong></td>
+</tr>
+<tr>
+<td><strong>记忆</strong></td>
+<td>文件式</td>
+<td><strong>三层架构 + Provider</strong></td>
+</tr>
+<tr>
+<td><strong>开发工具</strong></td>
+<td>基础</td>
+<td><strong>TDD &#x2F; 调试 &#x2F; 审查 &#x2F; 计划</strong></td>
+</tr>
+<tr>
+<td><strong>媒体</strong></td>
+<td>有限</td>
+<td><strong>语音 &#x2F; 图像 &#x2F; 视频</strong></td>
+</tr>
+<tr>
+<td><strong>扩展性</strong></td>
+<td>有限</td>
+<td><strong>插件 + MCP</strong></td>
+</tr>
+<tr>
+<td><strong>活跃度</strong></td>
+<td>维护中</td>
+<td><strong>活跃开发</strong></td>
+</tr>
+</tbody></table>
+<h3 id="从-OpenClaw-迁移的理由"><a href="#从-OpenClaw-迁移的理由" class="headerlink" title="从 OpenClaw 迁移的理由"></a>从 OpenClaw 迁移的理由</h3><ol>
+<li><strong>飞书&#x2F;微信原生支持</strong> — OpenClaw 有限，Hermes 完整集成</li>
+<li><strong>活跃开发</strong> — 新功能持续更新</li>
+<li><strong>更完善的工程实践</strong> — TDD、调试、代码审查内置</li>
+<li><strong>更强大的记忆</strong> — 三层架构 + 外部 Provider</li>
+<li><strong>多子代理</strong> — 复杂任务并行处理</li>
+<li><strong>完整自动化</strong> — Cron + Hooks + 事件驱动</li>
+</ol>
+<hr>
+<p><em>数据来源：Hermes Agent 官方文档 v0.10.0</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iyangjialin.github.io/2026/04/22/2026-04-22-hermes-vs-openclaw-comparison/" data-id="cmo9x3ej6002aa8d31wt6akhe" data-title="Hermes Agent vs OpenClaw：一次彻底的架构进化" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/04/11/2026-04-11-ai-redefining-what-humans-do/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AI不是替代人，而是重新定义「人该做什么」</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  
+  
+
+  
     <article id="post-2026-04-11-ai-redefining-what-humans-do" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/04/11/2026-04-11-ai-redefining-what-humans-do/" class="article-date">
@@ -108,8 +758,8 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      AI不是替代人，而是重新定义「人该做什么」
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/04/11/2026-04-11-ai-redefining-what-humans-do/">AI不是替代人，而是重新定义「人该做什么」</a>
     </h1>
   
 
@@ -122,128 +772,15 @@
 <p>这不是效率革命，而是”认知权力”的重新分配。</p>
 </blockquote>
 <p>本文从三个维度，拆解 AI 重塑工作与公司价值的底层逻辑。</p>
-<span id="more"></span>
-
-<hr>
-<h2 id="一、不是”人是混乱的”，而是”组织无法编码人”"><a href="#一、不是”人是混乱的”，而是”组织无法编码人”" class="headerlink" title="一、不是”人是混乱的”，而是”组织无法编码人”"></a>一、不是”人是混乱的”，而是”组织无法编码人”</h2><p>过去公司最大的问题，不是没有数据，而是**”人的经验无法被机器理解”**。</p>
-<p>从 Bill Gates 的”信息尽在指尖”，到今天大模型：</p>
-<ul>
-<li><strong>过去</strong>：数据 &#x3D; 结构化表格（ERP &#x2F; CRM）</li>
-<li><strong>现在</strong>：数据 &#x3D; 一切（会议、聊天、代码、邮件、脑子里的经验）</li>
-</ul>
-<p>关键变化是：</p>
-<blockquote>
-<p>AI 第一次让”非结构化认知”变成”可计算资产”</p>
-</blockquote>
-<p>这带来一个非常现实的变化：</p>
-<ul>
-<li>老员工的价值，不再只是”经验”</li>
-<li>而是：<strong>能否被沉淀为组织的 AI 能力</strong></li>
-</ul>
-<p><strong>结论（很关键）：未来淘汰的不是能力弱的人，而是”不可被 AI 放大的人”。</strong></p>
-<hr>
-<h2 id="二、不是”宏观委托-微观驾驭”，而是”认知接口重构”"><a href="#二、不是”宏观委托-微观驾驭”，而是”认知接口重构”" class="headerlink" title="二、不是”宏观委托 + 微观驾驭”，而是”认知接口重构”"></a>二、不是”宏观委托 + 微观驾驭”，而是”认知接口重构”</h2><p>“AI 指挥官”这个词是对的，但还不够彻底。升级一个模型：</p>
-<blockquote>
-<p><strong>人 &#x3D; Prompt + Judgment + Feedback Loop</strong></p>
-</blockquote>
-<p>未来工作流不是”人 → 做事”，而是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">人 → 定义问题（Prompt）</span><br><span class="line">AI → 执行探索</span><br><span class="line">人 → 判断与修正（Judgment）</span><br><span class="line">AI → 继续迭代（Loop）</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="真正的分水岭，不是会不会用-AI"><a href="#真正的分水岭，不是会不会用-AI" class="headerlink" title="真正的分水岭，不是会不会用 AI"></a>真正的分水岭，不是会不会用 AI</h3><p>而是：<strong>你能不能定义一个”好问题”</strong></p>
-<p>同样一句话”分析下季度市场策略”，不同人差距会极大：</p>
-<ul>
-<li><strong>普通人</strong>：一句模糊指令 → 得到泛化答案</li>
-<li><strong>高手</strong>拆成：<ul>
-<li>市场分层（区域 &#x2F; 人群）</li>
-<li>增长变量（价格 &#x2F; 渠道 &#x2F; 产品）</li>
-<li>风险假设（竞争 &#x2F; 政策）</li>
-<li>数据来源约束</li>
-</ul>
-</li>
-</ul>
-<p><strong>本质差异：不是 AI 强不强，而是你的”问题建模能力”强不强。</strong></p>
-<hr>
-<h2 id="三、不是”基础模型主权”，而是”认知资产资本化”"><a href="#三、不是”基础模型主权”，而是”认知资产资本化”" class="headerlink" title="三、不是”基础模型主权”，而是”认知资产资本化”"></a>三、不是”基础模型主权”，而是”认知资产资本化”</h2><p>企业真正的护城河，不是模型，而是**”被模型吃进去的数据结构”**。</p>
-<p>三层护城河正在形成：</p>
-<h3 id="第一层：公共层（被抹平）"><a href="#第一层：公共层（被抹平）" class="headerlink" title="第一层：公共层（被抹平）"></a>第一层：公共层（被抹平）</h3><ul>
-<li>开源模型</li>
-<li>API 能力<br>→ everyone can access</li>
-</ul>
-<h3 id="第二层：应用层（短期竞争）"><a href="#第二层：应用层（短期竞争）" class="headerlink" title="第二层：应用层（短期竞争）"></a>第二层：应用层（短期竞争）</h3><ul>
-<li>AI 工具</li>
-<li>Agent 产品<br>→ 很快同质化</li>
-</ul>
-<h3 id="第三层：核心层（真正壁垒）"><a href="#第三层：核心层（真正壁垒）" class="headerlink" title="第三层：核心层（真正壁垒）"></a>第三层：核心层（真正壁垒）</h3><p><strong>组织内部认知资产</strong>，包括：</p>
-<ul>
-<li>客户行为数据</li>
-<li>决策逻辑</li>
-<li>风控规则</li>
-<li>成功 &#x2F; 失败案例</li>
-</ul>
-<p>所以真正的问题不是”有没有 AI”，而是：</p>
-<blockquote>
-<p><strong>“你的公司有没有可被 AI 学习的知识体系？”</strong></p>
-</blockquote>
-<hr>
-<h2 id="四、一个最关键的风险"><a href="#四、一个最关键的风险" class="headerlink" title="四、一个最关键的风险"></a>四、一个最关键的风险</h2><blockquote>
-<p><strong>大部分公司，根本没有”可沉淀的知识”。</strong></p>
-</blockquote>
-<p>现实情况是：</p>
-<ul>
-<li>决策靠拍脑袋</li>
-<li>流程不标准</li>
-<li>数据不干净</li>
-<li>经验在个人脑子里</li>
-</ul>
-<p>这种公司即使接入 AI，只会”放大混乱”，而不是”提升效率”。</p>
-<hr>
-<h2 id="五、AI-时代的三次”角色跃迁”"><a href="#五、AI-时代的三次”角色跃迁”" class="headerlink" title="五、AI 时代的三次”角色跃迁”"></a>五、AI 时代的三次”角色跃迁”</h2><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>转变</th>
-<th>淘汰逻辑</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第一跃迁</td>
-<td>执行者 → 问题定义者</td>
-<td>不会问问题 &#x3D; 被淘汰</td>
-</tr>
-<tr>
-<td>第二跃迁</td>
-<td>经验拥有者 → 认知产品经理</td>
-<td>不能沉淀经验 &#x3D; 价值下降</td>
-</tr>
-<tr>
-<td>第三跃迁</td>
-<td>工具使用者 → 系统设计者</td>
-<td>不会构建 AI 工作流 &#x3D; 上限封死</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="六、一个”行动级建议”"><a href="#六、一个”行动级建议”" class="headerlink" title="六、一个”行动级建议”"></a>六、一个”行动级建议”</h2><p>对于关注 AI + 项目管理的人，可以做一件非常具体的事：</p>
-<h3 id="建一个”AI-项目管理操作系统”"><a href="#建一个”AI-项目管理操作系统”" class="headerlink" title="建一个”AI 项目管理操作系统”"></a>建一个”AI 项目管理操作系统”</h3><p>包含：</p>
-<ul>
-<li><strong>项目复盘</strong> → 喂给 AI（沉淀经验）</li>
-<li><strong>风险识别</strong> → 做成提示词模板</li>
-<li><strong>需求分析</strong> → 结构化输入 AI</li>
-<li><strong>自动生成</strong>：周报、风险清单、里程碑规划</li>
-</ul>
-<p>本质是在做一件事：</p>
-<blockquote>
-<p><strong>把你的”项目管理经验”，变成”AI 可复用能力”</strong></p>
-</blockquote>
-<hr>
-<blockquote>
-<p><strong>AI 不会取代人，但会取代”无法被 AI 放大的那部分人”。</strong></p>
-</blockquote>
-
+        
+          <p class="article-more-link">
+            <a href="/2026/04/11/2026-04-11-ai-redefining-what-humans-do/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-ai-redefining-what-humans-do/" data-id="cmntsrjkh00229od396y3cr0p" data-title="AI不是替代人，而是重新定义「人该做什么」" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-ai-redefining-what-humans-do/" data-id="cmo9x3ej2001ua8d3h0d3aj4l" data-title="AI不是替代人，而是重新定义「人该做什么」" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -251,18 +788,6 @@
 
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2026/04/11/2026-04-11-satya-nadella-redefining-company/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Satya Nadella 在重新定义公司是什么</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -310,7 +835,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-satya-nadella-redefining-company/" data-id="cmntsrjki00279od30dnsbidg" data-title="Satya Nadella 在重新定义公司是什么" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-satya-nadella-redefining-company/" data-id="cmo9x3ej50026a8d32r65ejdo" data-title="Satya Nadella 在重新定义公司是什么" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -364,7 +889,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-satya-nadella-cognitive-model/" data-id="cmntsrjkh00249od340dugb1e" data-title="纳德拉认知模型：一个让微软重生的架构师如何理解 AI 时代" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/11/2026-04-11-satya-nadella-cognitive-model/" data-id="cmo9x3ej40024a8d36u5nash2" data-title="纳德拉认知模型：一个让微软重生的架构师如何理解 AI 时代" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -418,7 +943,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/10/2026-04-10-self-deconstruction/" data-id="cmntsrjkg001x9od3g2cm8lxt" data-title="一次完整的自我拆解：从对话反推你的能力模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/10/2026-04-10-self-deconstruction/" data-id="cmo9x3ej30022a8d3deq2av8n" data-title="一次完整的自我拆解：从对话反推你的能力模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -496,7 +1021,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/09/2026-04-09-ai-era-education/" data-id="cmntsrjkf001u9od38ijfcnp2" data-title="AI 时代，教育何往：当「知道答案」不再重要" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/09/2026-04-09-ai-era-education/" data-id="cmo9x3ej0001ma8d37vc161qm" data-title="AI 时代，教育何往：当「知道答案」不再重要" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -554,7 +1079,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/05/2026-04-05-affaan-mustafa-ecc/" data-id="cmntsrjkd001m9od3cpbcazw1" data-title="Affaan Mustafa：把 AI 编程从「工具时代」推进到「操作系统时代」的人" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/05/2026-04-05-affaan-mustafa-ecc/" data-id="cmo9x3eiy001ja8d30pvz3k6d" data-title="Affaan Mustafa：把 AI 编程从「工具时代」推进到「操作系统时代」的人" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -609,7 +1134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/05/2026-04-05-dilts-nlp-agent-design/" data-id="cmntsrjkd001q9od37iphh9f7" data-title="Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/05/2026-04-05-dilts-nlp-agent-design/" data-id="cmo9x3ej1001qa8d36vz4eme9" data-title="Dilts逻辑层次模型 × AI智能体设计：一套可复用的系统工程方法论" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -663,7 +1188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/01/2026-04-01-ai-coding-chronicle/" data-id="cmntsrjkc001j9od3gfj84qqt" data-title="AI编码编年史：编程正在消失，还是正在重生？" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/04/01/2026-04-01-ai-coding-chronicle/" data-id="cmo9x3ej2001xa8d37w0v62pq" data-title="AI编码编年史：编程正在消失，还是正在重生？" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -719,69 +1244,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/03/31/2026-03-31-metaskill-skill-creator-guide/" data-id="cmntsrjka001c9od3aakp2eeu" data-title="MetaSkill：Skill-Creator 完整技能设计手册" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/03/31/2026-03-31-metaskill-skill-creator-guide/" data-id="cmo9x3eir0012a8d3aaoudc1d" data-title="MetaSkill：Skill-Creator 完整技能设计手册" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-  
-
-  
-    <article id="post-2026-03-31-skill-creator-methodology" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/31/2026-03-31-skill-creator-methodology/" class="article-date">
-  <time class="dt-published" datetime="2026-03-31T04:00:00.000Z" itemprop="datePublished">2026-03-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/31/2026-03-31-skill-creator-methodology/">Skill-Creator 方法论：把 AI 能力产品化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><code>Skill-Creator</code> 本质上不是一个工具，而是一套<strong>把大模型能力「产品化」的方法论</strong>。</p>
-</blockquote>
-<p>一句话理解：</p>
-<blockquote>
-<p>👉 把「会聊天的 AI」→ 变成「可复用的专业能力模块（Skill）」</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2026/03/31/2026-03-31-skill-creator-methodology/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/03/31/2026-03-31-skill-creator-methodology/" data-id="cmntsrjkb001e9od38hvs5tt9" data-title="Skill-Creator 方法论：把 AI 能力产品化" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li></ul>
 
     </footer>
   </div>
@@ -826,7 +1293,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
     </div>
   </div>
 
@@ -836,7 +1303,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
     </div>
   </div>
 
@@ -846,7 +1313,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18px;">Agent</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">Agent时代</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 10px;">Claude Code</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/GitHub/" style="font-size: 12px;">GitHub</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 10px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 12px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Satya-Nadella/" style="font-size: 12px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 12px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 14px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 12px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 12px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 14px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 14px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 14px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 12px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 12px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 16px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 14px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 12px;">系统思维</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 12px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 12px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 10px;">AI Agent</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18px;">Agent</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">Agent时代</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 10px;">Claude Code</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/GitHub/" style="font-size: 12px;">GitHub</a> <a href="/tags/Hermes/" style="font-size: 10px;">Hermes</a> <a href="/tags/NLP/" style="font-size: 12px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 12px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 12px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Satya-Nadella/" style="font-size: 12px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 12px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 14px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 12px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 12px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 14px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" style="font-size: 10px;">工具对比</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 14px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 14px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 12px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 12px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 16px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 14px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 12px;">系统思维</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 10px;">腾讯</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 12px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 12px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
     </div>
   </div>
 
@@ -868,6 +1335,10 @@
       <ul>
         
           <li>
+            <a href="/2026/04/22/2026-04-22-hermes-vs-openclaw-comparison/">Hermes Agent vs OpenClaw：一次彻底的架构进化</a>
+          </li>
+        
+          <li>
             <a href="/2026/04/11/2026-04-11-ai-redefining-what-humans-do/">AI不是替代人，而是重新定义「人该做什么」</a>
           </li>
         
@@ -881,10 +1352,6 @@
         
           <li>
             <a href="/2026/04/10/2026-04-10-self-deconstruction/">一次完整的自我拆解：从对话反推你的能力模型</a>
-          </li>
-        
-          <li>
-            <a href="/2026/04/09/2026-04-09-ai-era-education/">AI 时代，教育何往：当「知道答案」不再重要</a>
           </li>
         
       </ul>
