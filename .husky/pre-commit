@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 暂时禁用 pre-commit 检查
+# 如需启用，可以取消下面的注释
+# npm run lint
+# npm test

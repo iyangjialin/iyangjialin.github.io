@@ -1,0 +1,24 @@
+# Code Owners
+# 这份文件定义了代码库中不同部分的默认责任人和 reviewers
+
+# 默认规则：所有文件默认由仓库所有者负责
+*       @iyangjialin
+
+# 文章内容 - 由作者负责
+source/_posts/       @iyangjialin
+
+# 主题文件 - 由作者负责
+themes/              @iyangjialin
+
+# 配置文件 - 需要仔细审查
+_config*.yml         @iyangjialin
+package.json         @iyangjialin
+package-lock.json    @iyangjialin
+
+# 构建脚本 - 需要仔细审查
+scripts/             @iyangjialin
+*.js                 @iyangjialin
+
+# 文档
+*.md                 @iyangjialin
+LICENSE              @iyangjialin
