@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://iyangjialin.github.io/index.html</loc>
+    <loc>https://iyangjialin.github.io/2026/05/01/workbuddy-practice-cases/</loc>
     
     <lastmod>2026-05-01</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/2026/05/01/2026-05-01-workbuddy-practice-cases/</loc>
+    <loc>https://iyangjialin.github.io/index.html</loc>
     
     <lastmod>2026-05-01</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/2026/03/23/2026-03-23-andrej-karpathy-profile/</loc>
+    <loc>https://iyangjialin.github.io/2026/03/23/2026-03-23-elon-musk-profile-2026/</loc>
     
     <lastmod>2026-03-27</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/2026/03/23/2026-03-23-elon-musk-profile-2026/</loc>
+    <loc>https://iyangjialin.github.io/2026/03/23/2026-03-23-andrej-karpathy-profile/</loc>
     
     <lastmod>2026-03-27</lastmod>
     
@@ -393,13 +393,6 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/Deep-Learning/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://iyangjialin.github.io/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -407,14 +400,21 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/OpenAI/</loc>
+    <loc>https://iyangjialin.github.io/tags/%E7%A7%91%E6%8A%80/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/Tesla/</loc>
+    <loc>https://iyangjialin.github.io/tags/%E5%95%86%E4%B8%9A/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -463,35 +463,21 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/%E7%A7%91%E6%8A%80/</loc>
+    <loc>https://iyangjialin.github.io/tags/Deep-Learning/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/%E5%95%86%E4%B8%9A/</loc>
+    <loc>https://iyangjialin.github.io/tags/OpenAI/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E7%AE%97%E5%8A%9B/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://iyangjialin.github.io/tags/Tesla/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -506,6 +492,20 @@
   
   <url>
     <loc>https://iyangjialin.github.io/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E7%AE%97%E5%8A%9B/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -610,48 +610,6 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/Skill%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/Skill-Creator/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/SkillHub/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://iyangjialin.github.io/tags/Claude/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -680,6 +638,62 @@
   </url>
   
   <url>
+    <loc>https://iyangjialin.github.io/tags/SkillHub/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/AI%E7%94%9F%E6%80%81/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/Skill%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/Skill-Creator/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://iyangjialin.github.io/tags/Claude-Code/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -695,6 +709,20 @@
   
   <url>
     <loc>https://iyangjialin.github.io/tags/Affaan-Mustafa/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/Robert-Dilts/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/AI%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -729,21 +757,35 @@
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/AI%E7%94%9F%E6%80%81/</loc>
+    <loc>https://iyangjialin.github.io/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/Robert-Dilts/</loc>
+    <loc>https://iyangjialin.github.io/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://iyangjialin.github.io/tags/AI%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://iyangjialin.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/AI%E6%97%B6%E4%BB%A3/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iyangjialin.github.io/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -772,13 +814,6 @@
   
   <url>
     <loc>https://iyangjialin.github.io/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -840,41 +875,6 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/AI%E6%97%B6%E4%BB%A3/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
@@ -913,6 +913,13 @@
   </url>
   
   <url>
+    <loc>https://iyangjialin.github.io/categories/AI%E8%B6%8B%E5%8A%BF/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://iyangjialin.github.io/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -921,13 +928,6 @@
   
   <url>
     <loc>https://iyangjialin.github.io/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://iyangjialin.github.io/categories/AI%E8%B6%8B%E5%8A%BF/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
