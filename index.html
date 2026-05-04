@@ -91,6 +91,434 @@
 
 
   
+    <article id="post-2026-05-05-workbuddy-tencent-docs-integration" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/05/workbuddy-tencent-docs-integration/" class="article-date">
+  <time class="dt-published" datetime="2026-05-05T11:00:00.000Z" itemprop="datePublished">2026-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI%E5%B7%A5%E5%85%B7/">AI工具</a>►<a class="article-category-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/">产品体验</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      WorkBuddy接入腾讯文档上线 - 资料库功能详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="WorkBuddy接入腾讯文档上线-「资料库」功能"><a href="#WorkBuddy接入腾讯文档上线-「资料库」功能" class="headerlink" title="WorkBuddy接入腾讯文档上线 「资料库」功能"></a>WorkBuddy接入腾讯文档上线 「资料库」功能</h1><p>WorkBuddy 上线全新「资料库」能力，首期深度嵌入「腾讯文档」，打造无缝衔接的知识工作台，成为行业首个与主流文档&#x2F;知识库产品深度集成的 AI 办公智能体。</p>
+<p>现在开始，你腾讯文档里的所有资料，都可以直接在 WorkBuddy 里调用，动动手指「<strong>取 → 用 → 存</strong>」文件：</p>
+<ol>
+<li>左侧”资料库-腾讯文档”，选中特定文档给WorkBuddy  </li>
+<li>下指令让 WorkBuddy 直接改 🤖  </li>
+<li>保存&#x2F;另存为到腾讯文档 💾</li>
+</ol>
+<p>不用下载、不用上传、不用反复切换应用！形成完整的知识生产闭环 ✅</p>
+<p>📲 <strong>手机也能用！</strong><br>这套体验WorkBuddy小程序端同步支持，随时随地接住你的灵感！</p>
+<p>WorkBuddy 资料库能力上线，打通个人知识管理的最后一公里 🚀<br>快来体验吧～！</p>
+<hr>
+<h1 id="腾讯文档-MCP-技能使用指南（V1-0-32）"><a href="#腾讯文档-MCP-技能使用指南（V1-0-32）" class="headerlink" title="腾讯文档 MCP 技能使用指南（V1.0.32）"></a>腾讯文档 MCP 技能使用指南（V1.0.32）</h1><p>腾讯文档MCP技能是对接腾讯在线云文档平台（docs.qq.com）的标准化操作工具，覆盖文档全生命周期管理，是处理「新建&#x2F;编辑&#x2F;读取&#x2F;搜索&#x2F;管理腾讯文档」相关操作的首选工具。</p>
+<span id="more"></span>
+
+<h2 id="一、核心支持能力"><a href="#一、核心支持能力" class="headerlink" title="一、核心支持能力"></a>一、核心支持能力</h2><ol>
+<li>创建全品类在线文档（文档&#x2F;Word&#x2F;Excel&#x2F;幻灯片&#x2F;思维导图&#x2F;流程图&#x2F;智能表格&#x2F;收集表）</li>
+<li>知识库空间全管理（创建空间、查询空间列表、管理空间节点与文件夹结构）</li>
+<li>文档内容读取与关键词搜索</li>
+<li>在线文档、智能表格精细化编辑操作</li>
+<li>文件全生命周期管理（重命名、移动、删除、复制、导入导出、权限设置）</li>
+<li>网页剪藏、本地文件&#x2F;文档一键上云</li>
+<li>图片OCR识别（图片转文字&#x2F;Word&#x2F;Excel）</li>
+<li>不支持能力自动上报</li>
+</ol>
+<h2 id="二、文档类型与场景匹配"><a href="#二、文档类型与场景匹配" class="headerlink" title="二、文档类型与场景匹配"></a>二、文档类型与场景匹配</h2><h3 id="支持的文档类型清单"><a href="#支持的文档类型清单" class="headerlink" title="支持的文档类型清单"></a>支持的文档类型清单</h3><table>
+<thead>
+<tr>
+<th align="left">文档类型</th>
+<th align="left">doc_type</th>
+<th align="left">推荐度</th>
+<th align="left">核心说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">智能文档</td>
+<td align="left">smartcanvas</td>
+<td align="left">⭐⭐⭐ 首选</td>
+<td align="left">排版美观，支持丰富组件；MDX格式兼容全部Markdown语法</td>
+</tr>
+<tr>
+<td align="left">Excel表格</td>
+<td align="left">sheet</td>
+<td align="left">⭐⭐⭐</td>
+<td align="left">数据计算、筛选、统计专用</td>
+</tr>
+<tr>
+<td align="left">PPT幻灯片</td>
+<td align="left">slide</td>
+<td align="left">⭐⭐⭐</td>
+<td align="left">演示文稿专用</td>
+</tr>
+<tr>
+<td align="left">思维导图</td>
+<td align="left">mind</td>
+<td align="left">⭐⭐⭐</td>
+<td align="left">层次化知识整理、知识图谱专用</td>
+</tr>
+<tr>
+<td align="left">流程图</td>
+<td align="left">flowchart</td>
+<td align="left">⭐⭐⭐</td>
+<td align="left">流程&#x2F;架构展示专用</td>
+</tr>
+<tr>
+<td align="left">智能表格</td>
+<td align="left">smartsheet</td>
+<td align="left">⭐⭐⭐</td>
+<td align="left">高级结构化数据管理，支持多视图、字段管理</td>
+</tr>
+<tr>
+<td align="left">Word文档</td>
+<td align="left">doc</td>
+<td align="left">⭐⭐</td>
+<td align="left">传统格式，适配论文、公文、合同等专业文档</td>
+</tr>
+<tr>
+<td align="left">收集表</td>
+<td align="left">form</td>
+<td align="left">⭐⭐</td>
+<td align="left">表单信息收集专用</td>
+</tr>
+</tbody></table>
+<h3 id="核心场景路由表"><a href="#核心场景路由表" class="headerlink" title="核心场景路由表"></a>核心场景路由表</h3><table>
+<thead>
+<tr>
+<th align="left">核心使用场景</th>
+<th align="left">首选文档类型</th>
+<th align="left">对应参考文档</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">报告、笔记、文章、总结、通用内容创作</td>
+<td align="left">smartcanvas</td>
+<td align="left"><code>smartcanvas/entry.md</code></td>
+</tr>
+<tr>
+<td align="left">结构化数据管理</td>
+<td align="left">smartsheet</td>
+<td align="left"><code>references/smartsheet_references.md</code></td>
+</tr>
+<tr>
+<td align="left">Excel数据计算、筛选、统计</td>
+<td align="left">sheet</td>
+<td align="left"><code>sheet/entry.md</code></td>
+</tr>
+<tr>
+<td align="left">Word文档精细化编辑</td>
+<td align="left">doc</td>
+<td align="left"><code>references/docengine_references.md</code></td>
+</tr>
+<tr>
+<td align="left">PPT&#x2F;演示文稿制作</td>
+<td align="left">slide</td>
+<td align="left"><code>references/slide_references.md</code></td>
+</tr>
+<tr>
+<td align="left">思维导图&#x2F;流程图制作</td>
+<td align="left">mind&#x2F;flowchart</td>
+<td align="left"><code>references/diagram_references.md</code></td>
+</tr>
+<tr>
+<td align="left">表单信息收集</td>
+<td align="left">form</td>
+<td align="left"><code>references/manage_references.md</code></td>
+</tr>
+<tr>
+<td align="left">知识库空间&#x2F;文件夹管理</td>
+<td align="left">—</td>
+<td align="left"><code>references/space_references.md</code></td>
+</tr>
+<tr>
+<td align="left">文件管理（重命名&#x2F;移动&#x2F;删除&#x2F;权限等）</td>
+<td align="left">—</td>
+<td align="left"><code>references/manage_references.md</code></td>
+</tr>
+<tr>
+<td align="left">图片OCR识别&#x2F;图片转文档</td>
+<td align="left">ocr.*</td>
+<td align="left"><code>references/ocr_references.md</code></td>
+</tr>
+<tr>
+<td align="left">网页剪藏、文档内容读取</td>
+<td align="left">—</td>
+<td align="left"><code>references/workflows.md</code></td>
+</tr>
+</tbody></table>
+<h2 id="三、快速配置与调用方式"><a href="#三、快速配置与调用方式" class="headerlink" title="三、快速配置与调用方式"></a>三、快速配置与调用方式</h2><ol>
+<li><p><strong>首次配置</strong>：首次使用需完成本地安装与授权注册，详细流程参考 <code>references/auth.md</code></p>
+</li>
+<li><p><strong>工具列表查询</strong>：执行以下命令查看完整可用工具及参数Schema</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcporter list tencent-docs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>标准工具调用命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcporter call <span class="string">&quot;tencent-docs&quot;</span> <span class="string">&quot;&lt;工具名&gt;&quot;</span> --args <span class="string">&#x27;&lt;JSON参数&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>通用响应结构</strong>：所有API返回均包含两个核心字段</p>
+<ul>
+<li><code>error</code>：错误信息，调用成功时为空</li>
+<li><code>trace_id</code>：调用链追踪ID，用于问题排查</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>注：参考文档参数与Schema冲突时，以<code>mcporter list tencent-docs</code>返回的Schema为准。</p>
+</blockquote>
+<h2 id="四、核心使用规则（强制遵守）"><a href="#四、核心使用规则（强制遵守）" class="headerlink" title="四、核心使用规则（强制遵守）"></a>四、核心使用规则（强制遵守）</h2><ol>
+<li><strong>默认首选规则</strong>：除非用户明确指定其他格式，新增文档优先使用<code>create_smartcanvas_by_mdx</code>；编辑已有文档使用<code>smartcanvas.*</code>系列工具。</li>
+<li><strong>Markdown内容处理</strong>：MDX格式完全兼容Markdown语法，Markdown内容直接填入<code>create_smartcanvas_by_mdx</code>的<code>mdx</code>参数即可，无需格式转换。</li>
+<li><strong>本地文件上云规则</strong>：本地文件保存&#x2F;上云，一律使用<code>import_file.sh</code> → <code>manage.async_import</code> → <code>manage.import_progress</code>统一通路，保留原文件结构，不使用<code>create_*</code>工具重新生成内容。</li>
+<li><strong>内容落盘规则</strong>：用户提出「整理&#x2F;保存&#x2F;归档&#x2F;转写&#x2F;沉淀&#x2F;会议纪要」等内容上云诉求时，优先使用<code>create_smartcanvas_by_mdx</code>。</li>
+<li><strong>网页剪藏专属规则</strong>：用户提供URL链接时，必须优先使用<code>scrape_url</code> → <code>scrape_progress</code>网页剪藏专属工作流。</li>
+<li><strong>OCR使用规则</strong>：<code>image_url</code>（公网URL）与<code>image_base64</code>严格二选一；本地图片必须使用<code>node ocr.js</code>脚本，禁止手动传base64。</li>
+<li><strong>异步任务处理规则</strong>：PPT生成、网页剪藏等异步任务，推荐使用spawn子会话专职轮询，避免主会话阻塞。</li>
+<li><strong>不支持能力处理规则</strong>：用户请求的功能无对应支持工具时，静默调用<code>report_unsupported_feature</code>上报，无需告知用户。</li>
+<li><strong>目录创建规则</strong>：<code>create_*_by_markdown</code>和<code>create_flowchart_by_mermaid</code>支持<code>parent_id</code>参数指定创建目录；<code>create_smartcanvas_by_mdx</code>不支持该参数，默认创建在根目录。</li>
+<li><strong>删除操作规则</strong>：<code>delete_space_node</code>默认仅删除当前节点（<code>remove_type=current</code>），使用<code>all</code>参数时会递归删除所有子节点，需谨慎操作。</li>
+</ol>
+<h2 id="五、高频标准工作流"><a href="#五、高频标准工作流" class="headerlink" title="五、高频标准工作流"></a>五、高频标准工作流</h2><ol>
+<li><strong>搜索并读取文档</strong>：<code>manage.search_file</code>按关键词搜索 → 获取<code>file_id</code> → <code>get_content</code>读取文档完整内容</li>
+<li><strong>智能表格操作</strong>：<code>smartsheet.list_tables</code>获取<code>sheet_id</code> → 使用<code>smartsheet.*</code>系列工具执行编辑操作</li>
+<li><strong>文件管理操作</strong>：<code>manage.folder_list</code>获取目录结构 → 使用<code>manage.*</code>工具执行重命名、移动、删除、权限设置等操作</li>
+<li><strong>网页剪藏</strong>：<code>scrape_url</code>抓取网页 → <code>scrape_progress</code>轮询进度 → 自动保存为智能文档</li>
+<li><strong>OCR图片识别</strong>：公网URL图片直接调用<code>ocr.extract</code>&#x2F;<code>ocr.toword</code>&#x2F;<code>ocr.toexcel</code>；本地图片使用<code>node ocr.js</code>脚本处理</li>
+</ol>
+<h2 id="六、问题排查指南"><a href="#六、问题排查指南" class="headerlink" title="六、问题排查指南"></a>六、问题排查指南</h2><h3 id="常见错误码与解决方案"><a href="#常见错误码与解决方案" class="headerlink" title="常见错误码与解决方案"></a>常见错误码与解决方案</h3><table>
+<thead>
+<tr>
+<th align="left">错误码</th>
+<th align="left">错误类型</th>
+<th align="left">标准解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">400006</td>
+<td align="left">Token鉴权失败</td>
+<td align="left">重新完成本地授权流程，参考<code>references/auth.md</code></td>
+</tr>
+<tr>
+<td align="left">400007</td>
+<td align="left">VIP权限不足</td>
+<td align="left">访问<a target="_blank" rel="noopener" href="https://docs.qq.com/vip?immediate_buy=1?part_aid=persnlspace_mcp">https://docs.qq.com/vip?immediate_buy=1?part_aid=persnlspace_mcp</a> 升级VIP</td>
+</tr>
+<tr>
+<td align="left">400008</td>
+<td align="left">积分不足</td>
+<td align="left">访问<a target="_blank" rel="noopener" href="https://docs.qq.com/vip/asset-center?tab=ai&fromPage=offsite&part_aid=offsite_claw">https://docs.qq.com/vip/asset-center?tab=ai&amp;fromPage=offsite&amp;part_aid=offsite_claw</a> 购买积分</td>
+</tr>
+<tr>
+<td align="left">-32601</td>
+<td align="left">请求接口错误</td>
+<td align="left">确认调用的工具在<code>mcporter list tencent-docs</code>返回的列表中存在</td>
+</tr>
+<tr>
+<td align="left">-32603 &#x2F; 11607</td>
+<td align="left">请求参数错误</td>
+<td align="left">核对<code>file_id</code>、<code>content</code>等必填参数，确认参数格式与规范匹配</td>
+</tr>
+</tbody></table>
+<h3 id="标准排查步骤"><a href="#标准排查步骤" class="headerlink" title="标准排查步骤"></a>标准排查步骤</h3><ol>
+<li>匹配错误码，按上表对应方案优先处理</li>
+<li>执行<code>mcporter list tencent-docs</code>，确认工具存在且参数定义匹配</li>
+<li>鉴权相关错误，重新执行授权流程</li>
+<li>按场景路由表查阅对应参考文档，确认工具调用规范与约束</li>
+</ol>
+<h2 id="七、版本更新流程"><a href="#七、版本更新流程" class="headerlink" title="七、版本更新流程"></a>七、版本更新流程</h2><ol>
+<li>查看当前版本：读取本文件顶部的<code>version</code>字段，格式为<code>MAJOR.MINOR.PATCH</code></li>
+<li>检查最新版本：执行以下命令获取版本更新信息<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcporter call <span class="string">&quot;https://docs.qq.com/openapi/mcp&quot;</span> <span class="string">&quot;check_skill_update&quot;</span> --args <span class="string">&#x27;&#123;&quot;version&quot;: &quot;&lt;当前版本号&gt;&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>版本更新：若当前版本低于返回的<code>latest</code>最新版本，遵循返回的<code>instruction</code>指令完成更新，或提示用户执行更新操作。</li>
+<li>建议每日使用前执行一次版本更新检查。</li>
+</ol>
+<hr>
+<h1 id="腾讯文档-×-WorkBuddy-实战使用案例合集"><a href="#腾讯文档-×-WorkBuddy-实战使用案例合集" class="headerlink" title="腾讯文档 × WorkBuddy 实战使用案例合集"></a>腾讯文档 × WorkBuddy 实战使用案例合集</h1><p>WorkBuddy 基于MCP协议与腾讯文档原生深度打通，用户完成一次账号授权后，即可通过自然语言指令，实现腾讯文档「读取&#x2F;搜索&#x2F;创建&#x2F;编辑&#x2F;归档」全流程自动化操作，无需手动下载、上传、切换应用，完成<strong>资料获取→AI加工→云端沉淀</strong>的完整工作流闭环。以下是覆盖个人办公、团队协作、业务落地三大维度的真实实战案例。</p>
+<h2 id="一、个人办公效率提升类案例"><a href="#一、个人办公效率提升类案例" class="headerlink" title="一、个人办公效率提升类案例"></a>一、个人办公效率提升类案例</h2><h3 id="案例1：供应链从业者-自然语言驱动的个人工作流管理系统"><a href="#案例1：供应链从业者-自然语言驱动的个人工作流管理系统" class="headerlink" title="案例1：供应链从业者-自然语言驱动的个人工作流管理系统"></a>案例1：供应链从业者-自然语言驱动的个人工作流管理系统</h3><p><strong>场景痛点</strong>：供应链日常工作事项分散在微信、钉钉、OA、会议纪要中，订单交期跟进、紧急插单协调、设备异常处理、合同规格检查等多线程事项极易遗漏，传统手动记录待办、整理进度耗时且易出错。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>完成WorkBuddy与腾讯文档授权，搭建专属的「订单跟进」智能文档与待办智能表格</li>
+<li>全程通过微信WorkBuddy小程序用自然语言下达指令，无需打开电脑，示例指令：<ul>
+<li>「记录 A销售公司XX产品插单今天达成共识了，预计4月17日安排生产，同步关联原3月月度订单文档」</li>
+<li>「跟进XX车间设备改造异常事项，对接人小素，4月11日提醒我确认整改进度」</li>
+</ul>
+</li>
+<li>WorkBuddy自动完成：拆解事项→写入腾讯文档对应表格→设置跟进提醒→关联相关文档→结构化梳理进展</li>
+<li>到期自动触发提醒，同步更新事项状态，自动生成每日&#x2F;每周进展汇总。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>订单跟进事项遗漏率从15%降至0，跨部门协调响应效率提升60%</li>
+<li>原本每天30分钟的事项整理工作，压缩至2分钟语音指令完成</li>
+<li>所有工作进展可追溯，沉淀在腾讯文档中，随时可检索复盘。</li>
+</ul>
+<h3 id="案例2：职场人-全自动周报生成与归档"><a href="#案例2：职场人-全自动周报生成与归档" class="headerlink" title="案例2：职场人-全自动周报生成与归档"></a>案例2：职场人-全自动周报生成与归档</h3><p><strong>场景痛点</strong>：每周需手动整理本周工作内容、项目进展、下周计划，需从多个腾讯文档、表格中提取数据，手动排版汇总，单次耗时30分钟以上，重复机械工作占比高。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>授权WorkBuddy访问个人腾讯文档工作目录，设置自动化规则：「每周五下午6点，自动读取本周项目文档、待办表格、会议纪要」</li>
+<li>固定指令模板：「基于我本周腾讯文档内的所有工作内容，生成一份标准周报，包含本周核心成果、待解决问题、下周工作计划，格式适配公司周报模板，生成后直接保存到腾讯文档「周报归档」文件夹，命名格式：姓名-XXXX年第X周工作周报」</li>
+<li>WorkBuddy自动执行：多文档内容读取→AI汇总提炼→按模板排版→自动创建并写入腾讯文档→同步归档到指定文件夹。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>周报制作耗时从30分钟压缩至10分钟审阅时间，省时98%</li>
+<li>无需手动切换多个文档复制粘贴，格式零错乱，数据无遗漏</li>
+<li>所有周报自动归档到腾讯文档，形成个人工作台账，随时可检索追溯。</li>
+</ul>
+<h3 id="案例3：内容创作者-报告-PPT自动化生成与云端同步"><a href="#案例3：内容创作者-报告-PPT自动化生成与云端同步" class="headerlink" title="案例3：内容创作者-报告&#x2F;PPT自动化生成与云端同步"></a>案例3：内容创作者-报告&#x2F;PPT自动化生成与云端同步</h3><p><strong>场景痛点</strong>：制作汇报PPT、行业报告时，需频繁从腾讯文档调取历史数据、参考方案，手动复制粘贴易出现格式错乱、图表丢失，多设备切换操作繁琐。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>电脑端&#x2F;手机端均可下达指令，示例：「基于腾讯文档里的《Q1销售分析报告》内容，生成一份给老板汇报用的PPT，不超过10页，风格简洁商务，配色用深蓝+白色，包含封面、核心数据、问题分析、下一步计划」</li>
+<li>WorkBuddy自动完成：精准定位腾讯文档目标文件→完整读取内容（含复杂表格、图表、版式）→生成PPT大纲与完整初稿→保留原数据格式不跑偏</li>
+<li>生成完成后，一键回存到腾讯文档云端，手机、电脑多端实时同步，可直接打开分享、编辑。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>一份10页的商务PPT制作耗时从3小时压缩至15分钟，省时91.7%</li>
+<li>表格、图表、版式完整保留，无格式错乱，无需手动二次调整</li>
+<li>通勤路上即可通过手机小程序完成制作，无需携带电脑，碎片化时间高效利用。</li>
+</ul>
+<h2 id="二、团队协作与管理类案例"><a href="#二、团队协作与管理类案例" class="headerlink" title="二、团队协作与管理类案例"></a>二、团队协作与管理类案例</h2><h3 id="案例1：市场团队-竞品分析报告自动化全流程"><a href="#案例1：市场团队-竞品分析报告自动化全流程" class="headerlink" title="案例1：市场团队-竞品分析报告自动化全流程"></a>案例1：市场团队-竞品分析报告自动化全流程</h3><p><strong>场景痛点</strong>：每周需手动收集竞品官网、公众号、应用商店的最新动态，整理数据、撰写分析报告，单次耗时3小时以上，信息收集繁琐、更新不及时。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>团队共享腾讯文档空间，授权WorkBuddy访问「竞品分析」知识库</li>
+<li>设置自动化任务：「每周一上午9点，自动抓取指定3个竞品的官网、公众号、App Store最新动态，结构化存入腾讯文档「竞品动态」智能表格」</li>
+<li>补充指令：「基于本周抓取的竞品动态，按照团队模板生成竞品分析报告，标注核心变化、潜在风险、我方应对建议，生成后保存到腾讯文档「竞品分析报告」文件夹，并@负责人审阅」</li>
+<li>WorkBuddy全流程自动执行，无需人工干预，周一到岗即可直接审阅完整报告。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>每周竞品分析工作耗时从3小时压缩至10分钟审阅时间，效率提升94%</li>
+<li>竞品动态抓取无遗漏，报告格式统一，团队成员可实时在腾讯文档中协同编辑、评论</li>
+<li>所有历史报告、动态数据自动沉淀，形成团队竞品知识库，新人可快速查阅学习。</li>
+</ul>
+<h3 id="案例2：项目团队-跨部门协作事项跟进与待办闭环"><a href="#案例2：项目团队-跨部门协作事项跟进与待办闭环" class="headerlink" title="案例2：项目团队-跨部门协作事项跟进与待办闭环"></a>案例2：项目团队-跨部门协作事项跟进与待办闭环</h3><p><strong>场景痛点</strong>：跨部门项目协作中，事项对接人多、进度分散在不同群聊、会议中，待办事项跟进不及时，责任不清晰，极易出现延期。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>项目组搭建腾讯文档共享空间，创建「项目跟进总表」智能表格，包含事项名称、对接人、截止时间、当前状态、风险等级等字段</li>
+<li>会议结束后，直接在WorkBuddy下达指令：「把本次会议的待办事项拆解，对应到对接人、截止时间，写入腾讯文档的项目跟进总表，给每个事项设置到期前1天提醒，同步关联本次会议纪要文档」</li>
+<li>日常跟进指令示例：「更新XX车间设备改造事项的状态为整改中，最新进展为已完成零件更换，预计4月11日完成验收，同步更新到项目跟进总表，给对接人小素设置4月11日的确认提醒」</li>
+<li>WorkBuddy自动同步更新腾讯文档，到期自动触发提醒，每周自动生成项目进度汇总报告。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>项目任务延期率从25%降至3%，跨部门协作沟通成本降低70%</li>
+<li>所有事项进度可追溯、责任到人，全程在腾讯文档中透明化管理</li>
+<li>无需手动更新表格、反复提醒对接人，项目管理工作量大幅降低。</li>
+</ul>
+<h3 id="案例3：团队管理-知识库自动化运维与更新"><a href="#案例3：团队管理-知识库自动化运维与更新" class="headerlink" title="案例3：团队管理-知识库自动化运维与更新"></a>案例3：团队管理-知识库自动化运维与更新</h3><p><strong>场景痛点</strong>：团队腾讯文档知识库越来越臃肿，文档重复、内容过时、版本号错误等问题频发，新人找不到关键信息，手动维护耗时耗力。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>授权WorkBuddy访问团队腾讯文档知识库空间，设置定期自动化任务：「每月1号，自动扫描知识库内所有文档」</li>
+<li>设定AI执行规则：<ul>
+<li>识别文档中的过时内容（过期政策、失效版本号、停用流程），标记并汇总</li>
+<li>识别重复文档，标注相似度，推荐保留版本</li>
+<li>基于文档内容生成知识图谱，可视化展示文档关联关系</li>
+<li>为新人筛选生成「必读文档清单」，标注学习优先级</li>
+</ul>
+</li>
+<li>所有扫描结果、维护报告自动保存到腾讯文档知识库首页，负责人只需确认执行即可。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>团队知识库维护成本降低70%，无需专人每月手动梳理</li>
+<li>新人上手培训时间从2周缩短至3天，可快速通过必读清单掌握核心内容</li>
+<li>知识库内容时效性、准确性大幅提升，重复文档、过时内容清零。</li>
+</ul>
+<h2 id="三、业务场景落地类案例"><a href="#三、业务场景落地类案例" class="headerlink" title="三、业务场景落地类案例"></a>三、业务场景落地类案例</h2><h3 id="案例1：商务-法务-合同智能审阅与修改意见自动归档"><a href="#案例1：商务-法务-合同智能审阅与修改意见自动归档" class="headerlink" title="案例1：商务&#x2F;法务-合同智能审阅与修改意见自动归档"></a>案例1：商务&#x2F;法务-合同智能审阅与修改意见自动归档</h3><p><strong>场景痛点</strong>：客户频繁通过微信发送合同PDF，需逐条审阅、标记风险点、对比公司报价单、出具修改意见，传统流程需反复下载、上传、切换工具，全程耗时久，易遗漏风险。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>客户在微信群发来合同PDF，直接转发到WorkBuddy微信小程序</li>
+<li>语音下达指令：「把这份合同和腾讯文档项目文件夹里的对应报价单一起审阅，整理一份对比意见，标记风险条款、不符合公司规范的内容，给出修改建议，生成正式的审阅报告，保存到腾讯文档对应项目文件夹」</li>
+<li>WorkBuddy自动完成：文件读取→内容比对→风险识别→报告生成→自动写入腾讯文档，全程无需手动下载任何文件。</li>
+<li>打开腾讯文档即可直接查看完整报告，一键转发给客户或团队，修改后的合同可直接回存归档。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>单份合同审阅耗时从2小时压缩至5分钟，风险识别准确率提升至92%</li>
+<li>全程无下载、无上传、无应用切换，微信内即可完成全流程操作</li>
+<li>所有合同、审阅报告自动归档到腾讯文档，形成完整业务台账，可随时检索追溯。</li>
+</ul>
+<h3 id="案例2：销售团队-客户订单跟进与数据自动同步"><a href="#案例2：销售团队-客户订单跟进与数据自动同步" class="headerlink" title="案例2：销售团队-客户订单跟进与数据自动同步"></a>案例2：销售团队-客户订单跟进与数据自动同步</h3><p><strong>场景痛点</strong>：销售日常需跟进大量客户订单，订单信息分散在微信聊天、报价单、合同文档中，手动同步到订单表格易出错，客户跟进提醒不及时，丢单风险高。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>团队在腾讯文档搭建「销售订单管理」智能表格，关联客户档案、报价单、合同文档</li>
+<li>销售通过微信WorkBuddy小程序下达指令：「记录XX客户XX产品订单，今天已达成共识，订单金额10万元，预计4月20日付款，对接人XX，联系方式XX，同步关联对应报价单和合同文档，设置付款前3天跟进提醒」</li>
+<li>WorkBuddy自动将信息写入腾讯文档智能表格，自动关联相关文档，到期自动触发跟进提醒，每周自动生成个人&#x2F;团队销售业绩汇总报告。</li>
+<li>管理人员可实时在腾讯文档中查看全团队订单进度，无需销售手动提报。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>订单信息录入耗时从10分钟&#x2F;单压缩至1分钟语音指令，录入错误率清零</li>
+<li>客户订单跟进遗漏率降至0，回款及时率提升40%</li>
+<li>销售数据实时同步，团队业绩统计效率提升80%，无需手动汇总报表。</li>
+</ul>
+<h3 id="案例3：行政-HR-批量入职通知与员工档案自动归档"><a href="#案例3：行政-HR-批量入职通知与员工档案自动归档" class="headerlink" title="案例3：行政&#x2F;HR-批量入职通知与员工档案自动归档"></a>案例3：行政&#x2F;HR-批量入职通知与员工档案自动归档</h3><p><strong>场景痛点</strong>：批量新员工入职时，需手动发送入职通知、整理员工档案、创建个人学习文档，重复操作多，单次批量处理需3小时以上，易出现信息错误、遗漏。</p>
+<p><strong>实操流程</strong>：</p>
+<ol>
+<li>HR在腾讯文档创建「新员工入职名单」智能表格，包含员工姓名、岗位、入职时间、联系方式等信息，搭建员工档案知识库</li>
+<li>在WorkBuddy下达指令：「读取腾讯文档里的新员工入职名单，给每位员工生成定制化入职通知，包含入职时间、所需材料、办公地址、对接人信息；同时为每位员工创建个人入职档案文档，包含入职须知、岗位手册、学习清单，归档到腾讯文档「员工档案」文件夹，命名格式：姓名-岗位-入职档案」</li>
+<li>WorkBuddy自动批量执行，100份入职通知与档案文档最快5分钟即可全部完成。</li>
+</ol>
+<p><strong>落地效果</strong>：</p>
+<ul>
+<li>100人批量入职处理耗时从3小时压缩至5分钟，效率提升97%</li>
+<li>员工信息零错误、零遗漏，所有档案自动归档到腾讯文档，权限分级管理，安全可控</li>
+<li>新员工入职文档可直接分享，实时协同编辑，大幅降低HR重复工作量。</li>
+</ul>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://skillhub.cn/skills/tencent-docs">SkillHub - 腾讯文档技能</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.qq.com/open/document/mcp/">腾讯文档 MCP 官方文档</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iyangjialin.github.io/2026/05/05/workbuddy-tencent-docs-integration/" data-id="cmorsx4q8003ez8d3g1ex8byr" data-title="WorkBuddy接入腾讯文档上线 - 资料库功能详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E5%8A%9E%E5%85%AC/" rel="tag">AI办公</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCP%E5%8D%8F%E8%AE%AE/" rel="tag">MCP协议</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" rel="tag">技能配置</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" rel="tag">腾讯文档</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/05/05/deepseek-tui-complete-analysis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DeepSeek-TUI 完全解析：终端原生 AI 编码智能体</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  
+  
+
+  
     <article id="post-2026-05-05-deepseek-tui-complete-analysis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/05/05/deepseek-tui-complete-analysis/" class="article-date">
@@ -108,8 +536,8 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      DeepSeek-TUI 完全解析：终端原生 AI 编码智能体
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/05/deepseek-tui-complete-analysis/">DeepSeek-TUI 完全解析：终端原生 AI 编码智能体</a>
     </h1>
   
 
@@ -118,232 +546,15 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p><strong>DeepSeek-TUI</strong> 是一款终端原生的 AI 编码智能体，基于 Rust 开发，专为 DeepSeek V4 系列大模型打造。它完全运行在终端环境中，可直接读写文件、执行 Shell 命令、网页搜索、Git 管理、调度子智能体，基于 ratatui 框架构建了全键盘驱动的高速交互界面。</p>
-<span id="more"></span>
-
-<hr>
-<h2 id="一、核心差异化特性"><a href="#一、核心差异化特性" class="headerlink" title="一、核心差异化特性"></a>一、核心差异化特性</h2><p>与浏览器端 AI 助手、通用聊天前端不同，DeepSeek-TUI 专为代码优先的工作流设计，AI 可直接操作文件系统、终端和 Git 历史。</p>
-<h3 id="1-实时思维链流式展示"><a href="#1-实时思维链流式展示" class="headerlink" title="1. 实时思维链流式展示"></a>1. 实时思维链流式展示</h3><p>可实时输出模型的思考过程，支持 3 档推理强度（<code>off</code> → <code>high</code> → <code>max</code>），会话中随时可通过 <code>Shift+Tab</code> 切换，平衡推理深度与响应速度。</p>
-<h3 id="2-全工具套件真实执行权限"><a href="#2-全工具套件真实执行权限" class="headerlink" title="2. 全工具套件真实执行权限"></a>2. 全工具套件真实执行权限</h3><p>不只是建议命令，可直接执行。内置工具覆盖：</p>
-<ul>
-<li>文件读写&#x2F;编辑</li>
-<li>Shell 命令执行</li>
-<li>Git 操作</li>
-<li>网页搜索、URL 抓取（含 PDF 提取）</li>
-<li>补丁应用（<code>apply-patch</code>）</li>
-<li>子智能体生成</li>
-<li>MCP 协议对接</li>
-</ul>
-<p>所有工具调用默认需用户审批，完全可控。</p>
-<h3 id="3-智能上下文管理"><a href="#3-智能上下文管理" class="headerlink" title="3. 智能上下文管理"></a>3. 智能上下文管理</h3><p>适配 DeepSeek V4 系列 <strong>1M token 上下文窗口</strong>，可投喂完整代码库；上下文满额时自动执行压缩策略，无需手动裁剪。</p>
-<h3 id="4-多档交互模式"><a href="#4-多档交互模式" class="headerlink" title="4. 多档交互模式"></a>4. 多档交互模式</h3><p>按 <code>Tab</code> 可循环切换，覆盖从只读调研到全自动执行的全场景需求：</p>
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Plan</strong></td>
-<td>只读调研模式，仅可读取文件、查看信息，无修改&#x2F;执行权限</td>
-</tr>
-<tr>
-<td><strong>Agent</strong></td>
-<td>默认交互模式，所有操作需用户审批，安全可控</td>
-</tr>
-<tr>
-<td><strong>YOLO</strong></td>
-<td>自动审批执行模式，无需用户确认即可执行所有操作</td>
-</tr>
-<tr>
-<td><strong>Hetun（河豚）</strong></td>
-<td>通过递归子智能体并行完成任务调研与拆解</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="二、完整核心功能清单"><a href="#二、完整核心功能清单" class="headerlink" title="二、完整核心功能清单"></a>二、完整核心功能清单</h2><table>
-<thead>
-<tr>
-<th>功能模块</th>
-<th>核心说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>思维链流式展示</td>
-<td>实时呈现 DeepSeek 的思考推理过程</td>
-</tr>
-<tr>
-<td>全工具套件</td>
-<td>支持文件操作、Shell、Git、网页搜索、PDF 提取、补丁应用、子智能体、MCP 协议</td>
-</tr>
-<tr>
-<td>1M token 上下文</td>
-<td>支持完整代码库投喂，上下文满额自动智能压缩</td>
-</tr>
-<tr>
-<td>多交互模式</td>
-<td>Plan（只读调研）、Agent（审批制交互）、YOLO（自动审批执行）、Hetun（并行子智能体任务拆解）</td>
-</tr>
-<tr>
-<td>会话保存&#x2F;恢复</td>
-<td>支持长会话断点续传、对话分叉</td>
-</tr>
-<tr>
-<td>HTTP&#x2F;SSE 运行时 API</td>
-<td>支持 <code>deepseek serve --http</code> 启动无头智能体工作流</td>
-</tr>
-<tr>
-<td>MCP 协议兼容</td>
-<td>可对接模型上下文协议服务器，扩展工具能力</td>
-</tr>
-<tr>
-<td>实时成本追踪</td>
-<td>单轮与会话级别的 token 用量、成本预估</td>
-</tr>
-<tr>
-<td>主题切换</td>
-<td>支持深浅色主题，DeepSeek 品牌蓝色调色板</td>
-</tr>
-<tr>
-<td>macOS 沙箱</td>
-<td>基于 Seatbelt 的沙箱配置，限制文件写入权限</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="三、架构与仓库结构"><a href="#三、架构与仓库结构" class="headerlink" title="三、架构与仓库结构"></a>三、架构与仓库结构</h2><p>项目采用 Cargo 工作空间组织，包含 12+ 个职责单一的 crates，遵循分层架构（上层依赖下层，反向不可依赖）。</p>
-<table>
-<thead>
-<tr>
-<th>Crate 路径</th>
-<th>包名</th>
-<th>核心职责</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>crates/cli</code></td>
-<td>deepseek-cli</td>
-<td>CLI 入口、参数解析、命令路由</td>
-</tr>
-<tr>
-<td><code>crates/tui</code></td>
-<td>deepseek-tui</td>
-<td>完整终端 UI、引擎运行时、工具执行、流式处理、会话管理（当前核心运行时）</td>
-</tr>
-<tr>
-<td><code>crates/app-server</code></td>
-<td>deepseek-app-server</td>
-<td>基于 axum 的 HTTP&#x2F;SSE 运行时 API 服务</td>
-</tr>
-<tr>
-<td><code>crates/core</code></td>
-<td>deepseek-core</td>
-<td>智能体循环编排、会话与轮次管理</td>
-</tr>
-<tr>
-<td><code>crates/agent</code></td>
-<td>deepseek-agent</td>
-<td>模型&#x2F;服务商注册与降级策略</td>
-</tr>
-<tr>
-<td><code>crates/tools</code></td>
-<td>deepseek-tools</td>
-<td>工具调用生命周期、Schema 校验、调度并行性</td>
-</tr>
-<tr>
-<td><code>crates/config</code></td>
-<td>deepseek-config</td>
-<td>配置加载、配置文件、环境变量解析</td>
-</tr>
-<tr>
-<td><code>crates/state</code></td>
-<td>deepseek-state</td>
-<td>基于 SQLite 的会话&#x2F;线程持久化与恢复</td>
-</tr>
-<tr>
-<td><code>crates/execpolicy</code></td>
-<td>deepseek-execpolicy</td>
-<td>沙箱&#x2F;审批决策的执行策略引擎</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>注</strong>：当前 <code>crates/tui</code> 是终端用户的核心运行时，其余 crates 正在逐步拆分抽离。二次开发可优先从 <code>crates/tui/src/</code> 入手。</p>
-</blockquote>
-<h3 id="分层架构"><a href="#分层架构" class="headerlink" title="分层架构"></a>分层架构</h3><p>整体遵循 <strong>Dispatcher → TUI → Engine → Tools</strong> 分层模式：</p>
-<ol>
-<li><strong>Dispatcher</strong>：<code>deepseek</code> CLI 二进制为轻量级调度器，解析子命令后委托给 <code>deepseek-tui</code> 二进制处理交互式会话</li>
-<li><strong>TUI 层</strong>：基于 <code>ratatui</code> 构建终端界面，负责用户交互</li>
-<li><strong>Engine 层</strong>：异步执行代理循环，管理会话状态、轮次追踪、持久化任务队列；对接 OpenAI 兼容的 Chat Completions 流式客户端</li>
-<li><strong>Tools 层</strong>：类型化工具注册表，分发执行文件、Shell、Git、Web、MCP 等操作</li>
-</ol>
-<hr>
-<h2 id="四、支持模型与定价"><a href="#四、支持模型与定价" class="headerlink" title="四、支持模型与定价"></a>四、支持模型与定价</h2><p>默认适配 DeepSeek V4 模型家族，支持 NVIDIA NIM 托管变体。</p>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>上下文窗口</th>
-<th>输入（缓存命中）</th>
-<th>输入（缓存未命中）</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>deepseek-v4-pro</code></td>
-<td>1M</td>
-<td>$0.03625 &#x2F; 1M token</td>
-<td>$0.435 &#x2F; 1M token</td>
-<td>$0.87 &#x2F; 1M token</td>
-</tr>
-<tr>
-<td><code>deepseek-v4-flash</code></td>
-<td>1M</td>
-<td>$0.028 &#x2F; 1M token</td>
-<td>$0.14 &#x2F; 1M token</td>
-<td>$0.28 &#x2F; 1M token</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>注</strong>：<code>deepseek-v4-pro</code> 定价为限时 75% 折扣价，有效期至 <strong>2026-05-05</strong>；NVIDIA NIM 变体按 NVIDIA 账户条款计费，不产生 DeepSeek 平台账单。</p>
-</blockquote>
-<hr>
-<h2 id="五、快速安装与启动"><a href="#五、快速安装与启动" class="headerlink" title="五、快速安装与启动"></a>五、快速安装与启动</h2><h3 id="方式-1：npm-安装（推荐）"><a href="#方式-1：npm-安装（推荐）" class="headerlink" title="方式 1：npm 安装（推荐）"></a>方式 1：npm 安装（推荐）</h3><p>自动从 GitHub Release 下载预编译二进制文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装</span></span><br><span class="line">npm install -g deepseek-tui</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">deepseek</span><br></pre></td></tr></table></figure>
-
-<h3 id="方式-2：Cargo-源码编译安装（需-Rust-1-85-）"><a href="#方式-2：Cargo-源码编译安装（需-Rust-1-85-）" class="headerlink" title="方式 2：Cargo 源码编译安装（需 Rust 1.85+）"></a>方式 2：Cargo 源码编译安装（需 Rust 1.85+）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 deepseek CLI</span></span><br><span class="line">cargo install deepseek-tui-cli --locked</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 deepseek-tui 命令</span></span><br><span class="line">cargo install deepseek-tui --locked</span><br></pre></td></tr></table></figure>
-
-<h3 id="Linux-ARM64-适配（树莓派、Asahi、Graviton-等）"><a href="#Linux-ARM64-适配（树莓派、Asahi、Graviton-等）" class="headerlink" title="Linux ARM64 适配（树莓派、Asahi、Graviton 等）"></a>Linux ARM64 适配（树莓派、Asahi、Graviton 等）</h3><ul>
-<li>v0.8.8+ 版本可直接用 <code>npm i -g deepseek-tui</code>（glibc 环境）</li>
-<li>旧版本&#x2F;特殊环境可通过 Rust 构建</li>
-</ul>
-<h3 id="首次启动配置"><a href="#首次启动配置" class="headerlink" title="首次启动配置"></a>首次启动配置</h3><p>首次运行会提示输入 DeepSeek API Key，也可通过以下方式配置：</p>
-<ul>
-<li>环境变量：<code>DEEPSEEK_API_KEY</code></li>
-<li>命令行：<code>deepseek login</code></li>
-</ul>
-<hr>
-<h2 id="六、扩展子系统"><a href="#六、扩展子系统" class="headerlink" title="六、扩展子系统"></a>六、扩展子系统</h2><h3 id="LSP-子系统"><a href="#LSP-子系统" class="headerlink" title="LSP 子系统"></a>LSP 子系统</h3><p>启动 <code>rust-analyzer</code>&#x2F;<code>pyright</code> 等语言服务器，提供代码编辑后的诊断能力，并将错误注入模型上下文。</p>
-<h3 id="RLM-子系统"><a href="#RLM-子系统" class="headerlink" title="RLM 子系统"></a>RLM 子系统</h3><p>沙箱化 Python REPL，支持批量分类、子 LLM 编排。</p>
-<hr>
-<h2 id="七、适用场景"><a href="#七、适用场景" class="headerlink" title="七、适用场景"></a>七、适用场景</h2><p>DeepSeek-TUI 旨在成为开发者命令行中的 AI 结对编程伙伴，尤其适合：</p>
-<ul>
-<li><strong>长时间、复杂交互的编码任务</strong></li>
-<li><strong>需要完整代码库上下文的项目分析</strong></li>
-<li><strong>希望 AI 直接执行操作而非仅提供建议的开发者</strong></li>
-<li><strong>需要实时查看 AI 推理过程的场景</strong></li>
-</ul>
-<hr>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
-<li><strong>GitHub 仓库</strong>：<a target="_blank" rel="noopener" href="https://github.com/Hmbown/DeepSeek-TUI">https://github.com/Hmbown/DeepSeek-TUI</a></li>
-<li><strong>中文文档</strong>：<a target="_blank" rel="noopener" href="https://zread.ai/Hmbown/DeepSeek-TUI">https://zread.ai/Hmbown/DeepSeek-TUI</a></li>
-<li><strong>DeepSeek 平台</strong>：<a target="_blank" rel="noopener" href="https://platform.deepseek.com/">https://platform.deepseek.com</a></li>
-</ul>
-<hr>
-<p><em>最后更新：2026-05-05</em></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2026/05/05/deepseek-tui-complete-analysis/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/deepseek-tui-complete-analysis/" data-id="cmorrvbmb0036awd368et4bj6" data-title="DeepSeek-TUI 完全解析：终端原生 AI 编码智能体" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/deepseek-tui-complete-analysis/" data-id="cmorsx4q60031z8d30vj61em2" data-title="DeepSeek-TUI 完全解析：终端原生 AI 编码智能体" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -351,18 +562,6 @@
 
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2026/05/05/skillhub-research-report/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">SkillHub 深度研究报告：22 个 AI 技能完整数据分析</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -410,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-research-report/" data-id="cmorrvbma0033awd39h4g1es4" data-title="SkillHub 深度研究报告：22 个 AI 技能完整数据分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-research-report/" data-id="cmorsx4q60034z8d3aepv5pmm" data-title="SkillHub 深度研究报告：22 个 AI 技能完整数据分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -465,7 +664,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-skills-catalog/" data-id="cmorrvbmb0038awd34zd8b7k2" data-title="SkillHub 技能清单：21 个 AI 智能体技能全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-skills-catalog/" data-id="cmorsx4q7003bz8d35jh4hd7d" data-title="SkillHub 技能清单：21 个 AI 智能体技能全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -517,7 +716,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/04/claude-code-tools-comparison/" data-id="cmorrvbma0031awd36asi8wjr" data-title="Claude Code 三大工程化工具横评：Superpowers vs Compound Engineering vs Everything-Claude-Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/04/claude-code-tools-comparison/" data-id="cmorsx4q5002wz8d3h7nx0nbx" data-title="Claude Code 三大工程化工具横评：Superpowers vs Compound Engineering vs Everything-Claude-Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -569,7 +768,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/04/compound-engineering-plugin/" data-id="cmorrvbm9002xawd3briacjfh" data-title="Compound Engineering 插件全解析：AI 工程复利化实践指南" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/04/compound-engineering-plugin/" data-id="cmorsx4q70039z8d390wp6xfz" data-title="Compound Engineering 插件全解析：AI 工程复利化实践指南" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -621,7 +820,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/karpathy-vibe-coding-to-agentic-engineering/" data-id="cmorrvbm7002jawd33ffv922p" data-title="Karpathy：从Vibe Coding到Agentic Engineering" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/01/karpathy-vibe-coding-to-agentic-engineering/" data-id="cmorsx4q4002qz8d318achfpb" data-title="Karpathy：从Vibe Coding到Agentic Engineering" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -673,7 +872,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/luo-fuli-ai-paradigm-shift/" data-id="cmorrvbm8002nawd3brwz6lwo" data-title="独家对话罗福莉：AI范式已然巨变" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/01/luo-fuli-ai-paradigm-shift/" data-id="cmorsx4q3002kz8d39vflhb2j" data-title="独家对话罗福莉：AI范式已然巨变" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -725,7 +924,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/workbuddy-practice-cases/" data-id="cmorrvbm8002qawd3g6i93ed5" data-title="实践案例大全" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/01/workbuddy-practice-cases/" data-id="cmorsx4q5002tz8d39atmg3gl" data-title="实践案例大全" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -779,63 +978,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/workbuddy-complete-guide/" data-id="cmorrvbm9002vawd37irk38et" data-title="WorkBuddy 全指南：腾讯全场景 AI 智能体工作台完全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/01/workbuddy-complete-guide/" data-id="cmorsx4q4002nz8d37u8ofut0" data-title="WorkBuddy 全指南：腾讯全场景 AI 智能体工作台完全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag">AI使用指南</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">AI智能体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" rel="tag">桌面工作台</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-  
-
-  
-    <article id="post-2026-04-23-openclaw-vs-hermes-agent-comparison" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/04/23/2026-04-23-openclaw-vs-hermes-agent-comparison/" class="article-date">
-  <time class="dt-published" datetime="2026-04-23T01:00:00.000Z" itemprop="datePublished">2026-04-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/04/23/2026-04-23-openclaw-vs-hermes-agent-comparison/">OpenClaw vs Hermes Agent 深度对比分析报告</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>OpenClaw 与 Hermes Agent 是 2026 年开源 AI 智能体领域的两大标杆项目，均采用 MIT 开源协议，支持本地自托管、多模型接入、多消息通道适配与工具自动化能力。本报告从<strong>七大维度</strong>深度拆解对比，给出分场景选型建议。</p>
-        
-          <p class="article-more-link">
-            <a href="/2026/04/23/2026-04-23-openclaw-vs-hermes-agent-comparison/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/04/23/2026-04-23-openclaw-vs-hermes-agent-comparison/" data-id="cmorrvbm6002hawd3e8vpcva4" data-title="OpenClaw vs Hermes Agent 深度对比分析报告" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li></ul>
 
     </footer>
   </div>
@@ -884,7 +1031,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/">AI工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">使用指南</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">工程实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/">深度访谈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/">AI工具</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E4%BA%A7%E5%93%81%E4%BD%93%E9%AA%8C/">产品体验</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">使用指南</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">工程实践</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/">深度访谈</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E8%B6%8B%E5%8A%BF/">AI趋势</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%89%A9%E6%A1%A3%E6%A1%88/">人物档案</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/">商业洞察</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/">工具评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E8%B5%84%E6%BA%90/">技术资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">深度思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E6%83%B3/">随想</a></li></ul>
     </div>
   </div>
 
@@ -894,7 +1041,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag">AI使用指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B/" rel="tag">AI工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">AI工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%8A%80%E8%83%BD/" rel="tag">AI技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">AI智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A8%8B/" rel="tag">AI编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agentic-Engineering/" rel="tag">Agentic Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Andrej-Karpathy/" rel="tag">Andrej Karpathy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding-Agent/" rel="tag">Coding Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compound-Engineering/" rel="tag">Compound Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepSeek/" rel="tag">DeepSeek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Everything-Claude-Code/" rel="tag">Everything-Claude-Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiMo/" rel="tag">MiMo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-3-0/" rel="tag">Software 3.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Superpowers/" rel="tag">Superpowers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vibe-Coding/" rel="tag">Vibe Coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" rel="tag">实践案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3/" rel="tag">小米</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" rel="tag">工具评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" rel="tag">桌面工作台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" rel="tag">终端工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" rel="tag">罗福莉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" rel="tag">范式转移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag">AI使用指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%8A%9E%E5%85%AC/" rel="tag">AI办公</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B/" rel="tag">AI工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">AI工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%8A%80%E8%83%BD/" rel="tag">AI技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">AI智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A8%8B/" rel="tag">AI编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agentic-Engineering/" rel="tag">Agentic Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Andrej-Karpathy/" rel="tag">Andrej Karpathy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding-Agent/" rel="tag">Coding Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compound-Engineering/" rel="tag">Compound Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepSeek/" rel="tag">DeepSeek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Everything-Claude-Code/" rel="tag">Everything-Claude-Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP%E5%8D%8F%E8%AE%AE/" rel="tag">MCP协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiMo/" rel="tag">MiMo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-3-0/" rel="tag">Software 3.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Superpowers/" rel="tag">Superpowers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vibe-Coding/" rel="tag">Vibe Coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" rel="tag">实践案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3/" rel="tag">小米</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" rel="tag">工具评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" rel="tag">技能配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" rel="tag">桌面工作台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" rel="tag">终端工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" rel="tag">罗福莉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" rel="tag">腾讯文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" rel="tag">范式转移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
     </div>
   </div>
 
@@ -904,7 +1051,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 13.33px;">AI Agent</a> <a href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" style="font-size: 10px;">AI使用指南</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">AI工程</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">AI工程化</a> <a href="/tags/AI%E6%8A%80%E8%83%BD/" style="font-size: 11.67px;">AI技能</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">AI智能体</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18.33px;">Agent</a> <a href="/tags/Agentic-Engineering/" style="font-size: 10px;">Agentic Engineering</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 11.67px;">Agent时代</a> <a href="/tags/Andrej-Karpathy/" style="font-size: 10px;">Andrej Karpathy</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 16.67px;">Claude Code</a> <a href="/tags/Coding-Agent/" style="font-size: 10px;">Coding Agent</a> <a href="/tags/Compound-Engineering/" style="font-size: 11.67px;">Compound Engineering</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/Everything-Claude-Code/" style="font-size: 10px;">Everything-Claude-Code</a> <a href="/tags/GitHub/" style="font-size: 11.67px;">GitHub</a> <a href="/tags/Hermes/" style="font-size: 13.33px;">Hermes</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MiMo/" style="font-size: 10px;">MiMo</a> <a href="/tags/NLP/" style="font-size: 11.67px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 15px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 11.67px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Rust/" style="font-size: 10px;">Rust</a> <a href="/tags/Satya-Nadella/" style="font-size: 11.67px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 11.67px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 16.67px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Software-3-0/" style="font-size: 10px;">Software 3.0</a> <a href="/tags/Superpowers/" style="font-size: 10px;">Superpowers</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vibe-Coding/" style="font-size: 10px;">Vibe Coding</a> <a href="/tags/WorkBuddy/" style="font-size: 11.67px;">WorkBuddy</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 11.67px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 15px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" style="font-size: 10px;">实践案例</a> <a href="/tags/%E5%B0%8F%E7%B1%B3/" style="font-size: 10px;">小米</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" style="font-size: 15px;">工具对比</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" style="font-size: 11.67px;">工具评测</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 13.33px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.67px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 13.33px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.67px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 15px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" style="font-size: 11.67px;">桌面工作台</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">深度访谈</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 13.33px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" style="font-size: 10px;">知识管理</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 11.67px;">系统思维</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">终端工具</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" style="font-size: 10px;">罗福莉</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 13.33px;">腾讯</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" style="font-size: 10px;">范式转移</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 11.67px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 11.67px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 13.33px;">AI Agent</a> <a href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" style="font-size: 10px;">AI使用指南</a> <a href="/tags/AI%E5%8A%9E%E5%85%AC/" style="font-size: 10px;">AI办公</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">AI工程</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">AI工程化</a> <a href="/tags/AI%E6%8A%80%E8%83%BD/" style="font-size: 11.67px;">AI技能</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">AI智能体</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18.33px;">Agent</a> <a href="/tags/Agentic-Engineering/" style="font-size: 10px;">Agentic Engineering</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 11.67px;">Agent时代</a> <a href="/tags/Andrej-Karpathy/" style="font-size: 10px;">Andrej Karpathy</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 16.67px;">Claude Code</a> <a href="/tags/Coding-Agent/" style="font-size: 10px;">Coding Agent</a> <a href="/tags/Compound-Engineering/" style="font-size: 11.67px;">Compound Engineering</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/Everything-Claude-Code/" style="font-size: 10px;">Everything-Claude-Code</a> <a href="/tags/GitHub/" style="font-size: 11.67px;">GitHub</a> <a href="/tags/Hermes/" style="font-size: 13.33px;">Hermes</a> <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/MCP%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">MCP协议</a> <a href="/tags/MiMo/" style="font-size: 10px;">MiMo</a> <a href="/tags/NLP/" style="font-size: 11.67px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 15px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 11.67px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Rust/" style="font-size: 10px;">Rust</a> <a href="/tags/Satya-Nadella/" style="font-size: 11.67px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 11.67px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 16.67px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Software-3-0/" style="font-size: 10px;">Software 3.0</a> <a href="/tags/Superpowers/" style="font-size: 10px;">Superpowers</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vibe-Coding/" style="font-size: 10px;">Vibe Coding</a> <a href="/tags/WorkBuddy/" style="font-size: 13.33px;">WorkBuddy</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">人物访谈</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 11.67px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 15px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" style="font-size: 10px;">实践案例</a> <a href="/tags/%E5%B0%8F%E7%B1%B3/" style="font-size: 10px;">小米</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" style="font-size: 15px;">工具对比</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" style="font-size: 11.67px;">工具评测</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 13.33px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.67px;">开源</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 13.33px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">技能配置</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.67px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 15px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" style="font-size: 11.67px;">桌面工作台</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">深度访谈</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 13.33px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" style="font-size: 11.67px;">知识管理</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 11.67px;">系统思维</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">终端工具</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" style="font-size: 10px;">罗福莉</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 13.33px;">腾讯</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" style="font-size: 10px;">腾讯文档</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" style="font-size: 10px;">范式转移</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 11.67px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 11.67px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
     </div>
   </div>
 
@@ -926,6 +1073,10 @@
       <ul>
         
           <li>
+            <a href="/2026/05/05/workbuddy-tencent-docs-integration/">WorkBuddy接入腾讯文档上线 - 资料库功能详解</a>
+          </li>
+        
+          <li>
             <a href="/2026/05/05/deepseek-tui-complete-analysis/">DeepSeek-TUI 完全解析：终端原生 AI 编码智能体</a>
           </li>
         
@@ -939,10 +1090,6 @@
         
           <li>
             <a href="/2026/05/04/claude-code-tools-comparison/">Claude Code 三大工程化工具横评：Superpowers vs Compound Engineering vs Everything-Claude-Code</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/04/compound-engineering-plugin/">Compound Engineering 插件全解析：AI 工程复利化实践指南</a>
           </li>
         
       </ul>
