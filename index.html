@@ -91,6 +91,474 @@
 
 
   
+    <article id="post-2026-05-06-openspec-complete-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/05/06/openspec-complete-guide/" class="article-date">
+  <time class="dt-published" datetime="2026-05-06T00:00:00.000Z" itemprop="datePublished">2026-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AI%E5%B7%A5%E5%85%B7/">AI工具</a>►<a class="article-category-link" href="/categories/AI%E5%B7%A5%E5%85%B7/%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">工程实践</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      OpenSpec 完全指南：AI 时代的规范驱动开发框架
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>“The most loved spec framework.”</strong><br>GitHub: <a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec">Fission-AI&#x2F;OpenSpec</a> · 45.4k ⭐ · MIT License</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-openspec">什么是 OpenSpec</a></li>
+<li><a href="#%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC">核心价值</a></li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6">设计哲学</a></li>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">工作原理</a></li>
+<li><a href="#%E5%AE%8C%E6%95%B4%E5%B7%A5%E4%BD%9C%E6%B5%81">完整工作流</a></li>
+<li><a href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E5%88%86%E5%B1%82">技术架构分层</a></li>
+<li><a href="#%E6%A0%87%E5%87%86%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">标准项目结构与文件说明</a></li>
+<li><a href="#%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97">入门指南</a></li>
+<li><a href="#%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B">实践案例</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></li>
+</ol>
+<span id="more"></span>
+
+<hr>
+<h2 id="一、什么是-OpenSpec"><a href="#一、什么是-OpenSpec" class="headerlink" title="一、什么是 OpenSpec"></a>一、什么是 OpenSpec</h2><p>OpenSpec 是一个<strong>轻量级规范驱动开发框架</strong>（Spec-Driven Development Framework），旨在让人类与 AI 编码助手在写代码之前，先就「要做什么」达成一致。</p>
+<p>它不是一个项目管理工具，不是一个文档生成器，而是一个<strong>结构化的「共识层」</strong>——在模糊的想法和混乱的代码之间，建立起清晰的行为契约。</p>
+<h3 id="📖-一句话定义"><a href="#📖-一句话定义" class="headerlink" title="📖 一句话定义"></a>📖 一句话定义</h3><blockquote>
+<p><strong>OpenSpec &#x3D; 在 AI 写代码之前，人类和 AI 一起填写「要做什么」的规格说明，然后按规格交付。</strong></p>
+</blockquote>
+<h3 id="⚡-与传统方案的本质区别"><a href="#⚡-与传统方案的本质区别" class="headerlink" title="⚡ 与传统方案的本质区别"></a>⚡ 与传统方案的本质区别</h3><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>传统方案</th>
+<th>OpenSpec</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需求载体</td>
+<td>口头沟通、邮件、Issue</td>
+<td>结构化 Artifact 文件</td>
+</tr>
+<tr>
+<td>变更追踪</td>
+<td>Git 历史推演</td>
+<td>Delta Spec 增量描述</td>
+</tr>
+<tr>
+<td>AI 协作</td>
+<td>每次都是新对话，无记忆</td>
+<td>规格文件作为永久上下文</td>
+</tr>
+<tr>
+<td>灵活度</td>
+<td>瀑布式分阶段</td>
+<td>流体式，随时可迭代</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、核心价值"><a href="#二、核心价值" class="headerlink" title="二、核心价值"></a>二、核心价值</h2><h3 id="2-1-对人类（开发者-产品负责人）"><a href="#2-1-对人类（开发者-产品负责人）" class="headerlink" title="2.1 对人类（开发者&#x2F;产品负责人）"></a>2.1 对人类（开发者&#x2F;产品负责人）</h3><ul>
+<li><strong>减少返工</strong>：AI 不会跑偏，因为规格先行</li>
+<li><strong>可追溯</strong>：每个代码变更都有对应的 <code>proposal → specs → design → tasks</code> 链路</li>
+<li><strong>灵活变更</strong>：随时回头改规格，代码跟着走</li>
+</ul>
+<h3 id="2-2-对-AI（编码助手）"><a href="#2-2-对-AI（编码助手）" class="headerlink" title="2.2 对 AI（编码助手）"></a>2.2 对 AI（编码助手）</h3><ul>
+<li><strong>有据可依</strong>：不再靠「猜」，规格文档就是行动指南</li>
+<li><strong>上下文稳定</strong>：文件比聊天历史更持久</li>
+<li><strong>边界清晰</strong>：<code>tasks.md</code> 的 Checkbox 是明确的完成标准</li>
+</ul>
+<h3 id="2-3-对团队"><a href="#2-3-对团队" class="headerlink" title="2.3 对团队"></a>2.3 对团队</h3><ul>
+<li><strong>多人协作</strong>：规格是共识的基础，Code Review 有据可查</li>
+<li><strong>跨工具集成</strong>：支持 25+ AI 工具（Claude Code、Cursor、Windsurf、Cline 等）</li>
+<li><strong>企业级扩展</strong>：从个人项目到跨仓库企业项目均可</li>
+</ul>
+<hr>
+<h2 id="三、设计哲学"><a href="#三、设计哲学" class="headerlink" title="三、设计哲学"></a>三、设计哲学</h2><p>OpenSpec 的设计哲学浓缩为五句话：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fluid not rigid          # 流体式，而非僵化分阶段</span><br><span class="line">iterative not waterfall  # 迭代式，而非瀑布式</span><br><span class="line">easy not complex         # 简洁化，而非复杂化</span><br><span class="line">built for brownfield     # 支持存量项目，而不仅是新项目</span><br><span class="line">not just greenfield</span><br><span class="line">scalable from personal   # 从个人项目到企业级均可</span><br><span class="line">projects to enterprises</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-Fluid-Not-Rigid（流体式）"><a href="#3-1-Fluid-Not-Rigid（流体式）" class="headerlink" title="3.1 Fluid Not Rigid（流体式）"></a>3.1 Fluid Not Rigid（流体式）</h3><p>传统规范框架让你经历：规划阶段 → 实现阶段 → 完成。这是一个锁死的流程。</p>
+<p>OpenSpec 允许你以任何顺序创建产物（Artifact）：可以从 <code>proposal</code> 开始，也可以从 <code>tasks</code> 开始。依赖关系只是指引，不是限制。</p>
+<h3 id="3-2-Iterative-Not-Waterfall（迭代式）"><a href="#3-2-Iterative-Not-Waterfall（迭代式）" class="headerlink" title="3.2 Iterative Not Waterfall（迭代式）"></a>3.2 Iterative Not Waterfall（迭代式）</h3><p>需求会变，理解会深化。一开始看起来正确的方案，在看到代码库后可能不成立。</p>
+<p>OpenSpec 拥抱这个现实——<strong>随时可以回去更新任何一个 Artifact</strong>，不需要「规划阶段」的完美才开始。</p>
+<h3 id="3-3-Easy-Not-Complex（简洁化）"><a href="#3-3-Easy-Not-Complex（简洁化）" class="headerlink" title="3.3 Easy Not Complex（简洁化）"></a>3.3 Easy Not Complex（简洁化）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install -g @fission-ai/openspec@latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化（几秒钟完成）</span></span><br><span class="line">openspec init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始工作</span></span><br><span class="line">/opsx:propose your-idea</span><br></pre></td></tr></table></figure>
+
+<p>无需繁重的格式或仪式。</p>
+<h3 id="3-4-Brownfield-First（存量优先）"><a href="#3-4-Brownfield-First（存量优先）" class="headerlink" title="3.4 Brownfield-First（存量优先）"></a>3.4 Brownfield-First（存量优先）</h3><p>大多数软件工作不是从零开始，而是在既有系统上修改。OpenSpec 的 <strong>Delta Spec 机制</strong>使得描述「对现有行为的变更」变得自然，而不是重新描述整个系统。</p>
+<h3 id="3-5-Scalable（可扩展）"><a href="#3-5-Scalable（可扩展）" class="headerlink" title="3.5 Scalable（可扩展）"></a>3.5 Scalable（可扩展）</h3><table>
+<thead>
+<tr>
+<th>规模</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>个人项目</td>
+<td>一个人用，<code>openspec/</code> 目录足够</td>
+</tr>
+<tr>
+<td>团队协作</td>
+<td>共享 <code>openspec/</code> 目录，规格即文档</td>
+</tr>
+<tr>
+<td>跨仓库企业</td>
+<td>OpenSpec Workspace 支持跨多个仓库的协调规划</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、工作原理"><a href="#四、工作原理" class="headerlink" title="四、工作原理"></a>四、工作原理</h2><h3 id="4-1-核心概念"><a href="#4-1-核心概念" class="headerlink" title="4.1 核心概念"></a>4.1 核心概念</h3><p>OpenSpec 有三个核心概念：</p>
+<ol>
+<li><strong>Specs（规格）</strong>：系统的行为真相源（Source of Truth），描述「系统现在是如何运作的」</li>
+<li><strong>Changes（变更）</strong>：提议的修改，每个变更有独立文件夹，包含完整的规划产物</li>
+<li><strong>Delta Specs（增量规格）</strong>：描述相对于现有规格的「增&#x2F;改&#x2F;删」，而非重写整个规格</li>
+</ol>
+<h3 id="4-2-Artifact-体系"><a href="#4-2-Artifact-体系" class="headerlink" title="4.2 Artifact 体系"></a>4.2 Artifact 体系</h3><p>每个 Change 文件夹中包含四类 Artifact，它们之间有依赖关系但不是严格阶段门：</p>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>作用</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>proposal.md</code></td>
+<td><strong>Why &amp; What</strong> — 动机、范围、思路</td>
+<td>战略层</td>
+</tr>
+<tr>
+<td><code>specs/</code></td>
+<td><strong>Requirements</strong> — ADDED&#x2F;MODIFIED&#x2F;REMOVED 需求</td>
+<td>需求层</td>
+</tr>
+<tr>
+<td><code>design.md</code></td>
+<td><strong>How</strong> — 技术方案、架构决策</td>
+<td>设计层</td>
+</tr>
+<tr>
+<td><code>tasks.md</code></td>
+<td><strong>Checklist</strong> — 可执行的任务清单</td>
+<td>执行层</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">proposal ──► specs ──► design ──► tasks ──► implement</span><br><span class="line">   ▲           ▲          ▲                    │</span><br><span class="line">   └───────────┴──────────┴────────────────────┘</span><br><span class="line">            update as you learn</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-Delta-Spec-的格式"><a href="#4-3-Delta-Spec-的格式" class="headerlink" title="4.3 Delta Spec 的格式"></a>4.3 Delta Spec 的格式</h3><p>这是 OpenSpec 最核心的创新。每个 Change 的 <code>specs/</code> 目录不写完整的规格，而是写<strong>增量</strong>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Delta for Auth</span></span><br><span class="line"></span><br><span class="line"><span class="section">## ADDED Requirements</span></span><br><span class="line"></span><br><span class="line"><span class="section">### Requirement: Two-Factor Authentication</span></span><br><span class="line">系统必须在登录时要求第二个认证因子。</span><br><span class="line"></span><br><span class="line"><span class="section">#### Scenario: OTP required</span></span><br><span class="line"><span class="bullet">-</span> GIVEN 已启用2FA的用户</span><br><span class="line"><span class="bullet">-</span> WHEN 用户提交有效凭证</span><br><span class="line"><span class="bullet">-</span> THEN 展示 OTP 挑战</span><br><span class="line"></span><br><span class="line"><span class="section">## MODIFIED Requirements</span></span><br><span class="line"></span><br><span class="line"><span class="section">### Requirement: Session Timeout</span></span><br><span class="line">会话在30分钟不活动后失效。（原为60分钟）</span><br><span class="line"></span><br><span class="line"><span class="section">## REMOVED Requirements</span></span><br><span class="line"></span><br><span class="line"><span class="section">### Requirement: Remember Me</span></span><br><span class="line">（已被2FA替代，已废弃）</span><br></pre></td></tr></table></figure>
+
+<p>当 Change 被 Archive 时：</p>
+<ul>
+<li><strong>ADDED</strong> → 追加到主规格</li>
+<li><strong>MODIFIED</strong> → 替换现有版本</li>
+<li><strong>REMOVED</strong> → 从主规格中删除</li>
+</ul>
+<p>这样主规格始终是「当前系统行为」的完整描述，而 Change 只是「我想改什么」。</p>
+<h3 id="4-4-斜杠命令体系"><a href="#4-4-斜杠命令体系" class="headerlink" title="4.4 斜杠命令体系"></a>4.4 斜杠命令体系</h3><p>OpenSpec 通过 AI 助手的斜杠命令（Slash Commands）来驱动：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/opsx:propose</code></td>
+<td>一键创建完整变更（含所有 Artifact）</td>
+</tr>
+<tr>
+<td><code>/opsx:explore</code></td>
+<td>探索性研究，不创建产物</td>
+</tr>
+<tr>
+<td><code>/opsx:apply</code></td>
+<td>按 tasks.md 执行实现</td>
+</tr>
+<tr>
+<td><code>/opsx:sync</code></td>
+<td>将 Delta Spec 合并到主规格</td>
+</tr>
+<tr>
+<td><code>/opsx:archive</code></td>
+<td>归档完成的变更</td>
+</tr>
+<tr>
+<td><code>/opsx:new</code></td>
+<td>创建空变更骨架（Expanded 模式）</td>
+</tr>
+<tr>
+<td><code>/opsx:continue</code></td>
+<td>按依赖链创建下一个 Artifact（Expanded 模式）</td>
+</tr>
+<tr>
+<td><code>/opsx:ff</code></td>
+<td>快速创建所有 Artifact（Expanded 模式）</td>
+</tr>
+<tr>
+<td><code>/opsx:verify</code></td>
+<td>验证实现是否符合规格（Expanded 模式）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、完整工作流"><a href="#五、完整工作流" class="headerlink" title="五、完整工作流"></a>五、完整工作流</h2><h3 id="5-1-默认快速路径（Core-Profile）"><a href="#5-1-默认快速路径（Core-Profile）" class="headerlink" title="5.1 默认快速路径（Core Profile）"></a>5.1 默认快速路径（Core Profile）</h3><p>新安装默认启用 <code>core</code> profile，命令最简：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:propose ──► /opsx:apply ──► /opsx:sync ──► /opsx:archive</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step-by-Step 示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:propose add-dark-mode</span><br><span class="line"></span><br><span class="line">AI:  Created openspec/changes/add-dark-mode/</span><br><span class="line">     ✓ proposal.md — why we&#x27;re doing this, what&#x27;s changing</span><br><span class="line">     ✓ specs/       — requirements and scenarios</span><br><span class="line">     ✓ design.md    — technical approach</span><br><span class="line">     ✓ tasks.md     — implementation checklist</span><br><span class="line">     Ready for implementation!</span><br><span class="line"></span><br><span class="line">你: /opsx:apply</span><br><span class="line"></span><br><span class="line">AI:  Implementing tasks...</span><br><span class="line">     ✓ 1.1 Add theme context provider</span><br><span class="line">     ✓ 1.2 Create toggle component</span><br><span class="line">     ✓ 2.1 Add CSS variables</span><br><span class="line">     ✓ 2.2 Wire up localStorage</span><br><span class="line">     All tasks complete!</span><br><span class="line"></span><br><span class="line">你: /opsx:archive</span><br><span class="line"></span><br><span class="line">AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/</span><br><span class="line">     Specs updated. Ready for the next feature.</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-扩展工作流（Expanded-Profile）"><a href="#5-2-扩展工作流（Expanded-Profile）" class="headerlink" title="5.2 扩展工作流（Expanded Profile）"></a>5.2 扩展工作流（Expanded Profile）</h3><p>启用方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openspec config profile   <span class="comment"># 选择 workflows</span></span><br><span class="line">openspec update           <span class="comment"># 更新 AI 指令</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展模式命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:new ──► /opsx:ff or /opsx:continue ──► /opsx:apply ──► /opsx:verify ──► /opsx:archive</span><br></pre></td></tr></table></figure>
+
+<p><strong>适合场景：</strong></p>
+<ul>
+<li>复杂功能需要逐步审视每个 Artifact</li>
+<li>需要在 Artifact 之间迭代调整</li>
+</ul>
+<h3 id="5-3-探索式工作流"><a href="#5-3-探索式工作流" class="headerlink" title="5.3 探索式工作流"></a>5.3 探索式工作流</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opsx:explore ──► /opsx:new ──► /opsx:continue ──► ... ──► /opsx:apply</span><br></pre></td></tr></table></figure>
+
+<p>适合需求不明确时先研究，再转正式变更。</p>
+<h3 id="5-4-并行变更工作流"><a href="#5-4-并行变更工作流" class="headerlink" title="5.4 并行变更工作流"></a>5.4 并行变更工作流</h3><p>可以同时推进多个 Change：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Change A: /opsx:new ──► /opsx:ff ──► /opsx:apply（在推进中）</span><br><span class="line">                                        │</span><br><span class="line">                                   切换上下文</span><br><span class="line">                                        │</span><br><span class="line">Change B: /opsx:new ──► /opsx:ff ──► /opsx:apply</span><br></pre></td></tr></table></figure>
+
+<p>完成后可用 <code>/opsx:bulk-archive</code> 批量归档。</p>
+<hr>
+<h2 id="六、技术架构分层"><a href="#六、技术架构分层" class="headerlink" title="六、技术架构分层"></a>六、技术架构分层</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────┐</span><br><span class="line">│                 AI Coding Assistant                 │</span><br><span class="line">│         (Claude Code, Cursor, Windsurf, etc.)     │</span><br><span class="line">│                                                     │</span><br><span class="line">│   ┌─────────────────────────────────────────────┐   │</span><br><span class="line">│   │         OPSX Slash Command Layer            │   │</span><br><span class="line">│   │  /propose /apply /archive /verify /sync    │   │</span><br><span class="line">│   └─────────────────────────────────────────────┘   │</span><br><span class="line">└──────────────────────┬──────────────────────────────┘</span><br><span class="line">                       │ Slash Commands</span><br><span class="line">┌──────────────────────▼──────────────────────────────┐</span><br><span class="line">│              OpenSpec CLI (Node.js)                 │</span><br><span class="line">│                                                      │</span><br><span class="line">│  ┌──────────┐  ┌───────────┐  ┌───────────────┐    │</span><br><span class="line">│  │   Init   │  │  Config   │  │   Artifact    │    │</span><br><span class="line">│  │  Engine  │  │  Manager  │  │   Generator   │    │</span><br><span class="line">│  └──────────┘  └───────────┘  └───────────────┘    │</span><br><span class="line">│                                                      │</span><br><span class="line">│  ┌──────────┐  ┌───────────┐  ┌───────────────┐    │</span><br><span class="line">│  │  Delta   │  │   Sync    │  │   Workspace   │    │</span><br><span class="line">│  │   Merge  │  │  Engine   │  │    Manager    │    │</span><br><span class="line">│  └──────────┘  └───────────┘  └───────────────┘    │</span><br><span class="line">└──────────────────────┬──────────────────────────────┘</span><br><span class="line">                       │ File System I/O</span><br><span class="line">┌──────────────────────▼──────────────────────────────┐</span><br><span class="line">│                 Project Files                        │</span><br><span class="line">│                                                      │</span><br><span class="line">│  ┌─────────────────┐       ┌─────────────────────┐ │</span><br><span class="line">│  │   openspec/     │       │   Your Source Code  │ │</span><br><span class="line">│  │   ├── specs/    │       │       (任意项目)      │ │</span><br><span class="line">│  │   ├── changes/  │       └─────────────────────┘ │</span><br><span class="line">│  │   └── config.yaml      │                        │</span><br><span class="line">│  └─────────────────┘       │                        │</span><br><span class="line">│                    Delta Specs ──► Merge ──► Specs   │</span><br><span class="line">└─────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-CLI-层（Node-js）"><a href="#6-1-CLI-层（Node-js）" class="headerlink" title="6.1 CLI 层（Node.js）"></a>6.1 CLI 层（Node.js）</h3><ul>
+<li><strong>全局安装</strong>：<code>npm install -g @fission-ai/openspec@latest</code></li>
+<li><strong>依赖</strong>：<code>Node.js &gt;= 20.19.0</code></li>
+<li><strong>包管理</strong>：支持 npm、pnpm、yarn、bun、Nix</li>
+</ul>
+<h3 id="6-2-Schema-层"><a href="#6-2-Schema-层" class="headerlink" title="6.2 Schema 层"></a>6.2 Schema 层</h3><p>OpenSpec 的工作流由 <strong>Schema</strong> 驱动。默认 Schema 是 <code>spec-driven</code>，定义了 Artifact 的依赖图和生成顺序。</p>
+<p>用户可以自定义 Schema 来创建自己的 Artifact 序列。社区 Schema 发布在独立的仓库中。</p>
+<h3 id="6-3-AI-集成层"><a href="#6-3-AI-集成层" class="headerlink" title="6.3 AI 集成层"></a>6.3 AI 集成层</h3><p>AI 助手通过 <code>AGENTS.md</code>（由 <code>openspec init</code> 生成）中的指令来理解 OpenSpec 命令。运行 <code>openspec update</code> 会重新生成这些指令以保持同步。</p>
+<h3 id="6-4-Workspace-层（企业-跨仓库）"><a href="#6-4-Workspace-层（企业-跨仓库）" class="headerlink" title="6.4 Workspace 层（企业&#x2F;跨仓库）"></a>6.4 Workspace 层（企业&#x2F;跨仓库）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">workspace-folder/</span><br><span class="line">├── changes/                          # 跨仓库协调规划</span><br><span class="line">└── .openspec-workspace/</span><br><span class="line">    ├── workspace.yaml   # 共享标识 + 链接名（可移植）</span><br><span class="line">    └── local.yaml       # 本机路径映射（不含于共享状态）</span><br></pre></td></tr></table></figure>
+
+<p>支持的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openspec workspace setup</span><br><span class="line">openspec workspace list</span><br><span class="line">openspec workspace <span class="built_in">link</span> &lt;name&gt; &lt;path&gt;</span><br><span class="line">openspec workspace doctor</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、标准项目结构与文件说明"><a href="#七、标准项目结构与文件说明" class="headerlink" title="七、标准项目结构与文件说明"></a>七、标准项目结构与文件说明</h2><h3 id="7-1-初始化后的项目结构"><a href="#7-1-初始化后的项目结构" class="headerlink" title="7.1 初始化后的项目结构"></a>7.1 初始化后的项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">project-root/</span><br><span class="line">├── openspec/</span><br><span class="line">│   ├── specs/                    # ⭐ 系统行为真相源</span><br><span class="line">│   │   └── &lt;domain&gt;/</span><br><span class="line">│   │       └── spec.md</span><br><span class="line">│   ├── changes/                 # 提议的变更</span><br><span class="line">│   │   └── &lt;change-name&gt;/</span><br><span class="line">│   │       ├── proposal.md</span><br><span class="line">│   │       ├── design.md</span><br><span class="line">│   │       ├── tasks.md</span><br><span class="line">│   │       └── specs/           # Delta Specs</span><br><span class="line">│   │           └── &lt;domain&gt;/</span><br><span class="line">│   │               └── spec.md</span><br><span class="line">│   └── config.yaml              # 项目配置（可选）</span><br><span class="line">└── src/                         # 你的源代码</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-2-各文件详解"><a href="#7-2-各文件详解" class="headerlink" title="7.2 各文件详解"></a>7.2 各文件详解</h3><p><strong><code>openspec/specs/&lt;domain&gt;/spec.md</code></strong> — 系统当前行为的真相源文档</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># <span class="language-xml"><span class="tag">&lt;<span class="name">Domain</span>&gt;</span></span> Specification</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Purpose</span></span><br><span class="line">[这个领域做什么]</span><br><span class="line"></span><br><span class="line"><span class="section">## Requirements</span></span><br><span class="line"></span><br><span class="line"><span class="section">### Requirement: &lt;名称&gt;</span></span><br><span class="line">[需求描述]</span><br><span class="line"></span><br><span class="line"><span class="section">#### Scenario: &lt;场景名&gt;</span></span><br><span class="line"><span class="bullet">-</span> GIVEN &lt;前置条件&gt;</span><br><span class="line"><span class="bullet">-</span> WHEN &lt;触发事件&gt;</span><br><span class="line"><span class="bullet">-</span> THEN &lt;预期结果&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>openspec/changes/&lt;change-name&gt;/proposal.md</code></strong> — 「为什么做」和「做什么」</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Proposal: &lt;变更名称&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Intent</span></span><br><span class="line">[为什么要做这个变更]</span><br><span class="line"></span><br><span class="line"><span class="section">## Scope</span></span><br><span class="line"><span class="bullet">-</span> [包含的范围]</span><br><span class="line"><span class="bullet">-</span> [不包括的范围]</span><br><span class="line"></span><br><span class="line"><span class="section">## Approach</span></span><br><span class="line">[大致的技术思路]</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>openspec/changes/&lt;change-name&gt;/specs/&lt;domain&gt;/spec.md</code></strong> — Delta Spec，只描述增量变化</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Delta for <span class="language-xml"><span class="tag">&lt;<span class="name">Domain</span>&gt;</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="section">## ADDED Requirements</span></span><br><span class="line"><span class="section">### Requirement: &lt;新需求&gt;</span></span><br><span class="line">[描述]</span><br><span class="line"></span><br><span class="line"><span class="section">## MODIFIED Requirements</span></span><br><span class="line"><span class="section">### Requirement: &lt;已有需求&gt;</span></span><br><span class="line">[新描述]</span><br><span class="line">（原内容）</span><br><span class="line"></span><br><span class="line"><span class="section">## REMOVED Requirements</span></span><br><span class="line"><span class="section">### Requirement: &lt;要删除的需求&gt;</span></span><br><span class="line">（[原因]）</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>openspec/changes/&lt;change-name&gt;/tasks.md</code></strong> — 实现检查清单，Checkbox 格式</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Tasks</span></span><br><span class="line"></span><br><span class="line"><span class="section">## &lt;分组&gt;</span></span><br><span class="line"><span class="bullet">-</span> [ ] &lt;任务ID&gt; &lt;描述&gt;</span><br><span class="line"><span class="bullet">-</span> [x] &lt;已完成任务&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、入门指南"><a href="#八、入门指南" class="headerlink" title="八、入门指南"></a>八、入门指南</h2><h3 id="8-1-安装"><a href="#8-1-安装" class="headerlink" title="8.1 安装"></a>8.1 安装</h3><p><strong>前置条件</strong>：Node.js &gt;&#x3D; 20.19.0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装</span></span><br><span class="line">npm install -g @fission-ai/openspec@latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">openspec --version</span><br></pre></td></tr></table></figure>
+
+<p>也支持 pnpm、yarn、bun 和 Nix。</p>
+<h3 id="8-2-初始化项目"><a href="#8-2-初始化项目" class="headerlink" title="8.2 初始化项目"></a>8.2 初始化项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> your-project</span><br><span class="line">openspec init</span><br></pre></td></tr></table></figure>
+
+<p>这会在项目根目录创建 <code>openspec/</code> 目录和 <code>AGENTS.md</code> 文件。</p>
+<h3 id="8-3-开始你的第一个变更"><a href="#8-3-开始你的第一个变更" class="headerlink" title="8.3 开始你的第一个变更"></a>8.3 开始你的第一个变更</h3><p><strong>方式一：快速路径（推荐新手）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:propose add-user-authentication</span><br><span class="line"></span><br><span class="line">AI:  Created openspec/changes/add-user-authentication/</span><br><span class="line">     ✓ proposal.md</span><br><span class="line">     ✓ specs/auth/spec.md</span><br><span class="line">     ✓ design.md</span><br><span class="line">     ✓ tasks.md</span><br><span class="line">     Ready for implementation!</span><br><span class="line"></span><br><span class="line">你: /opsx:apply</span><br><span class="line"></span><br><span class="line">AI:  Working through tasks...</span><br><span class="line">     [AI 开始实现，检查每个 checkbox]</span><br><span class="line"></span><br><span class="line">你: /opsx:archive</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式二：扩展工作流</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:new add-user-authentication</span><br><span class="line"></span><br><span class="line">AI:  Created openspec/changes/add-user-authentication/</span><br><span class="line">     Schema: spec-driven</span><br><span class="line">     Ready to create: proposal</span><br><span class="line"></span><br><span class="line">你: /opsx:continue    # 逐步创建每个 Artifact</span><br><span class="line"></span><br><span class="line">AI:  Artifact status:</span><br><span class="line">     ✓ proposal (done)</span><br><span class="line">     ◆ specs (ready)</span><br><span class="line">     ◆ design (ready)</span><br><span class="line">     ○ tasks (blocked - needs: specs)</span><br><span class="line"></span><br><span class="line">你: /opsx:ff           # 快速创建剩余 Artifact</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-4-日常维护命令"><a href="#8-4-日常维护命令" class="headerlink" title="8.4 日常维护命令"></a>8.4 日常维护命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看活跃变更列表</span></span><br><span class="line">openspec list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看变更详情</span></span><br><span class="line">openspec show &lt;change-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证规格格式</span></span><br><span class="line">openspec validate &lt;change-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式仪表板</span></span><br><span class="line">openspec view</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 AI 指令（每次 OpenSpec 升级后）</span></span><br><span class="line">openspec update</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-5-启用扩展命令"><a href="#8-5-启用扩展命令" class="headerlink" title="8.5 启用扩展命令"></a>8.5 启用扩展命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">openspec config profile</span><br><span class="line"><span class="comment"># 选择 &quot;workflows&quot;</span></span><br><span class="line">openspec update</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、实践案例：电商网站的-Dark-Mode-功能"><a href="#九、实践案例：电商网站的-Dark-Mode-功能" class="headerlink" title="九、实践案例：电商网站的 Dark Mode 功能"></a>九、实践案例：电商网站的 Dark Mode 功能</h2><h3 id="Step-1：提出变更"><a href="#Step-1：提出变更" class="headerlink" title="Step 1：提出变更"></a>Step 1：提出变更</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:propose add-dark-mode</span><br><span class="line"></span><br><span class="line">AI:  Created openspec/changes/add-dark-mode/</span><br><span class="line">     ✓ proposal.md — 动机、范围</span><br><span class="line">     ✓ specs/ui/spec.md — 需求和场景</span><br><span class="line">     ✓ design.md — 技术方案</span><br><span class="line">     ✓ tasks.md — 实现检查清单</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2：检查生成的产物"><a href="#Step-2：检查生成的产物" class="headerlink" title="Step 2：检查生成的产物"></a>Step 2：检查生成的产物</h3><p><strong>proposal.md：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Proposal: Add Dark Mode</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Intent</span></span><br><span class="line">用户请求深色模式选项，以减少夜间使用的眼睛疲劳。</span><br><span class="line"></span><br><span class="line"><span class="section">## Scope</span></span><br><span class="line"><span class="bullet">-</span> 在设置中添加主题切换</span><br><span class="line"><span class="bullet">-</span> 支持系统偏好检测</span><br><span class="line"><span class="bullet">-</span> 在 localStorage 中持久化偏好</span><br><span class="line"></span><br><span class="line"><span class="section">## Approach</span></span><br><span class="line">使用 CSS 自定义属性实现主题化，React Context 管理状态。</span><br></pre></td></tr></table></figure>
+
+<p><strong>specs&#x2F;ui&#x2F;spec.md（Delta）：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Delta for UI</span></span><br><span class="line"></span><br><span class="line"><span class="section">## ADDED Requirements</span></span><br><span class="line"></span><br><span class="line"><span class="section">### Requirement: Theme Selection</span></span><br><span class="line">系统应允许用户在浅色和深色主题之间选择。</span><br><span class="line"></span><br><span class="line"><span class="section">#### Scenario: Manual toggle</span></span><br><span class="line"><span class="bullet">-</span> GIVEN 用户在任何页面</span><br><span class="line"><span class="bullet">-</span> WHEN 用户点击主题切换</span><br><span class="line"><span class="bullet">-</span> THEN 主题立即切换</span><br><span class="line"><span class="bullet">-</span> AND 偏好跨会话持久化</span><br><span class="line"></span><br><span class="line"><span class="section">#### Scenario: System preference</span></span><br><span class="line"><span class="bullet">-</span> GIVEN 用户无保存的偏好</span><br><span class="line"><span class="bullet">-</span> WHEN 应用加载</span><br><span class="line"><span class="bullet">-</span> THEN 使用系统首选颜色方案</span><br></pre></td></tr></table></figure>
+
+<p><strong>tasks.md：</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Tasks</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 1. Theme Infrastructure</span></span><br><span class="line"><span class="bullet">-</span> [ ] 1.1 Create ThemeContext with light/dark state</span><br><span class="line"><span class="bullet">-</span> [ ] 1.2 Add CSS custom properties for colors</span><br><span class="line"><span class="bullet">-</span> [ ] 1.3 Implement localStorage persistence</span><br><span class="line"></span><br><span class="line"><span class="section">## 2. UI Components</span></span><br><span class="line"><span class="bullet">-</span> [ ] 2.1 Create ThemeToggle component</span><br><span class="line"><span class="bullet">-</span> [ ] 2.2 Add toggle to settings page</span><br><span class="line"><span class="bullet">-</span> [ ] 2.3 Update Header to include quick toggle</span><br><span class="line"></span><br><span class="line"><span class="section">## 3. Styling</span></span><br><span class="line"><span class="bullet">-</span> [ ] 3.1 Define dark theme color palette</span><br><span class="line"><span class="bullet">-</span> [ ] 3.2 Update components to use CSS variables</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3：实施"><a href="#Step-3：实施" class="headerlink" title="Step 3：实施"></a>Step 3：实施</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:apply</span><br><span class="line"></span><br><span class="line">AI:  Implementing add-dark-mode...</span><br><span class="line"></span><br><span class="line">     Reading tasks.md...</span><br><span class="line">     - [ ] 1.1 Create ThemeContext</span><br><span class="line">     - [ ] 1.2 Add CSS custom properties</span><br><span class="line">     ...</span><br><span class="line"></span><br><span class="line">     Working on 1.1: Create ThemeContext...</span><br><span class="line">     [创建 src/context/ThemeContext.tsx]</span><br><span class="line">     ✓ 1.1 ThemeContext created</span><br><span class="line"></span><br><span class="line">     Working on 1.2: Add CSS custom properties...</span><br><span class="line">     [更新 src/styles/globals.css]</span><br><span class="line">     ✓ 1.2 CSS custom properties added</span><br><span class="line">     ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4：归档"><a href="#Step-4：归档" class="headerlink" title="Step 4：归档"></a>Step 4：归档</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">你: /opsx:archive</span><br><span class="line"></span><br><span class="line">AI:  Archiving add-dark-mode...</span><br><span class="line">     ✓ Merged ADDED requirements into openspec/specs/ui/spec.md</span><br><span class="line">     ✓ Moved to openspec/changes/archive/2025-01-24-add-dark-mode/</span><br><span class="line">     Done!</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、常见问题"><a href="#十、常见问题" class="headerlink" title="十、常见问题"></a>十、常见问题</h2><h3 id="Q1：OpenSpec-和传统-PRD-Spec-文档有什么区别？"><a href="#Q1：OpenSpec-和传统-PRD-Spec-文档有什么区别？" class="headerlink" title="Q1：OpenSpec 和传统 PRD&#x2F;Spec 文档有什么区别？"></a>Q1：OpenSpec 和传统 PRD&#x2F;Spec 文档有什么区别？</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统文档</th>
+<th>OpenSpec</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用途</td>
+<td>给人看</td>
+<td>给人和 AI 看</td>
+</tr>
+<tr>
+<td>变更管理</td>
+<td>重写或版本对照</td>
+<td>Delta Spec（增量描述）</td>
+</tr>
+<tr>
+<td>与代码关联</td>
+<td>分离</td>
+<td>归档时自动合并到 specs&#x2F;</td>
+</tr>
+<tr>
+<td>AI 可执行性</td>
+<td>低</td>
+<td>高（tasks.md 是可执行检查清单）</td>
+</tr>
+</tbody></table>
+<h3 id="Q2：我已经有了现有代码库，OpenSpec-怎么用？"><a href="#Q2：我已经有了现有代码库，OpenSpec-怎么用？" class="headerlink" title="Q2：我已经有了现有代码库，OpenSpec 怎么用？"></a>Q2：我已经有了现有代码库，OpenSpec 怎么用？</h3><p><strong>Brownfield 是 OpenSpec 的首要场景。</strong></p>
+<ol>
+<li>先创建 <code>openspec init</code></li>
+<li>用 <code>/opsx:propose &lt;improvement&gt;</code> 开始描述你想改什么</li>
+<li>Delta Spec 机制让你只需要描述「改了什么」，不需要重写整个系统规格</li>
+<li>归档时，增量自动合并到 <code>specs/</code></li>
+</ol>
+<h3 id="Q3：OpenSpec-支持哪些-AI-工具？"><a href="#Q3：OpenSpec-支持哪些-AI-工具？" class="headerlink" title="Q3：OpenSpec 支持哪些 AI 工具？"></a>Q3：OpenSpec 支持哪些 AI 工具？</h3><p>截至目前支持 <strong>25+ AI 编码助手</strong>，包括但不限于：</p>
+<ul>
+<li>Claude Code &#x2F; Claude Desktop</li>
+<li>Cursor</li>
+<li>Windsurf (Codeium)</li>
+<li>Cline</li>
+<li>GitHub Copilot</li>
+<li>JetBrains AI Assistant</li>
+<li>VS Code AI 插件</li>
+</ul>
+<p>完整列表见：<a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/supported-tools.md">Supported Tools 文档</a></p>
+<h3 id="Q4：多个变更同时进行会发生冲突吗？"><a href="#Q4：多个变更同时进行会发生冲突吗？" class="headerlink" title="Q4：多个变更同时进行会发生冲突吗？"></a>Q4：多个变更同时进行会发生冲突吗？</h3><p>不会。每个 Change 有独立的文件夹，互不干扰。</p>
+<ul>
+<li>可以随时切换 Change 上下文</li>
+<li>可以并行让 AI 处理不同 Change</li>
+<li>归档时各自合并到主规格，无冲突（因为每个规格文件在同一 domain 下）</li>
+</ul>
+<h3 id="Q5：如果-AI-实现的代码和规格不一致怎么办？"><a href="#Q5：如果-AI-实现的代码和规格不一致怎么办？" class="headerlink" title="Q5：如果 AI 实现的代码和规格不一致怎么办？"></a>Q5：如果 AI 实现的代码和规格不一致怎么办？</h3><p>使用 <code>/opsx:verify</code>（Expanded 模式）来验证实现是否符合规格。验证结果会指出偏差。</p>
+<h3 id="Q6：OpenSpec-适合什么规模的项目？"><a href="#Q6：OpenSpec-适合什么规模的项目？" class="headerlink" title="Q6：OpenSpec 适合什么规模的项目？"></a>Q6：OpenSpec 适合什么规模的项目？</h3><table>
+<thead>
+<tr>
+<th>规模</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>个人项目</td>
+<td>Repo-local <code>openspec/</code></td>
+</tr>
+<tr>
+<td>小团队</td>
+<td>Repo-local + 共享规格</td>
+</tr>
+<tr>
+<td>跨多个仓库</td>
+<td>OpenSpec Workspace</td>
+</tr>
+</tbody></table>
+<h3 id="Q7：Schema-是什么？可以自定义吗？"><a href="#Q7：Schema-是什么？可以自定义吗？" class="headerlink" title="Q7：Schema 是什么？可以自定义吗？"></a>Q7：Schema 是什么？可以自定义吗？</h3><p>Schema 定义了 Artifact 的序列和依赖关系。OpenSpec 默认使用 <code>spec-driven</code> Schema（proposal → specs → design → tasks）。</p>
+<p>高级用户可以通过 <a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/customization.md">Customization 文档</a> 创建自定义 Schema。</p>
+<h3 id="Q8：如何升级-OpenSpec？"><a href="#Q8：如何升级-OpenSpec？" class="headerlink" title="Q8：如何升级 OpenSpec？"></a>Q8：如何升级 OpenSpec？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @fission-ai/openspec@latest</span><br><span class="line">openspec update    <span class="comment"># 在每个项目中重新生成 AI 指令</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Q9：OpenSpec-会收集遥测数据吗？"><a href="#Q9：OpenSpec-会收集遥测数据吗？" class="headerlink" title="Q9：OpenSpec 会收集遥测数据吗？"></a>Q9：OpenSpec 会收集遥测数据吗？</h3><p>默认<strong>不收集任何遥测数据</strong>。详见 <a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/telemetry.md">Telemetry 文档</a></p>
+<h3 id="Q10：我可以在非-Node-js-项目中使用-OpenSpec-吗？"><a href="#Q10：我可以在非-Node-js-项目中使用-OpenSpec-吗？" class="headerlink" title="Q10：我可以在非 Node.js 项目中使用 OpenSpec 吗？"></a>Q10：我可以在非 Node.js 项目中使用 OpenSpec 吗？</h3><p>可以。OpenSpec 本质上是一套约定和文件结构，与语言&#x2F;框架无关。它通过 CLI 和 AI 斜杠命令工作，不需要项目使用 Node.js。</p>
+<hr>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>官网</td>
+<td><a target="_blank" rel="noopener" href="https://openspec.dev/">https://openspec.dev/</a></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec">https://github.com/Fission-AI/OpenSpec</a></td>
+</tr>
+<tr>
+<td>Discord 社区</td>
+<td><a target="_blank" rel="noopener" href="https://discord.gg/YctCnvvshC">https://discord.gg/YctCnvvshC</a></td>
+</tr>
+<tr>
+<td>入门文档</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/getting-started.md">Getting Started</a></td>
+</tr>
+<tr>
+<td>工作流</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/workflows.md">Workflows</a></td>
+</tr>
+<tr>
+<td>命令参考</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/commands.md">Commands</a></td>
+</tr>
+<tr>
+<td>概念说明</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/concepts.md">Concepts</a></td>
+</tr>
+<tr>
+<td>CLI 参考</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Fission-AI/OpenSpec/blob/main/docs/cli.md">CLI Reference</a></td>
+</tr>
+</tbody></table>
+<hr>
+<p><em>本文基于 OpenSpec 最新版本整理，所有信息来源于 GitHub 官方仓库。</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iyangjialin.github.io/2026/05/06/openspec-complete-guide/" data-id="cmot9srlj003hj8d3ekfv32ii" data-title="OpenSpec 完全指南：AI 时代的规范驱动开发框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E7%BC%96%E7%A0%81/" rel="tag">AI编码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenSpec/" rel="tag">OpenSpec</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" rel="tag">开源项目</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%84%E8%8C%83%E9%A9%B1%E5%8A%A8/" rel="tag">规范驱动</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/05/05/andrej-karpathy-skills/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  
+  
+
+  
     <article id="post-2026-05-05-andrej-karpathy-skills" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/05/05/andrej-karpathy-skills/" class="article-date">
@@ -108,8 +576,8 @@
       <header class="article-header">
         
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/05/05/andrej-karpathy-skills/">Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析</a>
     </h1>
   
 
@@ -122,176 +590,15 @@
 </blockquote>
 <p><code>andrej-karpathy-skills</code> 是一套轻量级的 LLM 编码行为护栏系统，将 Andrej Karpathy 提出的 LLM 编码典型失败模式，提炼为 <strong>4 条可落地的编码准则</strong>，以纯指令文本的形式适配 Claude Code、Cursor 等 AI 编码助手。</p>
 <p>🔗 项目地址：<a target="_blank" rel="noopener" href="https://github.com/forrestchang/andrej-karpathy-skills">github.com&#x2F;forrestchang&#x2F;andrej-karpathy-skills</a></p>
-<span id="more"></span>
-
-<hr>
-<h2 id="🔍-项目背景：LLM-编码的四大痛点"><a href="#🔍-项目背景：LLM-编码的四大痛点" class="headerlink" title="🔍 项目背景：LLM 编码的四大痛点"></a>🔍 项目背景：LLM 编码的四大痛点</h2><p>Andrej Karpathy 曾系统性地指出，当前 LLM 在辅助编码时存在四类高频失败模式：</p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>失败模式</th>
-<th>典型表现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td><strong>静默错误假设</strong></td>
-<td>不澄清歧义，自行脑补，猜错了也不说</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>过度复杂化</strong></td>
-<td>用 1000 行实现本可 100 行完成的逻辑，堆砌冗余抽象</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>无关代码改动</strong></td>
-<td>修改不理解的注释、删除正交逻辑、”顺手”重构</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>完成标准模糊</strong></td>
-<td>缺乏可验证目标，无法判断任务是否真正完成</td>
-</tr>
-</tbody></table>
-<p>这个项目的目标，就是把以上问题逐一消解——用 prompt 级别的指令约束，让 AI 编码助手的行为更可控、更可预期。</p>
-<hr>
-<h2 id="🧭-核心四大准则"><a href="#🧭-核心四大准则" class="headerlink" title="🧭 核心四大准则"></a>🧭 核心四大准则</h2><p>项目核心提炼了 4 条编码准则，每一条都精准对应上述痛点：</p>
-<h3 id="1-Think-Before-Coding-—-编码前先思考"><a href="#1-Think-Before-Coding-—-编码前先思考" class="headerlink" title="1. Think Before Coding — 编码前先思考"></a>1. Think Before Coding — 编码前先思考</h3><p><strong>解决问题</strong>：LLM 静默做出错误假设、盲目猜答案</p>
-<p><strong>核心要求</strong>：</p>
-<ul>
-<li>必须<strong>显性陈述假设</strong>，不允许隐藏前提</li>
-<li>存在歧义时，给出<strong>多种解读方案</strong>，供用户选择</li>
-<li>发现有更简单的方案时，<strong>主动提出</strong></li>
-<li>有困惑时，<strong>先提问而非猜测</strong></li>
-</ul>
-<hr>
-<h3 id="2-Simplicity-First-—-极简优先"><a href="#2-Simplicity-First-—-极简优先" class="headerlink" title="2. Simplicity First — 极简优先"></a>2. Simplicity First — 极简优先</h3><p><strong>解决问题</strong>：LLM 过度设计、代码膨胀、过早抽象</p>
-<p><strong>核心要求</strong>：</p>
-<ul>
-<li>只编写解决问题的<strong>最小可行代码</strong></li>
-<li>禁止以下行为：<ul>
-<li>投机性功能（”以后可能用到”的代码）</li>
-<li>过早抽象（单次使用的接口&#x2F;基类）</li>
-<li>非必要的可配置性</li>
-<li>无意义的异常处理（catch 住了什么都不做）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="3-Surgical-Changes-—-精准修改"><a href="#3-Surgical-Changes-—-精准修改" class="headerlink" title="3. Surgical Changes — 精准修改"></a>3. Surgical Changes — 精准修改</h3><p><strong>解决问题</strong>：LLM 修改与任务无关的代码、范围蔓延</p>
-<p><strong>核心要求</strong>：</p>
-<ul>
-<li><strong>仅触碰</strong>用户明确要求修改的内容</li>
-<li>禁止以下行为：<ul>
-<li>无关代码的”顺路优化”</li>
-<li>风格重构（统一缩进&#x2F;命名等）</li>
-<li>非自身产生的死代码清理</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>类比外科手术：只处理病灶，不碰周围健康组织。</p>
-</blockquote>
-<hr>
-<h3 id="4-Goal-Driven-Execution-—-目标驱动执行"><a href="#4-Goal-Driven-Execution-—-目标驱动执行" class="headerlink" title="4. Goal-Driven Execution — 目标驱动执行"></a>4. Goal-Driven Execution — 目标驱动执行</h3><p><strong>解决问题</strong>：LLM 无明确可验证的完成标准</p>
-<p><strong>核心要求</strong>：</p>
-<ul>
-<li>为每个任务<strong>定义可验证的成功标准</strong>（例如：修复 bug → 先写复现测试用例，再让用例通过）</li>
-<li>循环执行直至达标</li>
-<li>多步骤任务需要明确<strong>带验证节点的执行计划</strong></li>
-</ul>
-<hr>
-<h2 id="🏗️-项目架构"><a href="#🏗️-项目架构" class="headerlink" title="🏗️ 项目架构"></a>🏗️ 项目架构</h2><p>项目采用极简架构，<strong>无任何可运行的应用代码</strong>，核心价值全部承载于适配不同 AI 工具的指令文本文件中：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">andrej-karpathy-skills/</span><br><span class="line">├── CLAUDE.md                              # Claude Code 项目级指令文件</span><br><span class="line">├── README.md / README.zh.md              # 说明文档（中英文）</span><br><span class="line">├── EXAMPLES.md                            # 正反代码对比示例</span><br><span class="line">├── CURSOR.md                              # Cursor 编辑器适配说明</span><br><span class="line">├── .cursor/</span><br><span class="line">│   └── rules/karpathy-guidelines.mdc    # Cursor 项目级自动生效规则</span><br><span class="line">├── .claude-plugin/                        # Claude 插件配置</span><br><span class="line">└── skills/</span><br><span class="line">    └── karpathy-guidelines/</span><br><span class="line">        └── SKILL.md                       # Claude Code 全局技能定义</span><br></pre></td></tr></table></figure>
-
-<p>三大核心指令文件（<code>CLAUDE.md</code> &#x2F; <code>.cursor/rules/karpathy-guidelines.mdc</code> &#x2F; <code>skills/karpathy-guidelines/SKILL.md</code>）<strong>内容完全一致</strong>，仅通过不同的元数据封装适配对应工具的原生格式，<strong>无需任何构建或转换脚本</strong>。</p>
-<hr>
-<h2 id="🔌-三种集成方式"><a href="#🔌-三种集成方式" class="headerlink" title="🔌 三种集成方式"></a>🔌 三种集成方式</h2><p>根据使用场景，项目提供了三条集成路径：</p>
-<table>
-<thead>
-<tr>
-<th>集成方式</th>
-<th>适配工具</th>
-<th>生效范围</th>
-<th>操作成本</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Claude Code Plugin</strong></td>
-<td>Claude Code</td>
-<td>全局（所有项目）</td>
-<td>2 条 CLI 命令</td>
-<td>多仓库开发，一次安装全场景生效</td>
-</tr>
-<tr>
-<td><strong>CLAUDE.md 文件</strong></td>
-<td>Claude Code</td>
-<td>单项目</td>
-<td>1 条 curl 命令</td>
-<td>单项目使用，或团队需纳入版本控制</td>
-</tr>
-<tr>
-<td><strong>Cursor Rule（.mdc 文件）</strong></td>
-<td>Cursor</td>
-<td>单项目</td>
-<td>复制 1 个文件</td>
-<td>Cursor 用户，规则自动生效</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="✅-效果验证：4-个可观测信号"><a href="#✅-效果验证：4-个可观测信号" class="headerlink" title="✅ 效果验证：4 个可观测信号"></a>✅ 效果验证：4 个可观测信号</h2><p>准则生效后，可以通过以下 4 个维度验证效果：</p>
-<ol>
-<li><strong>PR&#x2F;diff 干净</strong>：无不必要的修改，仅保留用户明确要求的代码变更</li>
-<li><strong>首次实现即满足极简要求</strong>：无需反复要求 LLM “简化重写”</li>
-<li><strong>LLM 先问后做</strong>：编码前主动提出澄清问题，而非先猜错再返工</li>
-<li><strong>无范围外操作</strong>：无意外的重构、格式修改、无关注释删除</li>
-</ol>
-<hr>
-<h2 id="⚠️-使用注意事项"><a href="#⚠️-使用注意事项" class="headerlink" title="⚠️ 使用注意事项"></a>⚠️ 使用注意事项</h2><p>准则天然偏向<strong>谨慎优先而非速度优先</strong>，以下场景可灵活放宽：</p>
-<ul>
-<li>改错别字、变量名等 trivial 修改</li>
-<li>单行代码的明确替换</li>
-<li>完全不涉及业务逻辑的格式调整</li>
-</ul>
-<p>初期交互可能因 LLM 前置提问显得略慢，但长期来看，<strong>可大幅减少交互轮次，显著提升复杂编码任务的输出质量</strong>。</p>
-<hr>
-<h2 id="📊-核心价值总结"><a href="#📊-核心价值总结" class="headerlink" title="📊 核心价值总结"></a>📊 核心价值总结</h2><table>
-<thead>
-<tr>
-<th>维度</th>
-<th>改善效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>代码质量</strong></td>
-<td>减少无意义过度设计，代码更简洁可读</td>
-</tr>
-<tr>
-<td><strong>变更安全性</strong></td>
-<td>避免无关改动，降低引入新 bug 的风险</td>
-</tr>
-<tr>
-<td><strong>可验证性</strong></td>
-<td>以可验证目标为导向，改动能精准解决问题</td>
-</tr>
-<tr>
-<td><strong>协作效率</strong></td>
-<td>贴合资深工程师的编码思维，减少 AI 编码的”不接地气”问题</td>
-</tr>
-</tbody></table>
-<hr>
-<p>简而言之，这个项目把 Andrej Karpathy 对 LLM 编码的洞见，落地成了一套<strong>可直接部署的 AI 编码行为准则</strong>，让 Claude Code、Cursor 等工具写出更符合人类工程实践的代码。</p>
-<p>对于频繁使用 AI 辅助编码的工程师来说，这 4 条准则值得认真落地。</p>
-<hr>
-<p><em>参考资料：<a target="_blank" rel="noopener" href="https://github.com/forrestchang/andrej-karpathy-skills">项目 GitHub</a> · <a target="_blank" rel="noopener" href="https://zread.ai/forrestchang/andrej-karpathy-skills">Zread 解读</a></em></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2026/05/05/andrej-karpathy-skills/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/andrej-karpathy-skills/" data-id="cmosdd9bo0033a4d3hdq3702r" data-title="Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/andrej-karpathy-skills/" data-id="cmot9srlg0033j8d3eaokatw6" data-title="Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -299,18 +606,6 @@
 
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2026/05/05/tencent-docs-mcp-skill-analysis/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">腾讯文档 MCP Skill 深度技术分析</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -356,7 +651,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/tencent-docs-mcp-skill-analysis/" data-id="cmosdd9bt003fa4d31gl25nkm" data-title="腾讯文档 MCP Skill 深度技术分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/tencent-docs-mcp-skill-analysis/" data-id="cmot9srli003aj8d3f7z1hxjx" data-title="腾讯文档 MCP Skill 深度技术分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -419,7 +714,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/workbuddy-tencent-docs-integration/" data-id="cmosdd9bt003ia4d31dwraoi7" data-title="WorkBuddy接入腾讯文档上线 - 资料库功能详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/workbuddy-tencent-docs-integration/" data-id="cmot9srlk003kj8d3h975080r" data-title="WorkBuddy接入腾讯文档上线 - 资料库功能详解" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -471,7 +766,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/deepseek-tui-complete-analysis/" data-id="cmosdd9bn0031a4d3h44pa26x" data-title="DeepSeek-TUI 完全解析：终端原生 AI 编码智能体" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/deepseek-tui-complete-analysis/" data-id="cmot9srlf002wj8d3c1sa7kwx" data-title="DeepSeek-TUI 完全解析：终端原生 AI 编码智能体" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -526,7 +821,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-research-report/" data-id="cmosdd9bq0038a4d307cub9f6" data-title="SkillHub 深度研究报告：22 个 AI 技能完整数据分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-research-report/" data-id="cmot9srlh0038j8d31f5q6vdd" data-title="SkillHub 深度研究报告：22 个 AI 技能完整数据分析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -581,7 +876,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-skills-catalog/" data-id="cmosdd9br003aa4d300r7115r" data-title="SkillHub 技能清单：21 个 AI 智能体技能全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/05/skillhub-skills-catalog/" data-id="cmot9srlj003ej8d3aruy6mlk" data-title="SkillHub 技能清单：21 个 AI 智能体技能全解析" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -633,7 +928,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/04/claude-code-tools-comparison/" data-id="cmosdd9bj002ra4d3bguy9fnu" data-title="Claude Code 三大工程化工具横评：Superpowers vs Compound Engineering vs Everything-Claude-Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/04/claude-code-tools-comparison/" data-id="cmot9srle002vj8d3h3pe224t" data-title="Claude Code 三大工程化工具横评：Superpowers vs Compound Engineering vs Everything-Claude-Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -685,7 +980,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/04/compound-engineering-plugin/" data-id="cmosdd9bk002ua4d345q3h4k8" data-title="Compound Engineering 插件全解析：AI 工程复利化实践指南" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/04/compound-engineering-plugin/" data-id="cmot9srlg0031j8d33g19h9j3" data-title="Compound Engineering 插件全解析：AI 工程复利化实践指南" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -737,63 +1032,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/karpathy-vibe-coding-to-agentic-engineering/" data-id="cmosdd9bf002ia4d36gibd9bf" data-title="Karpathy：从Vibe Coding到Agentic Engineering" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://iyangjialin.github.io/2026/05/01/karpathy-vibe-coding-to-agentic-engineering/" data-id="cmot9srl9002jj8d3166q5sci" data-title="Karpathy：从Vibe Coding到Agentic Engineering" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B/" rel="tag">AI工程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agentic-Engineering/" rel="tag">Agentic Engineering</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Andrej-Karpathy/" rel="tag">Andrej Karpathy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software-3-0/" rel="tag">Software 3.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vibe-Coding/" rel="tag">Vibe Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-  
-
-  
-    <article id="post-2026-05-01-luo-fuli-ai-paradigm-shift" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/05/01/luo-fuli-ai-paradigm-shift/" class="article-date">
-  <time class="dt-published" datetime="2026-05-01T13:06:00.000Z" itemprop="datePublished">2026-05-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/">AI洞察</a>►<a class="article-category-link" href="/categories/AI%E6%B4%9E%E5%AF%9F/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/">深度访谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/05/01/luo-fuli-ai-paradigm-shift/">独家对话罗福莉：AI范式已然巨变</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        小米大模型团队负责人罗福莉首次公开长时间技术访谈，深入记录其对2026年AI范式巨变的系统性思考。
-        
-          <p class="article-more-link">
-            <a href="/2026/05/01/luo-fuli-ai-paradigm-shift/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://iyangjialin.github.io/2026/05/01/luo-fuli-ai-paradigm-shift/" data-id="cmosdd9bg002la4d35w8tdmwx" data-title="独家对话罗福莉：AI范式已然巨变" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MiMo/" rel="tag">MiMo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3/" rel="tag">小米</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" rel="tag">罗福莉</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" rel="tag">范式转移</a></li></ul>
 
     </footer>
   </div>
@@ -856,7 +1099,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag">AI使用指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%8A%9E%E5%85%AC/" rel="tag">AI办公</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B/" rel="tag">AI工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">AI工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%8A%80%E8%83%BD/" rel="tag">AI技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">AI智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A0%81/" rel="tag">AI编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A8%8B/" rel="tag">AI编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agentic-Engineering/" rel="tag">Agentic Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Andrej-Karpathy/" rel="tag">Andrej Karpathy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding-Agent/" rel="tag">Coding Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compound-Engineering/" rel="tag">Compound Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepSeek/" rel="tag">DeepSeek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Everything-Claude-Code/" rel="tag">Everything-Claude-Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP%E5%8D%8F%E8%AE%AE/" rel="tag">MCP协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiMo/" rel="tag">MiMo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-3-0/" rel="tag">Software 3.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Superpowers/" rel="tag">Superpowers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vibe-Coding/" rel="tag">Vibe Coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">代码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" rel="tag">实践案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3/" rel="tag">小米</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" rel="tag">工具评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" rel="tag">开源项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" rel="tag">技术分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" rel="tag">技能配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" rel="tag">桌面工作台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" rel="tag">终端工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E5%87%86%E5%88%99/" rel="tag">编码准则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" rel="tag">罗福莉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" rel="tag">腾讯文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" rel="tag">范式转移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI-Agent/" rel="tag">AI Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag">AI使用指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%8A%9E%E5%85%AC/" rel="tag">AI办公</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E5%85%B7/" rel="tag">AI工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B/" rel="tag">AI工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">AI工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%8A%80%E8%83%BD/" rel="tag">AI技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%97%B6%E4%BB%A3/" rel="tag">AI时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">AI智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%94%9F%E6%80%81/" rel="tag">AI生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A0%81/" rel="tag">AI编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E7%BC%96%E7%A8%8B/" rel="tag">AI编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E8%AE%BE%E8%AE%A1/" rel="tag">AI设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Affaan-Mustafa/" rel="tag">Affaan Mustafa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agentic-Engineering/" rel="tag">Agentic Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent%E6%97%B6%E4%BB%A3/" rel="tag">Agent时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Andrej-Karpathy/" rel="tag">Andrej Karpathy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anthropic/" rel="tag">Anthropic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude/" rel="tag">Claude</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Claude-Code/" rel="tag">Claude Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding-Agent/" rel="tag">Coding Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compound-Engineering/" rel="tag">Compound Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cursor/" rel="tag">Cursor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepSeek/" rel="tag">DeepSeek</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECC/" rel="tag">ECC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Everything-Claude-Code/" rel="tag">Everything-Claude-Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hermes/" rel="tag">Hermes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP%E5%8D%8F%E8%AE%AE/" rel="tag">MCP协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiMo/" rel="tag">MiMo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLP/" rel="tag">NLP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenAI/" rel="tag">OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenClaw/" rel="tag">OpenClaw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenSpec/" rel="tag">OpenSpec</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prompt/" rel="tag">Prompt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Robert-Dilts/" rel="tag">Robert Dilts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Satya-Nadella/" rel="tag">Satya Nadella</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill-Creator/" rel="tag">Skill-Creator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SkillHub/" rel="tag">SkillHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill%E8%AE%BE%E8%AE%A1/" rel="tag">Skill设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-3-0/" rel="tag">Software 3.0</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Superpowers/" rel="tag">Superpowers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tesla/" rel="tag">Tesla</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ToB/" rel="tag">ToB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Token/" rel="tag">Token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vibe-Coding/" rel="tag">Vibe Coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WorkBuddy/" rel="tag">WorkBuddy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" rel="tag">个人品牌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" rel="tag">个人成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" rel="tag">中国AI研究机构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" rel="tag">人物洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" rel="tag">人物访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag">代码分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A/" rel="tag">商业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" rel="tag">商业洞察</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" rel="tag">商业策略</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" rel="tag">大模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" rel="tag">太空探索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" rel="tag">实践案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3/" rel="tag">小米</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" rel="tag">工具对比</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" rel="tag">工具评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" rel="tag">工程系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" rel="tag">开发者</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" rel="tag">开源项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" rel="tag">技术分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" rel="tag">技术趋势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">技能设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" rel="tag">技能配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag">提示词工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag">效率工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E8%82%B2/" rel="tag">教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" rel="tag">数字分身</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" rel="tag">智能体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" rel="tag">智能经济</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" rel="tag">未来教育</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" rel="tag">桌面工作台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" rel="tag">深度访谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" rel="tag">生产力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" rel="tag">生产力革命</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E6%8A%80/" rel="tag">科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E5%8A%9B/" rel="tag">算力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" rel="tag">系统思维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" rel="tag">终端工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81%E5%87%86%E5%88%99/" rel="tag">编码准则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" rel="tag">编程范式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" rel="tag">罗福莉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" rel="tag">职业发展</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" rel="tag">职业规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" rel="tag">能力模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF/" rel="tag">腾讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" rel="tag">腾讯文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" rel="tag">自我认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" rel="tag">范式转移</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E8%8C%83%E9%A9%B1%E5%8A%A8/" rel="tag">规范驱动</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">计算机视觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" rel="tag">认知升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" rel="tag">长期主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
     </div>
   </div>
 
@@ -866,7 +1109,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 14.29px;">AI Agent</a> <a href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" style="font-size: 10px;">AI使用指南</a> <a href="/tags/AI%E5%8A%9E%E5%85%AC/" style="font-size: 10px;">AI办公</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">AI工程</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.43px;">AI工程化</a> <a href="/tags/AI%E6%8A%80%E8%83%BD/" style="font-size: 11.43px;">AI技能</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.43px;">AI智能体</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E7%BC%96%E7%A0%81/" style="font-size: 10px;">AI编码</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18.57px;">Agent</a> <a href="/tags/Agentic-Engineering/" style="font-size: 10px;">Agentic Engineering</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 11.43px;">Agent时代</a> <a href="/tags/Andrej-Karpathy/" style="font-size: 11.43px;">Andrej Karpathy</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 17.14px;">Claude Code</a> <a href="/tags/Coding-Agent/" style="font-size: 10px;">Coding Agent</a> <a href="/tags/Compound-Engineering/" style="font-size: 11.43px;">Compound Engineering</a> <a href="/tags/Cursor/" style="font-size: 10px;">Cursor</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/Everything-Claude-Code/" style="font-size: 10px;">Everything-Claude-Code</a> <a href="/tags/GitHub/" style="font-size: 11.43px;">GitHub</a> <a href="/tags/Hermes/" style="font-size: 12.86px;">Hermes</a> <a href="/tags/LLM/" style="font-size: 11.43px;">LLM</a> <a href="/tags/MCP%E5%8D%8F%E8%AE%AE/" style="font-size: 11.43px;">MCP协议</a> <a href="/tags/MiMo/" style="font-size: 10px;">MiMo</a> <a href="/tags/NLP/" style="font-size: 11.43px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 14.29px;">OpenClaw</a> <a href="/tags/Prompt/" style="font-size: 11.43px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Rust/" style="font-size: 10px;">Rust</a> <a href="/tags/Satya-Nadella/" style="font-size: 11.43px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 11.43px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 15.71px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Software-3-0/" style="font-size: 10px;">Software 3.0</a> <a href="/tags/Superpowers/" style="font-size: 10px;">Superpowers</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vibe-Coding/" style="font-size: 10px;">Vibe Coding</a> <a href="/tags/WorkBuddy/" style="font-size: 12.86px;">WorkBuddy</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 11.43px;">人物访谈</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 10px;">代码分析</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 11.43px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 14.29px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" style="font-size: 10px;">实践案例</a> <a href="/tags/%E5%B0%8F%E7%B1%B3/" style="font-size: 10px;">小米</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" style="font-size: 14.29px;">工具对比</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" style="font-size: 11.43px;">工具评测</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 12.86px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.43px;">开源</a> <a href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">开源项目</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" style="font-size: 10px;">技术分析</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 12.86px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">技能配置</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.43px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 14.29px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" style="font-size: 11.43px;">桌面工作台</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" style="font-size: 11.43px;">深度访谈</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 12.86px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" style="font-size: 11.43px;">知识管理</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 11.43px;">系统思维</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">终端工具</a> <a href="/tags/%E7%BC%96%E7%A0%81%E5%87%86%E5%88%99/" style="font-size: 10px;">编码准则</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" style="font-size: 10px;">罗福莉</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 12.86px;">腾讯</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" style="font-size: 11.43px;">腾讯文档</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" style="font-size: 10px;">范式转移</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 11.43px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 11.43px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
+      <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-Agent/" style="font-size: 15px;">AI Agent</a> <a href="/tags/AI%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" style="font-size: 10px;">AI使用指南</a> <a href="/tags/AI%E5%8A%9E%E5%85%AC/" style="font-size: 10px;">AI办公</a> <a href="/tags/AI%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI工具</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">AI工程</a> <a href="/tags/AI%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">AI工程化</a> <a href="/tags/AI%E6%8A%80%E8%83%BD/" style="font-size: 11.67px;">AI技能</a> <a href="/tags/AI%E6%97%B6%E4%BB%A3/" style="font-size: 10px;">AI时代</a> <a href="/tags/AI%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">AI智能体</a> <a href="/tags/AI%E7%94%9F%E6%80%81/" style="font-size: 10px;">AI生态</a> <a href="/tags/AI%E7%BC%96%E7%A0%81/" style="font-size: 11.67px;">AI编码</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">AI设计</a> <a href="/tags/Affaan-Mustafa/" style="font-size: 10px;">Affaan Mustafa</a> <a href="/tags/Agent/" style="font-size: 18.33px;">Agent</a> <a href="/tags/Agentic-Engineering/" style="font-size: 10px;">Agentic Engineering</a> <a href="/tags/Agent%E6%97%B6%E4%BB%A3/" style="font-size: 11.67px;">Agent时代</a> <a href="/tags/Andrej-Karpathy/" style="font-size: 11.67px;">Andrej Karpathy</a> <a href="/tags/Anthropic/" style="font-size: 10px;">Anthropic</a> <a href="/tags/Claude/" style="font-size: 10px;">Claude</a> <a href="/tags/Claude-Code/" style="font-size: 18.33px;">Claude Code</a> <a href="/tags/Coding-Agent/" style="font-size: 10px;">Coding Agent</a> <a href="/tags/Compound-Engineering/" style="font-size: 11.67px;">Compound Engineering</a> <a href="/tags/Cursor/" style="font-size: 11.67px;">Cursor</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/DeepSeek/" style="font-size: 10px;">DeepSeek</a> <a href="/tags/ECC/" style="font-size: 10px;">ECC</a> <a href="/tags/Everything-Claude-Code/" style="font-size: 10px;">Everything-Claude-Code</a> <a href="/tags/GitHub/" style="font-size: 11.67px;">GitHub</a> <a href="/tags/Hermes/" style="font-size: 13.33px;">Hermes</a> <a href="/tags/LLM/" style="font-size: 11.67px;">LLM</a> <a href="/tags/MCP%E5%8D%8F%E8%AE%AE/" style="font-size: 11.67px;">MCP协议</a> <a href="/tags/MiMo/" style="font-size: 10px;">MiMo</a> <a href="/tags/NLP/" style="font-size: 11.67px;">NLP</a> <a href="/tags/OpenAI/" style="font-size: 10px;">OpenAI</a> <a href="/tags/OpenClaw/" style="font-size: 15px;">OpenClaw</a> <a href="/tags/OpenSpec/" style="font-size: 10px;">OpenSpec</a> <a href="/tags/Prompt/" style="font-size: 11.67px;">Prompt</a> <a href="/tags/Robert-Dilts/" style="font-size: 10px;">Robert Dilts</a> <a href="/tags/Rust/" style="font-size: 10px;">Rust</a> <a href="/tags/Satya-Nadella/" style="font-size: 11.67px;">Satya Nadella</a> <a href="/tags/Skill-Creator/" style="font-size: 11.67px;">Skill-Creator</a> <a href="/tags/SkillHub/" style="font-size: 16.67px;">SkillHub</a> <a href="/tags/Skill%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">Skill设计</a> <a href="/tags/Software-3-0/" style="font-size: 10px;">Software 3.0</a> <a href="/tags/Superpowers/" style="font-size: 10px;">Superpowers</a> <a href="/tags/Tesla/" style="font-size: 10px;">Tesla</a> <a href="/tags/ToB/" style="font-size: 10px;">ToB</a> <a href="/tags/Token/" style="font-size: 10px;">Token</a> <a href="/tags/Vibe-Coding/" style="font-size: 10px;">Vibe Coding</a> <a href="/tags/WorkBuddy/" style="font-size: 13.33px;">WorkBuddy</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/" style="font-size: 10px;">个人品牌</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/" style="font-size: 10px;">个人成长</a> <a href="/tags/%E4%B8%AD%E5%9B%BDAI%E7%A0%94%E7%A9%B6%E6%9C%BA%E6%9E%84/" style="font-size: 10px;">中国AI研究机构</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">人物洞察</a> <a href="/tags/%E4%BA%BA%E7%89%A9%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">人物访谈</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" style="font-size: 10px;">代码分析</a> <a href="/tags/%E5%95%86%E4%B8%9A/" style="font-size: 11.67px;">商业</a> <a href="/tags/%E5%95%86%E4%B8%9A%E6%B4%9E%E5%AF%9F/" style="font-size: 10px;">商业洞察</a> <a href="/tags/%E5%95%86%E4%B8%9A%E7%AD%96%E7%95%A5/" style="font-size: 10px;">商业策略</a> <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" style="font-size: 15px;">大模型</a> <a href="/tags/%E5%A4%AA%E7%A9%BA%E6%8E%A2%E7%B4%A2/" style="font-size: 10px;">太空探索</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/" style="font-size: 10px;">实践案例</a> <a href="/tags/%E5%B0%8F%E7%B1%B3/" style="font-size: 10px;">小米</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94/" style="font-size: 15px;">工具对比</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E8%AF%84%E6%B5%8B/" style="font-size: 11.67px;">工具评测</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F/" style="font-size: 13.33px;">工程系统</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85/" style="font-size: 10px;">开发者</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 11.67px;">开源</a> <a href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" style="font-size: 11.67px;">开源项目</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90/" style="font-size: 10px;">技术分析</a> <a href="/tags/%E6%8A%80%E6%9C%AF%E8%B6%8B%E5%8A%BF/" style="font-size: 13.33px;">技术趋势</a> <a href="/tags/%E6%8A%80%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">技能设计</a> <a href="/tags/%E6%8A%80%E8%83%BD%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">技能配置</a> <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">提示词工程</a> <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">效率工具</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%95%B0%E5%AD%97%E5%88%86%E8%BA%AB/" style="font-size: 10px;">数字分身</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" style="font-size: 10px;">数据分析</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.67px;">方法论</a> <a href="/tags/%E6%99%BA%E8%83%BD%E4%BD%93/" style="font-size: 11.67px;">智能体</a> <a href="/tags/%E6%99%BA%E8%83%BD%E7%BB%8F%E6%B5%8E/" style="font-size: 15px;">智能经济</a> <a href="/tags/%E6%9C%AA%E6%9D%A5%E6%95%99%E8%82%B2/" style="font-size: 10px;">未来教育</a> <a href="/tags/%E6%A1%8C%E9%9D%A2%E5%B7%A5%E4%BD%9C%E5%8F%B0/" style="font-size: 11.67px;">桌面工作台</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E8%AE%BF%E8%B0%88/" style="font-size: 11.67px;">深度访谈</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/" style="font-size: 13.33px;">生产力</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B%E9%9D%A9%E5%91%BD/" style="font-size: 10px;">生产力革命</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" style="font-size: 11.67px;">知识管理</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 10px;">科技</a> <a href="/tags/%E7%AE%97%E5%8A%9B/" style="font-size: 10px;">算力</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/" style="font-size: 11.67px;">系统思维</a> <a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">终端工具</a> <a href="/tags/%E7%BC%96%E7%A0%81%E5%87%86%E5%88%99/" style="font-size: 10px;">编码准则</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/" style="font-size: 10px;">编程范式</a> <a href="/tags/%E7%BD%97%E7%A6%8F%E8%8E%89/" style="font-size: 10px;">罗福莉</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 10px;">职业发展</a> <a href="/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" style="font-size: 10px;">职业规划</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">能力模型</a> <a href="/tags/%E8%85%BE%E8%AE%AF/" style="font-size: 13.33px;">腾讯</a> <a href="/tags/%E8%85%BE%E8%AE%AF%E6%96%87%E6%A1%A3/" style="font-size: 11.67px;">腾讯文档</a> <a href="/tags/%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5/" style="font-size: 10px;">自我认知</a> <a href="/tags/%E8%8C%83%E5%BC%8F%E8%BD%AC%E7%A7%BB/" style="font-size: 10px;">范式转移</a> <a href="/tags/%E8%A7%84%E8%8C%83%E9%A9%B1%E5%8A%A8/" style="font-size: 10px;">规范驱动</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" style="font-size: 10px;">计算机视觉</a> <a href="/tags/%E8%AE%A4%E7%9F%A5%E5%8D%87%E7%BA%A7/" style="font-size: 10px;">认知升级</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 11.67px;">软件工程</a> <a href="/tags/%E9%95%BF%E6%9C%9F%E4%B8%BB%E4%B9%89/" style="font-size: 11.67px;">长期主义</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a>
     </div>
   </div>
 
@@ -888,6 +1131,10 @@
       <ul>
         
           <li>
+            <a href="/2026/05/06/openspec-complete-guide/">OpenSpec 完全指南：AI 时代的规范驱动开发框架</a>
+          </li>
+        
+          <li>
             <a href="/2026/05/05/andrej-karpathy-skills/">Andrej Karpathy 编码准则落地：karpathy-skills 项目全解析</a>
           </li>
         
@@ -901,10 +1148,6 @@
         
           <li>
             <a href="/2026/05/05/deepseek-tui-complete-analysis/">DeepSeek-TUI 完全解析：终端原生 AI 编码智能体</a>
-          </li>
-        
-          <li>
-            <a href="/2026/05/05/skillhub-research-report/">SkillHub 深度研究报告：22 个 AI 技能完整数据分析</a>
           </li>
         
       </ul>
